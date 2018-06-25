@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-25T22:31:31+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">ElasticSearch分组相关性写入</title><link href="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="alternate" type="text/html" title="ElasticSearch分组相关性写入" /><published>2018-05-25T07:31:30+08:00</published><updated>2018-05-25T07:31:30+08:00</updated><id>http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write</id><content type="html" xml:base="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">&lt;p&gt;随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。&lt;/p&gt;
+
+&lt;p&gt;在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。&lt;/p&gt;
+
+&lt;p&gt;起初我们对原因进行分析，认为是数据索引过多导致数据节点写入过慢。于是，在每天晚上定时对最近三天的数据进行分析，找出哪些产品的数据量比较小，并将数据量较小的数据索引进行合并，以减少索引数量；同时每天定时关闭一周前的数据索引转为冷数据，以减轻集群负担，使ES集群的写入和查询速度均得到提升。&lt;/p&gt;
+
+&lt;p&gt;在持续稳定了一段时间后，写入速度又开始下降，只有正常情况下写入峰值的一半左右，而此时的索引数量仍在可接受的范围内，于是猜测写入较慢和索引数量之间的没有直接影响的关系，可能是与写入时的数据相关性有关。在进行数据写入时，由于数据本身基于产品进行划分，短时间大量不同产品数据的写入，会导致ES在处理一次数据提交时，需要将数据写入不同的索引。基于以上推测，我进行了一次关于数据相关性分组写入的测试。&lt;/p&gt;
+
+&lt;p&gt;测试主要对相同总量，不同分组的数据进行写入测试，结果如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;宿主机环境&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;组件配置&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;组件&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;版本&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Docker&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1.12.6&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Centos&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Linux version 3.10.0­514.26.2.el7.x86_6&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;Elasticsearch&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;6.1&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;ES参数配置&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;参数&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;值&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;ES数据节点数&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;索引分片数&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;分片副本数&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;thread_pool.index.queue_size&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1000&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;thread_pool.index.size&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;5&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;写入策略&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;参数&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;值&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;数据总条数&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;写入次数&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;单次批量写入数据量&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;测试方式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在写入数据量配置相同的情况下，调整一次提交中数据写入的索引数，即把单次批量写入的200条数据，写入到不同的N个索引中进行测试&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;测试结果&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;数据总数&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;写入次数&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;单次写入数据条数&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;写入索引数N&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;总耗时(ms)&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;单次批量写入平均耗时(ms)&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;单词批量写入最大耗时(ms)&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;135895&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1358&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;4301&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;50&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;128403&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1284&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;3716&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;25&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;70075&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;700&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1577&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;10&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;34501&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;345&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1062&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;20000&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;100&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;200&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;1&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;11326&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;113&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;724&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;结果分析&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;从结果中可以明显看出，单次批量写入的数据中，最终需要写入的索引数N越小，写入速度越快。
+由此可以得出，在提交进行写入的数据中，数据分组相关性越高，最终写入的索引数越少，写入会越快。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;后记&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;后来基于这次的测试结果，我对数据写入的逻辑进行调整，将数据进行分组后写入，以此来提高数据分组相关性。
+但是从最终测试结果来看，实际数据写入速度并没有太明显的提升。对原因进行分析后，发现原因如下：&lt;/p&gt;
+
+  &lt;p&gt;之前对数据量较少的产品数据索引进行合并，部分不同产品的数据已经是写入到同一个合并后的索引。而在实际场景中，大部分产品的数据量都是很小的，绝大部分的产品数据都是写入到这个合并索引中，所以从另一个角度上减少了单次数据提交所需要写入的索引数，导致优化数据写入后的效果并不明显。&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Qi</name></author><category term="ElasticSearch" /><summary type="html">随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。</summary></entry></feed>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/</loc>
+<lastmod>2018-04-02T18:23:10+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/</loc>
 <lastmod>2018-05-25T07:31:30+08:00</lastmod>
 </url>
@@ -24,9 +28,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/about/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/README.en/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/assets/lib/fastclick/</loc>

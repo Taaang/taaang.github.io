@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ElasticSearch," />
+  <meta name="keywords" content="JVM," />
 
 
 
@@ -109,17 +109,20 @@
 
 
 
-<meta name="description" content="随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。">
-<meta name="keywords" content="ElasticSearch">
+<meta name="description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
+<meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ElasticSearch分组相关性写入">
-<meta property="og:url" content="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">
+<meta property="og:title" content="Java Jar包变更导致JVM崩溃问题">
+<meta property="og:url" content="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
 <meta property="og:site_name" content="To the Moon">
-<meta property="og:description" content="随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。">
+<meta property="og:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="/assets/images/post_imgs/img_jvm_crash_1.png">
+<meta property="og:image" content="/assets/images/post_imgs/img_jvm_crash_2.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ElasticSearch分组相关性写入">
-<meta name="twitter:description" content="随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。">
+<meta name="twitter:title" content="Java Jar包变更导致JVM崩溃问题">
+<meta name="twitter:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
+<meta name="twitter:image" content="/assets/images/post_imgs/img_jvm_crash_1.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -152,7 +155,7 @@
 
 
 
-  <title>ElasticSearch分组相关性写入 | To the Moon</title>
+  <title>Java Jar包变更导致JVM崩溃问题 | To the Moon</title>
   
 
 
@@ -312,7 +315,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qi">
@@ -332,7 +335,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            ElasticSearch分组相关性写入
+            Java Jar包变更导致JVM崩溃问题
           
         </h1>
         
@@ -346,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-25T07:31:30+08:00">
-                2018-05-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T18:23:10+08:00">
+                2018-04-02
               </time>
             
 
@@ -370,8 +373,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/ElasticSearch" itemprop="url" rel="index">
-                    <span itemprop="name">ElasticSearch</span>
+                  <a href="/category/#/JVM" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -388,9 +391,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/elasticsearch/2018/05/24/elasticsearch-group-write/#comments" itemprop="discussionUrl">
+                <a href="/jvm/2018/04/02/jvm-crash-when-jar-modify/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/elasticsearch/2018/05/24/elasticsearch-group-write/" itemprop="commentCount"></span>
+                        data-disqus-identifier="/jvm/2018/04/02/jvm-crash-when-jar-modify/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -436,192 +439,191 @@
 
 
 
-  <p>随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
-在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。</p>
+  <p>最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>异常（一）
+JException in thread "data_send_thread_1" java.lang.NoClassDefFoundError: com/****/StreamResetException
+        ...
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+        ... 10 more
+</code></pre></td></tr></tbody></table></div>
+</div>
+<p>或者</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>异常（二）
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 128  java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58]
+J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes)
+J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140]
+v  ~StubRoutines::call_stub
+J 933  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
+J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94]
+J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188]
+J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes)
+J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)
+</code></pre></td></tr></tbody></table></div>
+</div>
 
-<p>起初我们对原因进行分析，认为是数据索引过多导致数据节点写入过慢。于是，在每天晚上定时对最近三天的数据进行分析，找出哪些产品的数据量比较小，并将数据量较小的数据索引进行合并，以减少索引数量；同时每天定时关闭一周前的数据索引转为冷数据，以减轻集群负担，使ES集群的写入和查询速度均得到提升。</p>
+<p>可以看出，崩溃原因均可归结为Class加载失败导致的，而加载的这个Class是一个JAVA Agent中的一个类。</p>
 
-<p>在持续稳定了一段时间后，写入速度又开始下降，只有正常情况下写入峰值的一半左右，而此时的索引数量仍在可接受的范围内，于是猜测写入较慢和索引数量之间的没有直接影响的关系，可能是与写入时的数据相关性有关。在进行数据写入时，由于数据本身基于产品进行划分，短时间大量不同产品数据的写入，会导致ES在处理一次数据提交时，需要将数据写入不同的索引。基于以上推测，我进行了一次关于数据相关性分组写入的测试。</p>
+<h2 id="异常一线程进行类加载时抛出">异常（一）：线程进行类加载时抛出</h2>
 
-<p>测试主要对相同总量，不同分组的数据进行写入测试，结果如下：</p>
+<p>当对象创建时，ClassLoader会先判断对象对应的类是否已经加载过，如果没有，则会优先进行加载。但在当前场景下，ClassLoader进行类加载时，抛出了NoClassDefFoundError异常。</p>
 
-<p><strong>宿主机环境</strong></p>
+<p>其中，NoClassDefFoundError与ClassNotFoundException是有区别的。ClassNotFoundException是在进行动态类加载时出现，往往实现不知道这个类是否存在，比如调用Class.forName，通过反射进行类加载时容易出现这个异常；NoClassDefFoundError遇到的并不多，一般是在编译时明确该类存在，但是在运行时进行加载的时候，找不到该类的定义。</p>
 
-<p><strong>组件配置</strong></p>
+<h2 id="异常二tomcat类加载时抛出">异常（二）：Tomcat类加载时抛出</h2>
 
-<blockquote>
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: center">组件</th>
-        <th style="text-align: center">版本</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: center">Docker</td>
-        <td style="text-align: center">1.12.6</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">Centos</td>
-        <td style="text-align: center">Linux version 3.10.0­514.26.2.el7.x86_6</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">Elasticsearch</td>
-        <td style="text-align: center">6.1</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
+<p>Tomcat作为Web应用容器，为每一个Web应用创建一个单独的WebAppClassLoader，用于加载这个应用所需要的类，同时也以此将不同项目所需要的类隔离开来。从异常信息可以看出，当ClassLoader尝试去加载一个类时，首先进行Jar包扫描，找到对应的Class在哪个Jar报中，然后通过特殊的权限控制方式，读取Jar包进行类加载。而Jar包本身以Zip格式为基础，所以通过ZipFile获取文件入口，而此时抛出异常。</p>
 
-<p><strong>ES参数配置</strong></p>
+<h2 id="异常分析">异常分析</h2>
 
-<blockquote>
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: center">参数</th>
-        <th style="text-align: center">值</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: center">ES数据节点数</td>
-        <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">索引分片数</td>
-        <td style="text-align: center">5</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">分片副本数</td>
-        <td style="text-align: center">1</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">thread_pool.index.queue_size</td>
-        <td style="text-align: center">1000</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">thread_pool.index.size</td>
-        <td style="text-align: center">5</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
+<p> 1.  NoClassDefFoundError为JVM运行时异常，是在尝试加载Class时无法找到抛出的；</p>
 
-<p><strong>写入策略</strong></p>
+<p> 2.  对Tomcat源码进行调试，发现在AppClassLoader中，包含宝对应Java Agent的JAR包路径，并在加载过程中检查该JAR包中是否包含对应的Class，相关代码如下：</p>
 
-<blockquote>
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: center">参数</th>
-        <th style="text-align: center">值</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: center">数据总条数</td>
-        <td style="text-align: center">20000</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">写入次数</td>
-        <td style="text-align: center">100</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">单次批量写入数据量</td>
-        <td style="text-align: center">200</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32</pre></td><td class="code"><pre class="highlight"><code>URLClassLoader.java
 
-<p><strong>测试方式</strong></p>
 
-<blockquote>
-  <p>在写入数据量配置相同的情况下，调整一次提交中数据写入的索引数，即把单次批量写入的200条数据，写入到不同的N个索引中进行测试</p>
-</blockquote>
+protected Class&lt;?&gt; findClass(final String name)
+    throws ClassNotFoundException
+{
+    final Class&lt;?&gt; result;
+    try {
+        result = AccessController.doPrivileged(
+            new PrivilegedExceptionAction&lt;Class&lt;?&gt;&gt;() {
+                public Class&lt;?&gt; run() throws ClassNotFoundException {
+                    String path = name.replace('.', '/').concat(".class");
+                    Resource res = ucp.getResource(path, false);
+                    if (res != null) {
+                        try {
+                            return defineClass(name, res);
+                        } catch (IOException e) {
+                            throw new ClassNotFoundException(name, e);
+                        }
+                    } else {
+                        return null;
+                    }
+                }
+            }, acc);
+    } catch (java.security.PrivilegedActionException pae) {
+        throw (ClassNotFoundException) pae.getException();
+    }
+    if (result == null) {
+        throw new ClassNotFoundException(name);
+    }
+    return result;
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
 
-<p><strong>测试结果</strong></p>
+<p>其中，<code class="highlighter-rouge">ucp.getResource(path, false)</code>尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：</p>
 
-<blockquote>
-  <table>
-    <thead>
-      <tr>
-        <th style="text-align: center">数据总数</th>
-        <th style="text-align: center">写入次数</th>
-        <th style="text-align: center">单次写入数据条数</th>
-        <th style="text-align: center">写入索引数N</th>
-        <th style="text-align: center">总耗时(ms)</th>
-        <th style="text-align: center">单次批量写入平均耗时(ms)</th>
-        <th style="text-align: center">单词批量写入最大耗时(ms)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td style="text-align: center">20000</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">200</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">135895</td>
-        <td style="text-align: center">1358</td>
-        <td style="text-align: center">4301</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">20000</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">200</td>
-        <td style="text-align: center">50</td>
-        <td style="text-align: center">128403</td>
-        <td style="text-align: center">1284</td>
-        <td style="text-align: center">3716</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">20000</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">200</td>
-        <td style="text-align: center">25</td>
-        <td style="text-align: center">70075</td>
-        <td style="text-align: center">700</td>
-        <td style="text-align: center">1577</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">20000</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">200</td>
-        <td style="text-align: center">10</td>
-        <td style="text-align: center">34501</td>
-        <td style="text-align: center">345</td>
-        <td style="text-align: center">1062</td>
-      </tr>
-      <tr>
-        <td style="text-align: center">20000</td>
-        <td style="text-align: center">100</td>
-        <td style="text-align: center">200</td>
-        <td style="text-align: center">1</td>
-        <td style="text-align: center">11326</td>
-        <td style="text-align: center">113</td>
-        <td style="text-align: center">724</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ZipFile.java
 
-<p><strong>结果分析</strong></p>
 
-<blockquote>
-  <p>从结果中可以明显看出，单次批量写入的数据中，最终需要写入的索引数N越小，写入速度越快。
-由此可以得出，在提交进行写入的数据中，数据分组相关性越高，最终写入的索引数越少，写入会越快。</p>
-</blockquote>
+/**
+ * Returns the zip file entry for the specified name, or null
+ * if not found.
+ *
+ * @param name the name of the entry
+ * @return the zip file entry, or null if not found
+ * @throws IllegalStateException if the zip file has been closed
+ */
+public ZipEntry getEntry(String name) {
+    if (name == null) {
+        throw new NullPointerException("name");
+    }
+    long jzentry = 0;
+    synchronized (this) {
+        ensureOpen();
+        jzentry = getEntry(jzfile, zc.getBytes(name), true);
+        if (jzentry != 0) {
+            ZipEntry ze = getZipEntry(name, jzentry);
+            freeEntry(jzfile, jzentry);
+            return ze;
+        }
+    }
+    return null;
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
 
-<p><strong>后记</strong></p>
+<p>正常情况下在JAVA Agent的JAR包中搜索，能找到对应的Class信息，即getEntry方法返回非0；而出现异常时，getEntry方法返回0。</p>
 
-<blockquote>
-  <p>后来基于这次的测试结果，我对数据写入的逻辑进行调整，将数据进行分组后写入，以此来提高数据分组相关性。
-但是从最终测试结果来看，实际数据写入速度并没有太明显的提升。对原因进行分析后，发现原因如下：</p>
+<p> 3.  使用strace查看getEntry时对应的系统调用，结果如下：</p>
 
-  <p>之前对数据量较少的产品数据索引进行合并，部分不同产品的数据已经是写入到同一个合并后的索引。而在实际场景中，大部分产品的数据量都是很小的，绝大部分的产品数据都是写入到这个合并索引中，所以从另一个角度上减少了单次数据提交所需要写入的索引数，导致优化数据写入后的效果并不明显。</p>
-</blockquote>
+<p><strong>（1）Class加载成功时，可以从对应的JAR包中读取到Class信息</strong>
+<img src="/assets/images/post_imgs/img_jvm_crash_1.png" alt="Strace_normal" /></p>
+
+<p><strong>（2）Class加载异常时，无法读取到Class信息</strong>
+<img src="/assets/images/post_imgs/img_jvm_crash_2.png" alt="Strace_error" /></p>
+
+<p>可以看到在对JAR包中Class进行加载时，找不到对应的Class。但是，实际上使用解压或者使用JD-GUI查看其内容时，是能够找到编译后的Class文件，所以该类是存在的。那么问题来了，为什么明明有却会说找不到？</p>
+
+<h2 id="问题原因">问题原因</h2>
+
+<p>最终，根据错误的异常信息，在Java官网找到了相似的异常，其实这是JAVA本身就存在的一个问题：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ID 1296729.1
+
+Java Virtual Machine (JVM) crashes in java.util.zip.ZipFile.getEntry() during Class Loading (文档 ID 1296729.1） -  Random crashes during classloading while a jar/zip file is being accessed.  Here is a typical stack trace. Please notice that a custom classloader calls java.util.zip.ZipFile.getEntry() and the crash happens somewhere in libzip or libc or a native windows dll：
+
+tack: [0xfffffffe4e900000,0xfffffffe4e940000], sp=0xfffffffe4e93b1a0, free space=236k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C [libc_psr.so.1+0xbf4]
+C [libzip.so+0xe280]
+C [libzip.so+0x28e8]
+C [libzip.so+0x2d9c]
+J java.util.zip.ZipFile.getEntry(JLjava/lang/String;Z)J
+J java.util.zip.ZipFile.getEntry(Ljava/lang/String;)Ljava/util/zip/ZipEntry;
+J weblogic.utils.classloaders.JarClassFinder.getSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.AbstractClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+j weblogic.application.utils.CompositeWebAppFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+j weblogic.utils.classloaders.CodeGenClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
+j weblogic.utils.classloaders.GenericClassLoader.findLocalClass(Ljava/lang/String;)Ljava/lang/Class;
+j weblogic.utils.classloaders.GenericClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+j weblogic.utils.classloaders.ChangeAwareClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
+J java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
+J weblogic.utils.classloaders.ChangeAwareClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class;
+j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>其中，三种情况可能导致该问题发生：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>There are three possible scenarios here:
+
+1. While a class is in use it is dynamically reloaded from a jar file.
+2. While a jar file is being accessed by the class loader, the jar file is being modified.
+3. A Jarfile which was bigger than 4GB was accessed (applies to Java 6 and earlier only)
+
+
+Please note that a crash may happen even a long time after a jarfile was modified as classloaders keep references to jarfiles.
+
+Another possible sceanrio is when Java or the application itself is being patched while the application is running.
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>而这次问题的发生是由于第二点引起的，我们在对JAVA Agent版本进行更新时，是使用覆盖源文件的方式进行，随着Tomcat或者JVM重启去重新加载新的Agent JAR包。</p>
+
+<p>在更新JAR包，由于JVM还是保持着原JAR包的引用，所以再尝试从JAR包中进行Class加载时抛出异常，导致JVM崩溃。</p>
+
+<p>其中有一点比较关键的是，即使在JAR包变更后很长一段时间，也会出现这个问题，原因是因为在正常情况下，业务主要流程已经都跑过一次，依赖的类已经加载过，所以很少触发新的类加载，而当应用走到某个很少触发的业务逻辑或者抛出某个未加载过的异常，需要从该变更过的JAR包中进行Class加载时，就会产生这个现象。</p>
+
+<h2 id="解决方案">解决方案</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
+（https://stackoverflow.com/questions/38326183/jvm-crashed-in-java-util-zip-zipfile-getentry）
+2. 启动时关闭MemoryMapping。JAVA Bug Fixs - 6929479
+（http://www.oracle.com/us/technologies/java/overview-156328.html）
+</code></pre></td></tr></tbody></table></div>
+</div>
 
 
       
@@ -653,7 +655,7 @@
         <div class="post-tags">
           
             
-            <a href="/tag/#/ElasticSearch" rel="tag"># ElasticSearch</a>
+            <a href="/tag/#/JVM" rel="tag"># JVM</a>
           
         </div>
       
@@ -669,15 +671,15 @@
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="next" title="ElasticSearch分组相关性写入">
+                <i class="fa fa-chevron-left"></i> ElasticSearch分组相关性写入
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/jvm/2018/04/02/jvm-crash-when-jar-modify/" rel="prev" title="Java Jar包变更导致JVM崩溃问题">
-                Java Jar包变更导致JVM崩溃问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -740,8 +742,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
@@ -805,6 +816,34 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+
+
+
+
+
+
+
+            
+              <div class="post-toc-content">
+    <ol class=nav>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常一线程进行类加载时抛出"> <span class="nav-number">1</span> <span class="nav-text">异常（一）：线程进行类加载时抛出</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常二tomcat类加载时抛出"> <span class="nav-number">2</span> <span class="nav-text">异常（二）：Tomcat类加载时抛出</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常分析"> <span class="nav-number">3</span> <span class="nav-text">异常分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题原因"> <span class="nav-number">4</span> <span class="nav-text">问题原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">5</span> <span class="nav-text">解决方案</span> </a> </li>
+    </ol>
+  </div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -953,9 +992,9 @@
       
       <script type="text/javascript">
           var disqus_config = function () {
-              this.page.url = 'http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/';
-              this.page.identifier = '/elasticsearch/2018/05/24/elasticsearch-group-write/';
-              this.page.title = 'ElasticSearch分组相关性写入';
+              this.page.url = 'http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/';
+              this.page.identifier = '/jvm/2018/04/02/jvm-crash-when-jar-modify/';
+              this.page.title = 'Java Jar包变更导致JVM崩溃问题';
           };
           var d = document, s = d.createElement('script');
           s.src = 'https://Star.disqus.com/embed.js';

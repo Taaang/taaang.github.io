@@ -439,13 +439,217 @@
 
 
 
-  <p>随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。</p>
+  <p>随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
+在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。</p>
 
 
 
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/elasticsearch/2018/05/24/elasticsearch-group-write/#" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+        
+        
+        
+        
+          <div class="post-eof"></div>
+        
+      
+    </footer>
+  </article>
+
+  
+    
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="assets/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="To the Moon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+                
+                <a class="post-title-link" href="/jvm/2018/04/02/jvm-crash-when-jar-modify/" itemprop="url">
+                Java Jar包变更导致JVM崩溃问题
+              </a>
+            
+          
+        </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T18:23:10+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/category/#/JVM" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/jvm/2018/04/02/jvm-crash-when-jar-modify/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/jvm/2018/04/02/jvm-crash-when-jar-modify/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <p>最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>异常（一）
+JException in thread "data_send_thread_1" java.lang.NoClassDefFoundError: com/****/StreamResetException
+        ...
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+        ... 10 more
+</code></pre></td></tr></tbody></table></div>
+</div>
+<p>或者</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>异常（二）
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+J 128  java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58]
+J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes)
+J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140]
+v  ~StubRoutines::call_stub
+J 933  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
+J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94]
+J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188]
+J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes)
+J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+
+
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/jvm/2018/04/02/jvm-crash-when-jar-modify/#" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -531,7 +735,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -542,7 +746,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -553,7 +757,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

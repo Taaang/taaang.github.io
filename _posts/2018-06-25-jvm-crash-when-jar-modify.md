@@ -123,10 +123,10 @@ public ZipEntry getEntry(String name) {
 &emsp;3.  使用strace查看getEntry时对应的系统调用，结果如下：
 
 __（1）Class加载成功时，可以从对应的JAR包中读取到Class信息__
-![Strace_normal](/assets/images/post_imgs/img_jvm_crash_1.png)
+![Strace_normal](https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png)
 
 __（2）Class加载异常时，无法读取到Class信息__
-![Strace_error](/assets/images/post_imgs/img_jvm_crash_2.png)
+![Strace_error](https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_2.png)
 
 
 可以看到在对JAR包中Class进行加载时，找不到对应的Class。但是，实际上使用解压或者使用JD-GUI查看其内容时，是能够找到编译后的Class文件，所以该类是存在的。那么问题来了，为什么明明有却会说找不到？

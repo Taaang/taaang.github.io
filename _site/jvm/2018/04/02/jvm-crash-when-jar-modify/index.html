@@ -117,12 +117,12 @@
 <meta property="og:site_name" content="To the Moon">
 <meta property="og:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="/assets/images/post_imgs/img_jvm_crash_1.png">
-<meta property="og:image" content="/assets/images/post_imgs/img_jvm_crash_2.png">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_2.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Jar包变更导致JVM崩溃问题">
 <meta name="twitter:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
-<meta name="twitter:image" content="/assets/images/post_imgs/img_jvm_crash_1.png">
+<meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -554,10 +554,10 @@ public ZipEntry getEntry(String name) {
 <p> 3.  使用strace查看getEntry时对应的系统调用，结果如下：</p>
 
 <p><strong>（1）Class加载成功时，可以从对应的JAR包中读取到Class信息</strong>
-<img src="/assets/images/post_imgs/img_jvm_crash_1.png" alt="Strace_normal" /></p>
+<img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png" alt="Strace_normal" /></p>
 
 <p><strong>（2）Class加载异常时，无法读取到Class信息</strong>
-<img src="/assets/images/post_imgs/img_jvm_crash_2.png" alt="Strace_error" /></p>
+<img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_2.png" alt="Strace_error" /></p>
 
 <p>可以看到在对JAR包中Class进行加载时，找不到对应的Class。但是，实际上使用解压或者使用JD-GUI查看其内容时，是能够找到编译后的Class文件，所以该类是存在的。那么问题来了，为什么明明有却会说找不到？</p>
 

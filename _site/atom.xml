@@ -1,4 +1,172 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-30T15:18:31+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">ElasticSearch分组相关性写入</title><link href="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="alternate" type="text/html" title="ElasticSearch分组相关性写入" /><published>2018-05-25T07:31:30+08:00</published><updated>2018-05-25T07:31:30+08:00</updated><id>http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write</id><content type="html" xml:base="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">&lt;p&gt;随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-16T20:39:12+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">字符编码</title><link href="http://localhost:4000/common/2018/07/05/character-coding/" rel="alternate" type="text/html" title="字符编码" /><published>2018-07-06T02:16:30+08:00</published><updated>2018-07-06T02:16:30+08:00</updated><id>http://localhost:4000/common/2018/07/05/character-coding</id><content type="html" xml:base="http://localhost:4000/common/2018/07/05/character-coding/">&lt;h2 id=&quot;字符字符集和字符编码&quot;&gt;字符、字符集和字符编码&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;字符&lt;/td&gt;
+        &lt;td&gt;基本信息单元，字母、数字和标点等&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;字符集&lt;/td&gt;
+        &lt;td&gt;字符集合，例如ASCII、GBK&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;字符编码&lt;/td&gt;
+        &lt;td&gt;字符集的二进制编码方式&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;那么问题来了，我们常说的ASCII、GBK等都是指字符编码，为什么被列入字符集里了？&lt;/p&gt;
+
+&lt;p&gt;实际上对于大部分的字符集来说，一个字符集智慧有一套编码，所以字符集即唯一确定了其编码。&lt;/p&gt;
+
+&lt;p&gt;但是凡事总有例外，UNICODE字符集就是一个特例，UNICODE存在多种编码方式，包括UTF-8、UTF-16等。&lt;/p&gt;
+
+&lt;h2 id=&quot;常见字符编码&quot;&gt;常见字符编码&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;ASCII&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;单字节编码字符集，最高位不使用，常设为0.
+
+0~31及127为控制码，共33个
+
+32~126是字符，共95个
+
+空间占用：1字节
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;不够用了怎么办 -&amp;gt; LATIN-1（ISO-8859-1）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ASCII扩展字符集，启用最高位。
+
+0~127位与ASCII相同，新开启的128~255收录新字符。
+
+空间占用：1字节
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;有中文了怎么办 -&amp;gt; GB2312&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;有中文了怎么办？常用中文字符有6000多个~
+
+GB2312解决了中文问题，包含常用中文字符
+
+0~127位与ASCII相同，高位其他字符取消，采用新规则：
+
+当两个大于127的字符连在一起时，就表示一个汉字，前一个为高字节（0xA1到0xF7），后一个为低字节（0xA1到0xFE），可以组合出7000+的汉字。其中，高字节等于字符区号+0xA0，低字节等于字符所在区中的位置+0xA0。
+
+同时，GB2312也对一些特殊字符、数字和标点等进行了重新编码，重新编码的这一批字符，就是我们常说的“全角”字符，而127位以下的这些字符就被称为“半角”字符。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;哎呀，中文那么多不够用啊 -&amp;gt; GBK&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;基于GB2312进行扩展，不再要求低字节一定是127之后的编码，只要第一个字节是大于127的，那么代表这是一个汉字的开始。
+
+GBK包含了GB2312的所有内容，同时又增加了近20000个新的汉字。
+
+
+看一个例子：
+
+a机智
+
+采用GBK编码后，以十六进制方式查看，结果为：
+
+61bb fad6 c7
+
+第一个字节小于127，和ASCII编码保持一致，可以直接查表得到61对应a；
+
+之后一共4个字节，分别对应“机智”，查询后匹配bbfa对应”机“，d6c7对应”智”
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;繁体字  -&amp;gt; BIG5&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;虽然GBK支持少量繁体中文，但是数量有限，于是就出现了BIG5啦。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;ISO表示我坐不住了 -&amp;gt; UNICODE&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的国家，不同的语言，编码太多，就会出现兼容、转换等问题。这时候，ISO坐不住了。
+
+ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Universal Multiple-Octet Coded Character Set），为了能够同时包含大量的字符，UNICODE使用2个字节来统一表示，对于ASCII中低于127位的字符保持不变，其他全部重新编码。
+
+前面有提到，UNICODE是字符集，并不能代表字符编码，UNICODE拥有多种编码方式，包括为UTF-8、UTF-16。（UCS Transfer Format，UCS是UNICDOE的简称）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;字符与字节&quot;&gt;字符与字节&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的编码的字符串，其长度和大小怎么计算？
+
+字符串长度：字符串的实际长度，计算字符长度，strlen结果；
+字符串大小：字符串的空间占用大小，需要结合字符编码进行大小计算。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;mysql下的字符编码&quot;&gt;MySQL下的字符编码&lt;/h2&gt;
+
+&lt;p&gt;show variables like ‘%character%’;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_coding.png?raw=true&quot; alt=&quot;mysql_coding&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_client&lt;/td&gt;
+        &lt;td&gt;客户端字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_connection&lt;/td&gt;
+        &lt;td&gt;网络传输数据的字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_database&lt;/td&gt;
+        &lt;td&gt;服务端数据字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_filesystem&lt;/td&gt;
+        &lt;td&gt;服务端文件名字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_results&lt;/td&gt;
+        &lt;td&gt;服务端返回结果集的字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;character_set_server&lt;/td&gt;
+        &lt;td&gt;服务端全局字符编码&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;mysql字符集校对规则&quot;&gt;MySQL字符集校对规则&lt;/h2&gt;
+
+&lt;p&gt;相同字符集内，字符比较和排序的规则。&lt;/p&gt;
+
+&lt;p&gt;如果查看MySQL中，information_schema的CHARACTER_SETS，可以看到MySQL支持的字符集及其校对规则，例如：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_collate.png?raw=true&quot; alt=&quot;mysql_collate&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;图中显示了MySQL支持的字符集，以及对应字符集的校对规则、字符集中字符的长度。其中，不同的校对规则，会以_ci、_cs、_bin结尾，分别代表了不同的比对模式，_ci为大小写不敏感，_cs为大小写敏感，_bin为二进制比对。&lt;/p&gt;
+
+&lt;h2 id=&quot;mysql表字符集修改&quot;&gt;MySQL表字符集修改&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;修改表字符集（新数据生效）
+	ALTER TABLE  … CHARACTER SET …
+修改表字符集（新旧数据生效）
+	ALTER TABLE  … CONVERT TO CHARACTER SET …
+修改当前会话字符集
+	SET NAMES …（client、result、connection）
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name>Qi</name></author><category term="Character Coding" /><summary type="html">字符、字符集和字符编码</summary></entry><entry><title type="html">ElasticSearch分组相关性写入</title><link href="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="alternate" type="text/html" title="ElasticSearch分组相关性写入" /><published>2018-05-25T07:31:30+08:00</published><updated>2018-05-25T07:31:30+08:00</updated><id>http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write</id><content type="html" xml:base="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">&lt;p&gt;随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。&lt;/p&gt;
 
 &lt;p&gt;起初我们对原因进行分析，认为是数据索引过多导致数据节点写入过慢。于是，在每天晚上定时对最近三天的数据进行分析，找出哪些产品的数据量比较小，并将数据量较小的数据索引进行合并，以减少索引数量；同时每天定时关闭一周前的数据索引转为冷数据，以减轻集群负担，使ES集群的写入和查询速度均得到提升。&lt;/p&gt;
@@ -8,6 +176,21 @@
 &lt;p&gt;测试主要对相同总量，不同分组的数据进行写入测试，结果如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;宿主机环境&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;table&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;CPU&lt;/td&gt;
+        &lt;td&gt;4核&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;内存&lt;/td&gt;
+        &lt;td&gt;8G&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;组件配置&lt;/strong&gt;&lt;/p&gt;
 

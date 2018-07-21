@@ -3,7 +3,9 @@ title: 字符编码
 date: 2018-07-05 18:16:30
 categories:
 - Common
+- MySQL
 tags:
+- MySQL
 - Character Coding
 ---
 

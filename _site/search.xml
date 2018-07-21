@@ -2,15 +2,38 @@
 <search>
   
     <entry>
+      <title><![CDATA[JVM NoSuchMethodError异常问题处理]]></title>
+      <url>/jvm/2018/07/13/jvm-classload-priority/</url>
+      <content type="text"><![CDATA[最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。异常信息[ERROR] 15:35:43.751 c.c.m.o.e.GlobalExceptionHandler(31) - Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:978)        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)        at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)        at javax.servlet.http.HttpServlet.service(HttpServlet.java:644)        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)        at javax.servlet.http.HttpServlet.service(HttpServlet.java:725)        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)        at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)        at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)异常分析项目是在尝试调用Google Guava Splitter中的splitToList方法时，发现该方法未定义。首先，项目编译时正常，所以在此过程中，是能找到对应的类和方法，那么为什么会出现在运行时找不到的情况呢？其次，抛出的异常是NoSuchMethodError，说明ClassLoader成功加载到了对应的类，只是在进行方法调用时，发现方法不存在。针对上面的分析，进行一些猜想的验证： 1.maven打包使用了低版本的Guava，而低版本中没有对应的方法 理论上来说，这种情况不太可能，如果使用了没有对应方法的低版本，那么打包编译是会失败的，实际上反编后，也是可以在对应的类中找到该方法的； 2.JAR冲突，导致使用了低版本的Guava，而低版本中没有对应的方法 然鹅，事实证明不是，maven依赖树中只出现了一个guava包的引用，所以排除这种情况； 3.Tomcat进行Class加载时，加载了低版本的Guava，而低版本中没有对应的方法 于是，我把项目打成了JAR，引入tomcat模块，放到测试环境中运行，一切正常~那么基本可以判断是和服务器Tomcat或JAVA环境有一定的关系，为了弄清楚在加载该类时，是从哪里加载的，在Tomcat启动参数中，加入-XX:+TraceClassLoading -XX:+TraceClassUnloading，用于跟踪Tomcat类加载和卸载，并在日志中进行查看，恩。。。然后发现：恩。。。。。。。恩。。。。。。。。恩。。。。。。。。。嘛玩意儿这是。。。。。根本就是不是从我的JAR包中加载的。。。。从上面的图可以看出，在进行Guava Splitter类加载的时候，从JRE的扩展LIB库中进行了该类的加载，那么为什么没有从项目包中加载，而是从扩展LIB库中进行加载的呢？可以看出，只有在项目部署在服务器Tomcat上的时候，才出现了相应的问题，那么很可能是和服务器中的Tomcat或JAVA环境有关。首先，我们来看一下Tomcat是如何做类加载和管理的。Tomcat使用一系列不同的ClassLoader来加载和管理一些基础的常规类，它们是能被所有WEB应用同时使用的，包括JVM的基础运行时类、Tomcat内部类等。而单个应用部署在Tomcat的独立容器中，每个容器中的WEB应用对应的ClassLoader相互隔离，以此来实现隔离。Tomcat中ClassLoader之间是呈现层级关系的，具体结构如下图所示：其中，Bootstrap class loader  用于加载JVM运行时基础类，同时也包含了扩展JAR包目录下的所有类（$JAVA_HOME/jre/lib/ext）；System class loader  一般从CLASSPATH环境变量中进行类初始化，所有的这些对于Tomcat内部类和WEB应用都是可见的。然后，标准的Tomcat启动脚本是会忽略CLASSPATH环境变量，而使用下列仓库进行代替： 1.$CATALINA_HOME/bin/bootstrap.jar  包含用于初始化Tomcat的所需类； 2.$CATALINA_BASE/bin/tomcat-juli.jar or $CATALINA_HOME/bin/tomcat-juli.jar  日志相关的实现类； 3.$CATALINA_HOME/bin/commons-daemon.jar  Apache Commons Daemon 中的类，Linux下可用于实现后台服务，Windows下可用于实现注册为系统服务。Common class loader  包含附加的类，对于Tomcat内部类和所有的WEB应用都是可见的，默认查找CATALINA_HOME和CATALINA_BASE目录下的lib目录；WebappX class loader  为每一个部署在Tomcat中WEB应用实例创建的ClassLoader，包括/WEB-INF/classes下所有解包的类和资源，同时也包含/WEB-INF/lib目录下JAR包中的类和资源。由于前三个ClassLoader是各个WEB应用通用的，当需要加载一个类时，会优先按顺序上最上层ClassLoader进行加载，当一个ClassLoader在对应的目录中没有找到对应的类时，就依次交给下一层级的ClassLoader进行加载。如果最终都没有找到对应的类，则抛出NoClassDefFoundError。综上所述，当尝试进行Google Guava Splitter类的加载时，首先交由Bootstrap class loader进行尝试性的加载，然后在对应目录中的JAR包中进行搜索时，居然从jre/lib/ext目录下的JAR包中找到了对应的类，所以优先进行了加载，而在对该JAR包进行反编后，发现确实包含了Google Guava，并且对应的Guava版本是14.0.1，而在对应的版本下，Guava Splitter确实还没有splitToList方法，所以最终导致类加载成功，但是找不到对应的方法，抛出NoSuchMethodError。异常原因当尝试进行Google Guava Splitter类的加载时，Bootstrap class loader优先找到并加载了低版本的Guava Splitter，而低版本中没有包含splitToList方法。后来在同事里问了一圈，发现是有同事之前测试，将测试JAR包放到了jre/lib/ext目录，导致了该问题的发生。解决方案      经确认后，将该JAR从扩展库目录中移除，处理后恢复正常；        禁止将业务JAR包放到JAVA库目录中，避免相关问题的再次发生；        在对模块进行JAR包封装，或进行SDK开发时，应尽可能较少相关第三方库依赖，避免与引用方依赖发生冲突；        如果无法避免引用第三方常用类库，可以使用maven shade插件，对相关第三方类库的包名进行变更，以此避免相关问题。  ]]></content>
+      <categories>
+        
+          <category> JVM </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> JVM </tag>
+        
+          <tag> NoSuchMethodError </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
       <title><![CDATA[字符编码]]></title>
-      <url>/common/2018/07/05/character-coding/</url>
+      <url>/common/mysql/2018/07/05/character-coding/</url>
       <content type="text"><![CDATA[ 字符、字符集和字符编码                    字符        基本信息单元，字母、数字和标点等                    字符集        字符集合，例如ASCII、GBK                    字符编码        字符集的二进制编码方式            那么问题来了，我们常说的ASCII、GBK等都是指字符编码，为什么被列入字符集里了？实际上对于大部分的字符集来说，一个字符集智慧有一套编码，所以字符集即唯一确定了其编码。但是凡事总有例外，UNICODE字符集就是一个特例，UNICODE存在多种编码方式，包括UTF-8、UTF-16等。常见字符编码ASCII单字节编码字符集，最高位不使用，常设为0.0~31及127为控制码，共33个32~126是字符，共95个空间占用：1字节不够用了怎么办 -&gt; LATIN-1（ISO-8859-1）ASCII扩展字符集，启用最高位。0~127位与ASCII相同，新开启的128~255收录新字符。空间占用：1字节有中文了怎么办 -&gt; GB2312有中文了怎么办？常用中文字符有6000多个~GB2312解决了中文问题，包含常用中文字符0~127位与ASCII相同，高位其他字符取消，采用新规则：当两个大于127的字符连在一起时，就表示一个汉字，前一个为高字节（0xA1到0xF7），后一个为低字节（0xA1到0xFE），可以组合出7000+的汉字。其中，高字节等于字符区号+0xA0，低字节等于字符所在区中的位置+0xA0。同时，GB2312也对一些特殊字符、数字和标点等进行了重新编码，重新编码的这一批字符，就是我们常说的“全角”字符，而127位以下的这些字符就被称为“半角”字符。哎呀，中文那么多不够用啊 -&gt; GBK基于GB2312进行扩展，不再要求低字节一定是127之后的编码，只要第一个字节是大于127的，那么代表这是一个汉字的开始。GBK包含了GB2312的所有内容，同时又增加了近20000个新的汉字。看一个例子：a机智采用GBK编码后，以十六进制方式查看，结果为：61bb fad6 c7第一个字节小于127，和ASCII编码保持一致，可以直接查表得到61对应a；之后一共4个字节，分别对应“机智”，查询后匹配bbfa对应”机“，d6c7对应”智”繁体字  -&gt; BIG5虽然GBK支持少量繁体中文，但是数量有限，于是就出现了BIG5啦。ISO表示我坐不住了 -&gt; UNICODE不同的国家，不同的语言，编码太多，就会出现兼容、转换等问题。这时候，ISO坐不住了。ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Universal Multiple-Octet Coded Character Set），为了能够同时包含大量的字符，UNICODE使用2个字节来统一表示，对于ASCII中低于127位的字符保持不变，其他全部重新编码。前面有提到，UNICODE是字符集，并不能代表字符编码，UNICODE拥有多种编码方式，包括为UTF-8、UTF-16。（UCS Transfer Format，UCS是UNICDOE的简称）字符与字节不同的编码的字符串，其长度和大小怎么计算？字符串长度：字符串的实际长度，计算字符长度，strlen结果；字符串大小：字符串的空间占用大小，需要结合字符编码进行大小计算。MySQL下的字符编码show variables like ‘%character%’;                    character_set_client        客户端字符编码                    character_set_connection        网络传输数据的字符编码                    character_set_database        服务端数据字符编码                    character_set_filesystem        服务端文件名字符编码                    character_set_results        服务端返回结果集的字符编码                    character_set_server        服务端全局字符编码            MySQL字符集校对规则相同字符集内，字符比较和排序的规则。如果查看MySQL中，information_schema的CHARACTER_SETS，可以看到MySQL支持的字符集及其校对规则，例如：图中显示了MySQL支持的字符集，以及对应字符集的校对规则、字符集中字符的长度。其中，不同的校对规则，会以_ci、_cs、_bin结尾，分别代表了不同的比对模式，_ci为大小写不敏感，_cs为大小写敏感，_bin为二进制比对。MySQL表字符集修改修改表字符集（新数据生效）	ALTER TABLE  … CHARACTER SET …修改表字符集（新旧数据生效）	ALTER TABLE  … CONVERT TO CHARACTER SET …修改当前会话字符集	SET NAMES …（client、result、connection）]]></content>
       <categories>
         
           <category> Common </category>
         
+          <category> MySQL </category>
+        
       </categories>
       <tags>
+        
+          <tag> MySQL </tag>
         
           <tag> Character Coding </tag>
         
@@ -47,6 +70,23 @@
       <tags>
         
           <tag> JVM </tag>
+        
+      </tags>
+      <tags></tags>
+    </entry>
+  
+    <entry>
+      <title><![CDATA[MySQL Communications link failure问题]]></title>
+      <url>/common/2016/12/10/mysql-communications-link-failure.md/</url>
+      <content type="text"><![CDATA[最近对项目进行测试，突然出现Communications link failure异常，原文如下：```com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failureThe last packet successfully received from the server was 20,096 milliseconds ago.The last packet sent successfully to the server was 0 milliseconds ago.    at sun.reflect.GeneratedConstructorAccessor84.newInstance(Unknown Source) ~[?:?]    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_75]    ...```查看MySQL Status的Aborted_clients，变化如下：请求接口前：]]></content>
+      <categories>
+        
+          <category> Common </category>
+        
+      </categories>
+      <tags>
+        
+          <tag> MySQL </tag>
         
       </tags>
       <tags></tags>

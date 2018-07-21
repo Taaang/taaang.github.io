@@ -1,0 +1,23 @@
+---
+title: MySQL Communications link failure问题
+date: 2016-12-10 11:34:29
+categories:
+- Common
+tags:
+- MySQL
+---
+
+
+最近对项目进行测试，突然出现Communications link failure异常，原文如下：
+
+```
+com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+
+The last packet successfully received from the server was 20,096 milliseconds ago.The last packet sent successfully to the server was 0 milliseconds ago.
+    at sun.reflect.GeneratedConstructorAccessor84.newInstance(Unknown Source) ~[?:?]
+    at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_75]
+    ...
+```
+
+查看MySQL Status的Aborted_clients，变化如下：
+请求接口前：

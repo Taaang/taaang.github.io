@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-21T13:41:51+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">JVM NoSuchMethodError异常问题处理</title><link href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/" rel="alternate" type="text/html" title="JVM NoSuchMethodError异常问题处理" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/13/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-21T13:52:01+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">类加载NoSuchMethodError异常问题处理</title><link href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/" rel="alternate" type="text/html" title="类加载NoSuchMethodError异常问题处理" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/13/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
 
 &lt;h2 id=&quot;异常信息&quot;&gt;异常信息&lt;/h2&gt;
 
@@ -55,7 +55,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 &lt;p&gt;嘛玩意儿这是。。。。。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.png?raw=true&quot; alt=&quot;jvm_load_error_gg&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.jpg?raw=true&quot; alt=&quot;jvm_load_error_gg&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;根本就是不是从我的JAR包中加载的。。。。&lt;/p&gt;
 

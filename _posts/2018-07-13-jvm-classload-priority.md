@@ -65,7 +65,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 嘛玩意儿这是。。。。。
 
-![jvm_load_error_gg](https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.png?raw=true)
+![jvm_load_error_gg](https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.jpg?raw=true)
 
 根本就是不是从我的JAR包中加载的。。。。
 

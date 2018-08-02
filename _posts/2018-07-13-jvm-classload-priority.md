@@ -75,6 +75,8 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 首先，我们来看一下Tomcat是如何做类加载和管理的。
 
+(https://tomcat.apache.org/tomcat-8.0-doc/class-loader-howto.html)
+
 Tomcat使用一系列不同的ClassLoader来加载和管理一些基础的常规类，它们是能被所有WEB应用同时使用的，包括JVM的基础运行时类、Tomcat内部类等。而单个应用部署在Tomcat的独立容器中，每个容器中的WEB应用对应的ClassLoader相互隔离，以此来实现隔离。Tomcat中ClassLoader之间是呈现层级关系的，具体结构如下图所示：
 
 ![tomcat_class_loader_structure](https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_tomcat_class_loader_structure.png?raw=true)

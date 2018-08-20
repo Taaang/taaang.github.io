@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-21T13:52:01+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">类加载NoSuchMethodError异常问题处理</title><link href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/" rel="alternate" type="text/html" title="类加载NoSuchMethodError异常问题处理" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/13/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-20T19:43:55+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">Tomcat类加载NoSuchMethodError异常问题</title><link href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/" rel="alternate" type="text/html" title="Tomcat类加载NoSuchMethodError异常问题" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/13/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
 
 &lt;h2 id=&quot;异常信息&quot;&gt;异常信息&lt;/h2&gt;
 
@@ -64,6 +64,8 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 &lt;p&gt;可以看出，只有在项目部署在服务器Tomcat上的时候，才出现了相应的问题，那么很可能是和服务器中的Tomcat或JAVA环境有关。&lt;/p&gt;
 
 &lt;p&gt;首先，我们来看一下Tomcat是如何做类加载和管理的。&lt;/p&gt;
+
+&lt;p&gt;(https://tomcat.apache.org/tomcat-8.0-doc/class-loader-howto.html)&lt;/p&gt;
 
 &lt;p&gt;Tomcat使用一系列不同的ClassLoader来加载和管理一些基础的常规类，它们是能被所有WEB应用同时使用的，包括JVM的基础运行时类、Tomcat内部类等。而单个应用部署在Tomcat的独立容器中，每个容器中的WEB应用对应的ClassLoader相互隔离，以此来实现隔离。Tomcat中ClassLoader之间是呈现层级关系的，具体结构如下图所示：&lt;/p&gt;
 
@@ -664,16 +666,66 @@ Another possible sceanrio is when Java or the application itself is being patche
 2. 启动时关闭MemoryMapping。JAVA Bug Fixs - 6929479
 （http://www.oracle.com/us/technologies/java/overview-156328.html）
 &lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>Qi</name></author><category term="JVM" /><summary type="html">最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)</summary></entry><entry><title type="html">MySQL Communications link failure问题</title><link href="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure.md/" rel="alternate" type="text/html" title="MySQL Communications link failure问题" /><published>2016-12-10T19:34:29+08:00</published><updated>2016-12-10T19:34:29+08:00</updated><id>http://localhost:4000/common/2016/12/10/mysql-communications-link-failure.md</id><content type="html" xml:base="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure.md/">最近对项目进行测试，突然出现Communications link failure异常，原文如下：
+&lt;/div&gt;</content><author><name>Qi</name></author><category term="JVM" /><summary type="html">最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)</summary></entry><entry><title type="html">MySQL Communications link failure问题</title><link href="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/" rel="alternate" type="text/html" title="MySQL Communications link failure问题" /><published>2016-12-10T19:34:29+08:00</published><updated>2016-12-10T19:34:29+08:00</updated><id>http://localhost:4000/common/2016/12/10/mysql-communications-link-failure</id><content type="html" xml:base="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/">&lt;p&gt;最近对项目进行测试，突然出现Communications link failure异常，原文如下：&lt;/p&gt;
 
-```
-com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 The last packet successfully received from the server was 20,096 milliseconds ago.The last packet sent successfully to the server was 0 milliseconds ago.
     at sun.reflect.GeneratedConstructorAccessor84.newInstance(Unknown Source) ~[?:?]
     at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_75]
     ...
-```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-查看MySQL Status的Aborted_clients，变化如下：
-请求接口前：</content><author><name>Qi</name></author><category term="MySQL" /><summary type="html">最近对项目进行测试，突然出现Communications link failure异常，原文如下：</summary></entry></feed>
+&lt;p&gt;查看MySQL Status的Aborted_clients，变化如下：
+请求接口前：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_1.jpeg?raw=true&quot; alt=&quot;mysql_1&quot; /&gt;
+&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_2.jpeg?raw=true&quot; alt=&quot;mysql_2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;请求接口后：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_3.jpeg?raw=true&quot; alt=&quot;mysql_3&quot; /&gt;
+&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_4.jpeg?raw=true&quot; alt=&quot;mysql_4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;等待一段时间后：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_5.jpeg?raw=true&quot; alt=&quot;mysql_5&quot; /&gt;
+&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_6.jpeg?raw=true&quot; alt=&quot;mysql_6&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;此时，再次请求接口，出现Communications link failure，可判断是MySQL认为连接已经无效，主动关闭了连接。查测试服务器MySQL相关配置后，发现wait_timeout设置为10s，再结合日志中last packet successfully received时间，判断可能为该配置问题。&lt;/p&gt;
+
+&lt;p&gt;但是比较奇怪的是，线上项目正常。正常情况下，线上服务器应与测试服务器上的配置一致，保证测试结果有效。所以果断查看线上MySQL配置后，发现wait_timeout为600s，所以基本确定是因为测试服务器wait_timeout最近可能被人修改，导致出现这个MySQL主动关闭连接的情况。&lt;/p&gt;
+
+&lt;p&gt;这又引出另一个问题，如果线上配置是600s，那么有过期连接后，MySQL依然会进行关闭，应该也会出现同样的错误，但是实际情况是线上项目一直正常，没有出现告警，于是怀疑是获取连接的时候，连接池进行了一些维护性工作。&lt;/p&gt;
+
+&lt;p&gt;连接池使用的是阿里的DruidDataSource，查看连接其默认配置，发现：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_status_3.jpeg?raw=true&quot; alt=&quot;mysql_druid&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中testOnBorrow和testOnReturn是默认不开启的，testWhileIdle默认为true，查看获取连接的相关代码，发现如下：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (isTestWhileIdle()) {
+    final long currentTimeMillis = System.currentTimeMillis();
+    final long lastActiveTimeMillis = poolableConnection.getConnectionHolder().getLastActiveTimeMillis();
+    final long idleMillis = currentTimeMillis - lastActiveTimeMillis;
+    long timeBetweenEvictionRunsMillis = this.getTimeBetweenEvictionRunsMillis();
+    if (timeBetweenEvictionRunsMillis &amp;lt;= 0) {
+        timeBetweenEvictionRunsMillis = DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS;
+    }
+
+    if (idleMillis &amp;gt;= timeBetweenEvictionRunsMillis) {
+        boolean validate = testConnectionInternal(poolableConnection.getConnection());
+        if (!validate) {
+            if (LOG.isDebugEnabled()) {
+            LOG.debug(&quot;skip not validate connection.&quot;);
+            }
+            discardConnection(realConnection);             
+            continue;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;其中，默认的DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS为60s，即默认对超过60s的未活动连接进行检测，所以线上MySQL配置600s也没有出现Communications link failure。&lt;/p&gt;</content><author><name>Qi</name></author><category term="MySQL" /><summary type="html">最近对项目进行测试，突然出现Communications link failure异常，原文如下：</summary></entry></feed>

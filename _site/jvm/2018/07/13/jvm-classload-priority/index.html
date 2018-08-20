@@ -112,7 +112,7 @@
 <meta name="description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
 <meta name="keywords" content="JVM, NoSuchMethodError">
 <meta property="og:type" content="article">
-<meta property="og:title" content="类加载NoSuchMethodError异常问题处理">
+<meta property="og:title" content="Tomcat类加载NoSuchMethodError异常问题">
 <meta property="og:url" content="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">
 <meta property="og:site_name" content="To the Moon">
 <meta property="og:description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.jpg?raw=true">
 <meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_tomcat_class_loader_structure.png?raw=true">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="类加载NoSuchMethodError异常问题处理">
+<meta name="twitter:title" content="Tomcat类加载NoSuchMethodError异常问题">
 <meta name="twitter:description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
 <meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load.png?raw=true">
 
@@ -156,7 +156,7 @@
 
 
 
-  <title>类加载NoSuchMethodError异常问题处理 | To the Moon</title>
+  <title>Tomcat类加载NoSuchMethodError异常问题 | To the Moon</title>
   
 
 
@@ -336,7 +336,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            类加载NoSuchMethodError异常问题处理
+            Tomcat类加载NoSuchMethodError异常问题
           
         </h1>
         
@@ -506,6 +506,8 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 <p>可以看出，只有在项目部署在服务器Tomcat上的时候，才出现了相应的问题，那么很可能是和服务器中的Tomcat或JAVA环境有关。</p>
 
 <p>首先，我们来看一下Tomcat是如何做类加载和管理的。</p>
+
+<p>(https://tomcat.apache.org/tomcat-8.0-doc/class-loader-howto.html)</p>
 
 <p>Tomcat使用一系列不同的ClassLoader来加载和管理一些基础的常规类，它们是能被所有WEB应用同时使用的，包括JVM的基础运行时类、Tomcat内部类等。而单个应用部署在Tomcat的独立容器中，每个容器中的WEB应用对应的ClassLoader相互隔离，以此来实现隔离。Tomcat中ClassLoader之间是呈现层级关系的，具体结构如下图所示：</p>
 
@@ -926,7 +928,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
           var disqus_config = function () {
               this.page.url = 'http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/';
               this.page.identifier = '/jvm/2018/07/13/jvm-classload-priority/';
-              this.page.title = '类加载NoSuchMethodError异常问题处理';
+              this.page.title = 'Tomcat类加载NoSuchMethodError异常问题';
           };
           var d = document, s = d.createElement('script');
           s.src = 'https://Star.disqus.com/embed.js';

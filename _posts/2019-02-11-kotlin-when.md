@@ -54,7 +54,7 @@ when (enumA) {
 
 而在新版本发布后，代码执行， 输出了“else”。。
 
-![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.jpeg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.jpeg){:height="300" width="300"}
 
 可以确定的是这段代码相关内容没有任何改动，那么为什么会出现两种不同的结果呢？
 
@@ -66,7 +66,7 @@ when (enumA) {
 
 咋办。。
 
-![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg){:height="300" width="300"}
 
 既然代码没有变过，那么项目有没有其他变更呢？
 
@@ -124,13 +124,13 @@ Code:
 
 比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。
 
-![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg){:height="300" width="300"}
 
 oridinal不是返回的枚举中类型序号吗。。。
 
 所以这个比较只是在比较序号的吗。。。
 
-![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.jpg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.jpg){:height="300" width="300"}
 
 EnumA和FakeEnumA中枚举类型声明的顺序确实是一样的，那如果我把FakeEnumA中的定义顺序换一下，不就正常了吗。。
 

@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JVM,NoSuchMethodError," />
+  <meta name="keywords" content="Kotlin," />
 
 
 
@@ -109,21 +109,23 @@
 
 
 
-<meta name="description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
-<meta name="keywords" content="JVM, NoSuchMethodError">
+<meta name="description" content="送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。">
+<meta name="keywords" content="Kotlin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat类加载NoSuchMethodError异常问题">
-<meta property="og:url" content="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">
+<meta property="og:title" content="Kotlin升级导致的when异常问题">
+<meta property="og:url" content="http://localhost:4000/kotlin/2019/02/10/kotlin-when/">
 <meta property="og:site_name" content="To the Moon">
-<meta property="og:description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
+<meta property="og:description" content="送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load.png?raw=true">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.jpg?raw=true">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_tomcat_class_loader_structure.png?raw=true">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_1?raw=true">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_2?raw=true">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_3?raw=true">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_4?raw=true">
+<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_5?raw=true">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomcat类加载NoSuchMethodError异常问题">
-<meta name="twitter:description" content="最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。">
-<meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load.png?raw=true">
+<meta name="twitter:title" content="Kotlin升级导致的when异常问题">
+<meta name="twitter:description" content="送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。">
+<meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_1?raw=true">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -156,7 +158,7 @@
 
 
 
-  <title>Tomcat类加载NoSuchMethodError异常问题 | To the Moon</title>
+  <title>Kotlin升级导致的when异常问题 | To the Moon</title>
   
 
 
@@ -316,7 +318,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/kotlin/2019/02/10/kotlin-when/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qi">
@@ -336,7 +338,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            Tomcat类加载NoSuchMethodError异常问题
+            Kotlin升级导致的when异常问题
           
         </h1>
         
@@ -350,8 +352,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T06:15:36+08:00">
-                2018-07-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-11T00:15:36+08:00">
+                2019-02-10
               </time>
             
 
@@ -374,8 +376,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/JVM" itemprop="url" rel="index">
-                    <span itemprop="name">JVM</span>
+                  <a href="/category/#/Kotlin" itemprop="url" rel="index">
+                    <span itemprop="name">Kotlin</span>
                   </a>
                 </span>
 
@@ -392,9 +394,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/jvm/2018/07/13/jvm-classload-priority/#comments" itemprop="discussionUrl">
+                <a href="/kotlin/2019/02/10/kotlin-when/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/jvm/2018/07/13/jvm-classload-priority/" itemprop="commentCount"></span>
+                        data-disqus-identifier="/kotlin/2019/02/10/kotlin-when/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -440,121 +442,406 @@
 
 
 
-  <p>最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。</p>
+  <p>送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。</p>
 
-<h2 id="异常信息">异常信息</h2>
+<h2 id="问题背景">问题背景</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18</pre></td><td class="code"><pre class="highlight"><code>[ERROR] 15:35:43.751 c.c.m.o.e.GlobalExceptionHandler(31) - Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;
-org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;
-        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:978)
-        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
-        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)
-        at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:872)
-        at javax.servlet.http.HttpServlet.service(HttpServlet.java:644)
-        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)
-        at javax.servlet.http.HttpServlet.service(HttpServlet.java:725)
-        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
-        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
-        at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
-        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
-        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
-        at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
-        at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
-        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
-        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+<p>一段神奇的代码：</p>
+
+<p>两个枚举类，分别定义如下：
+EnumA ↓</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6</pre></td><td class="code"><pre class="highlight"><code>enum class EnumA(var value: Int) {
+
+    A_1(1),
+    A_2(2)
+
+}
 </code></pre></td></tr></tbody></table></div>
 </div>
 
-<h2 id="异常分析">异常分析</h2>
+<p>FakeEnumA ↓</p>
 
-<p>项目是在尝试调用Google Guava Splitter中的splitToList方法时，发现该方法未定义。</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6</pre></td><td class="code"><pre class="highlight"><code>enum class FakeEnumA(var value: Int) {
 
-<p>首先，项目编译时正常，所以在此过程中，是能找到对应的类和方法，那么为什么会出现在运行时找不到的情况呢？</p>
+    A_1(1),
+    A_2(2)
 
-<p>其次，抛出的异常是NoSuchMethodError，说明ClassLoader成功加载到了对应的类，只是在进行方法调用时，发现方法不存在。</p>
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
 
-<p>针对上面的分析，进行一些猜想的验证：</p>
+<p>代码里进行了一段神奇的操作：</p>
 
-<p> 1.maven打包使用了低版本的Guava，而低版本中没有对应的方法</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>val enumA = EnumA.A_1
 
-<p> 理论上来说，这种情况不太可能，如果使用了没有对应方法的低版本，那么打包编译是会失败的，实际上反编后，也是可以在对应的类中找到该方法的；</p>
+when (enumA) {
+    FakeEnumA.A_1 -&gt; println("I'm A_1")
+    FakeEnumA.A_2 -&gt; println("I'm A_2")
+    else -&gt; println("else")
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
 
-<p> 2.JAR冲突，导致使用了低版本的Guava，而低版本中没有对应的方法</p>
+<p>代码正常编译，理论上来说，不同类型比较，应该进入else，而结果确实进入了else。</p>
 
-<p> 然鹅，事实证明不是，maven依赖树中只出现了一个guava包的引用，所以排除这种情况；</p>
+<p>但是。。这个版本之前，代码执行，输出了“I’m A_1”。。</p>
 
-<p> 3.Tomcat进行Class加载时，加载了低版本的Guava，而低版本中没有对应的方法</p>
+<p>而在新版本发布后，代码执行， 输出了“else”。。</p>
 
-<p> 于是，我把项目打成了JAR，引入tomcat模块，放到测试环境中运行，一切正常~那么基本可以判断是和服务器Tomcat或JAVA环境有一定的关系，为了弄清楚在加载该类时，是从哪里加载的，在Tomcat启动参数中，加入-XX:+TraceClassLoading -XX:+TraceClassUnloading，用于跟踪Tomcat类加载和卸载，并在日志中进行查看，恩。。。然后发现：</p>
+<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_1?raw=true" alt="kotlin_when" /></p>
 
-<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load.png?raw=true" alt="jvm_load_error" /></p>
+<p>可以确定的是这段代码相关内容没有任何改动，那么为什么会出现两种不同的结果呢？</p>
 
-<p>恩。。。。。。。</p>
+<h2 id="异常现象">异常现象</h2>
 
-<p>恩。。。。。。。。</p>
+<p>两个不同的类对象比较，理论上比较肯定会不同，但是原代码比较判定为相等</p>
 
-<p>恩。。。。。。。。。</p>
+<h2 id="问题分析">问题分析</h2>
 
-<p>嘛玩意儿这是。。。。。</p>
+<p>咋办。。</p>
 
-<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_class_load_gg.jpg?raw=true" alt="jvm_load_error_gg" /></p>
+<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_2?raw=true" alt="kotlin_when" /></p>
 
-<p>根本就是不是从我的JAR包中加载的。。。。</p>
+<p>既然代码没有变过，那么项目有没有其他变更呢？</p>
 
-<p>从上面的图可以看出，在进行Guava Splitter类加载的时候，从JRE的扩展LIB库中进行了该类的加载，那么为什么没有从项目包中加载，而是从扩展LIB库中进行加载的呢？</p>
+<p>有的，我们把Kotlin升级了，从1.2升级到了1.3，因为1.3提供了协程。。贼开心。。</p>
 
-<p>可以看出，只有在项目部署在服务器Tomcat上的时候，才出现了相应的问题，那么很可能是和服务器中的Tomcat或JAVA环境有关。</p>
+<p>抱着算一把命的想法，把变更回滚，Kotlin改回1.2，发现果然复现了原来异常的情况，两个不同的类对象，比较判定为了相等，输出了”I’m A_1”,那么基本可以确定是由于Kotlin升级导致的结果。</p>
 
-<p>首先，我们来看一下Tomcat是如何做类加载和管理的。</p>
+<p>那么为什么旧版本Kotlin会产生这种现象呢？</p>
 
-<p>(https://tomcat.apache.org/tomcat-8.0-doc/class-loader-howto.html)</p>
+<p>Kotlin代码最终也是编译生成字节码跑在JVM上的，那么来看看字节码吧~</p>
 
-<p>Tomcat使用一系列不同的ClassLoader来加载和管理一些基础的常规类，它们是能被所有WEB应用同时使用的，包括JVM的基础运行时类、Tomcat内部类等。而单个应用部署在Tomcat的独立容器中，每个容器中的WEB应用对应的ClassLoader相互隔离，以此来实现隔离。Tomcat中ClassLoader之间是呈现层级关系的，具体结构如下图所示：</p>
+<h2 id="kotlin12的字节码实现">Kotlin1.2的字节码实现</h2>
 
-<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_tomcat_class_loader_structure.png?raw=true" alt="tomcat_class_loader_structure" /></p>
+<p>先看看Kotlin 1.2的时候，这段代码的字节码是怎样的 ↓</p>
 
-<p>其中，</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32<br/>33<br/>34<br/>35<br/>36</pre></td><td class="code"><pre class="highlight"><code>Code:
+   0: aload_0
+   1: ldc           #9                  // String args
+   3: invokestatic  #15                 // Method kotlin/jvm/internal/Intrinsics.checkParameterIsNotNull:(Ljava/lang/Object;Ljava/lang/String;)V
+   6: getstatic     #21                 // Field com/seewo/share/example/when/EnumA.A_1:Lcom/seewo/share/example/when/EnumA;
+   9: astore_1                          
+  10: aload_1
+  12: getstatic     #27                 // Field com/seewo/share/example/when/EnumTestMainKt$WhenMappings.$EnumSwitchMapping$0:[I
+  14: swap
+  15: invokevirtual #31                 // Method com/seewo/share/example/when/EnumA.ordinal:()I  //取enumA.A_1对应的oridinal()
+  18: iaload
+  19: tableswitch   { // 1 to 2         // 通过tableswitch，实现对应代码when(enumA)
+                 1: 40                  
+                 2: 53                  
+           default: 66                  
+      }
+  40: ldc           #33                 // String I'm A_1
+  42: astore_2
+  43: getstatic     #39                 // Field java/lang/System.out:Ljava/io/PrintStream;
+  46: aload_2
+  47: invokevirtual #45                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+  50: goto          76
+  53: ldc           #47                 // String I'm A_2
+  55: astore_2
+  56: getstatic     #39                 // Field java/lang/System.out:Ljava/io/PrintStream;
+  59: aload_2
+  60: invokevirtual #45                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+  63: goto          76
+  66: ldc           #49                 // String else
+  68: astore_2
+  69: getstatic     #39                 // Field java/lang/System.out:Ljava/io/PrintStream;
+  72: aload_2
+  73: invokevirtual #45                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+  76: return
+}
 
-<p><strong>Bootstrap class loader</strong>  用于加载JVM运行时基础类，同时也包含了扩展JAR包目录下的所有类（$JAVA_HOME/jre/lib/ext）；</p>
+</code></pre></td></tr></tbody></table></div>
+</div>
+<p>从上面的字节码看，好像并没有啥问题，生成映射、取值、获得映射结果，比较。。</p>
 
-<p><strong>System class loader</strong>  一般从CLASSPATH环境变量中进行类初始化，所有的这些对于Tomcat内部类和WEB应用都是可见的。然后，标准的Tomcat启动脚本是会忽略CLASSPATH环境变量，而使用下列仓库进行代替：</p>
+<p>比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。</p>
 
-<p> 1.$CATALINA_HOME/bin/bootstrap.jar  包含用于初始化Tomcat的所需类；</p>
+<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_3?raw=true" alt="kotlin_when" /></p>
 
-<p> 2.$CATALINA_BASE/bin/tomcat-juli.jar or $CATALINA_HOME/bin/tomcat-juli.jar  日志相关的实现类；</p>
+<p>oridinal不是返回的枚举中类型序号吗。。。</p>
 
-<p> 3.$CATALINA_HOME/bin/commons-daemon.jar  Apache Commons Daemon 中的类，Linux下可用于实现后台服务，Windows下可用于实现注册为系统服务。</p>
+<p>所以这个比较只是在比较序号的吗。。。</p>
 
-<p><strong>Common class loader</strong>  包含附加的类，对于Tomcat内部类和所有的WEB应用都是可见的，默认查找CATALINA_HOME和CATALINA_BASE目录下的lib目录；</p>
+<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_4?raw=true" alt="kotlin_when" /></p>
 
-<p><strong>WebappX class loader</strong>  为每一个部署在Tomcat中WEB应用实例创建的ClassLoader，包括/WEB-INF/classes下所有解包的类和资源，同时也包含/WEB-INF/lib目录下JAR包中的类和资源。</p>
+<p>EnumA和FakeEnumA中枚举类型声明的顺序确实是一样的，那如果我把FakeEnumA中的定义顺序换一下，不就正常了吗。。</p>
 
-<p>由于前三个ClassLoader是各个WEB应用通用的，当需要加载一个类时，会优先按顺序上最上层ClassLoader进行加载，当一个ClassLoader在对应的目录中没有找到对应的类时，就依次交给下一层级的ClassLoader进行加载。如果最终都没有找到对应的类，则抛出NoClassDefFoundError。</p>
+<p>然后我测试了一把，发现并没有用，结果依然是判定相等，那这是为什么呢。。。</p>
 
-<p>综上所述，当尝试进行Google Guava Splitter类的加载时，首先交由Bootstrap class loader进行尝试性的加载，然后在对应目录中的JAR包中进行搜索时，居然从jre/lib/ext目录下的JAR包中找到了对应的类，所以优先进行了加载，而在对该JAR包进行反编后，发现确实包含了Google Guava，并且对应的Guava版本是14.0.1，而在对应的版本下，Guava Splitter确实还没有splitToList方法，所以最终导致类加载成功，但是找不到对应的方法，抛出NoSuchMethodError。</p>
+<p><strong>Kotlin 1.2 中，when的实现</strong></p>
 
-<h2 id="异常原因">异常原因</h2>
+<p>继续看字节码，发现通过iaload加载了EnumTestMainKt$WhenMappings.$EnumSwitchMapping$中index为0(A.A_1.oridnal)的元素，进入tableswitch进行跳转，那么这个EnumSwitchMapping又是什么呢？</p>
 
-<p>当尝试进行Google Guava Splitter类的加载时，Bootstrap class loader优先找到并加载了低版本的Guava Splitter，而低版本中没有包含splitToList方法。</p>
+<p>继续看字节码:</p>
 
-<p>后来在同事里问了一圈，发现是有同事之前测试，将测试JAR包放到了jre/lib/ext目录，导致了该问题的发生。</p>
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22</pre></td><td class="code"><pre class="highlight"><code>public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+  public static final int[] $EnumSwitchMapping$0;
+
+  static {};
+    Code:
+       0: invokestatic  #14                 // Method com/seewo/share/example/when/EnumA.values:()[Lcom/seewo/share/example/when/EnumA;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #16                 // Field $EnumSwitchMapping$0:[I
+       9: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      12: getstatic     #20                 // Field com/seewo/share/example/when/EnumA.A_1:Lcom/seewo/share/example/when/EnumA;
+      15: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      23: getstatic     #27                 // Field com/seewo/share/example/when/EnumA.A_2:Lcom/seewo/share/example/when/EnumA;
+      26: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      29: iconst_2
+      30: iastore
+      31: return
+}
+
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>该Mapping中，基于EnumA中的元素个数，创建了一个数组，数组中的对应关系是怎样的呢，我们按照字节码一步步来看:</p>
+
+<p>9         -&gt; getstatic，获取到Mapping中的数组元素
+12~15     -&gt; EnumA.A_1.ordinal()，获取到0
+18        -&gt; iconst_1，得到整数1
+19        -&gt; iastore，存入数组</p>
+
+<p>在iastore前，操作数栈中的元素如下:</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>ordinal</td>
+      </tr>
+      <tr>
+        <td>$EnumSwitchMapping$0</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>而iastore命令调用的栈描述如下：</p>
+
+<blockquote>
+  <table>
+    <tbody>
+      <tr>
+        <td>value</td>
+      </tr>
+      <tr>
+        <td>index</td>
+      </tr>
+      <tr>
+        <td>arrayref</td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<p>可以得出其等同于语句$EnumSwitchMapping$0[ordinal]=index</p>
+
+<p>则该Mapping中数组的对应关系为：mapping[0]=1, mapping[1]=2，可以看出，该Mapping实际保存了枚举类型ordinal到tableswitch的映射关系</p>
+
+<p>那么再看回之前的iaload，通过EnumA.A_1的ordinal，从Mapping中加载出的值为1，对应到tableswitch，跳转到40，最终进入”I’m A_1”分支</p>
+
+<p>所以总结下来，跳转过程如下：</p>
+
+<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_kotlin_when_5?raw=true" alt="kotlin_when" /></p>
+
+<p>那么整个过程看来，和FakeEnumA没有一点关系，那么真的是这样吗？</p>
+
+<p><strong>EnumSwitchMapping</strong></p>
+
+<p>在Kotlin 1.2编译生成的字节码中，EnumSwitchMapping主要保存了ordinal到tableswitch的映射关系，字节码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21</pre></td><td class="code"><pre class="highlight"><code>public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+  public static final int[] $EnumSwitchMapping$0;
+
+  static {};
+    Code:
+       0: invokestatic  #14                 // Method com/seewo/share/example/when/EnumA.values:()[Lcom/seewo/share/example/when/EnumA;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #16                 // Field $EnumSwitchMapping$0:[I
+       9: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      12: getstatic     #20                 // Field com/seewo/share/example/when/EnumA.A_1:Lcom/seewo/share/example/when/EnumA;
+      15: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      23: getstatic     #27                 // Field com/seewo/share/example/when/EnumA.A_2:Lcom/seewo/share/example/when/EnumA;
+      26: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      29: iconst_2
+      30: iastore
+      31: return
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>可以看出整个Mapping的生成似乎和FakeEnumA没有任何关系，但是实际上是这样的吗？</p>
+
+<p>我们尝试改动FakeEnumA和when的代码，进行如下测试：</p>
+
+<p> 1.FakeEnumA添加一个新的类型A_3，代码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code>enum class FakeEnumA(var value: Int) {
+    A_1(1),
+    A_2(2),
+    A_3(3)
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p> 2.when跳转中，把FakeEnumA.A_1改为FakeEnumA.A_3，代码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code>when (enumA) {
+    FakeEnumA.A_3 -&gt; println("I'm A_1")
+    FakeEnumA.A_2 -&gt; println("I'm A_2")
+    else -&gt; println("else")
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
+<p>以上代码均正常编译通过，如果整个过程和FakeEnumA没有关系的话，那么应该会正常运行，并输出”I’m A_1”。</p>
+
+<p>但是实际执行却抛出异常：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3</pre></td><td class="code"><pre class="highlight"><code>Exception in thread "main" java.lang.NoSuchFieldError: A_3
+        at com.share.example.when.EnumTestMainKt$WhenMappings.&lt;clinit&gt;(Unknown Source)
+        at com.share.example.when.EnumTestMainKt.main(EnumTestMain.kt:17)
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>在运行时抛出了NoSuchFieldError,说明在编译的时候时候，编译器校验正常通过，但在运行的时候，发现A_3找不到了，抛出异常。</p>
+
+<p>此时的EnumSwitchMapping字节码如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21</pre></td><td class="code"><pre class="highlight"><code>public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+  public static final int[] $EnumSwitchMapping$0;
+
+  static {};
+    Code:
+       0: invokestatic  #14                 // Method com/seewo/share/example/when/EnumA.values:()[Lcom/seewo/share/example/when/EnumA;
+       3: arraylength
+       4: newarray       int
+       6: putstatic     #16                 // Field $EnumSwitchMapping$0:[I
+       9: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      12: getstatic     #20                 // Field com/seewo/share/example/when/EnumA.A_3:Lcom/seewo/share/example/when/EnumA;
+      15: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      18: iconst_1
+      19: iastore
+      20: getstatic     #16                 // Field $EnumSwitchMapping$0:[I
+      23: getstatic     #27                 // Field com/seewo/share/example/when/EnumA.A_2:Lcom/seewo/share/example/when/EnumA;
+      26: invokevirtual #24                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      29: iconst_2
+      30: iastore
+      31: return
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>可以看到，是在类的静态初始化域中，对类内的数组对象进行了初始化，并赋值，其中12: getstatic尝试获取EnumA中的A_3时，发现找不到对应的枚举类型。</p>
+
+<p>由此可以推断，该Mapping的在编译时依赖于when中的条件分支（FakeEnumA.A_3和FakeEnumA.A_2）进行生成，而生成时，只取了枚举类型的name，并没有判断是否是同一个枚举类型，最终导致了这个异常。。</p>
+
+<p><strong>Kotlin 1.3 中，when的实现</strong></p>
+
+<p>综上所述，已经找到了Kotlin 1.2中会进入错误分支的原因，那么为什么Kotlin 1.3中会恢复正常，进入else分支呢？</p>
+
+<p>我们看一看使用Kotlin 1.3编译后生成的字节码：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32<br/>33<br/>34<br/>35<br/>36<br/>37<br/>38<br/>39<br/>40<br/>41<br/>42<br/>43<br/>44<br/>45<br/>46<br/>47<br/>48<br/>49<br/>50<br/>51<br/>52<br/>53<br/>54<br/>55<br/>56<br/>57<br/>58<br/>59</pre></td><td class="code"><pre class="highlight"><code>public final class com.seewo.share.example.when.EnumTestMainKt {
+  public static final void main(java.lang.String[]);
+    Code:
+       0: aload_0
+       1: ldc           #9                  // String args
+       3: invokestatic  #15                 // Method kotlin/jvm/internal/Intrinsics.checkParameterIsNotNull:(Ljava/lang/Object;Ljava/lang/String;)V
+       6: getstatic     #21                 // Field com/seewo/share/example/when/EnumA.A_1:Lcom/seewo/share/example/when/EnumA;
+       9: astore_1
+      10: getstatic     #21                 // Field com/seewo/share/example/when/EnumA.A_1:Lcom/seewo/share/example/when/EnumA;
+      13: invokevirtual #25                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      16: istore_2
+      17: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      20: iload_2
+      21: invokevirtual #37                 // Method java/io/PrintStream.println:(I)V
+      24: getstatic     #40                 // Field com/seewo/share/example/when/EnumA.A_2:Lcom/seewo/share/example/when/EnumA;
+      27: invokevirtual #25                 // Method com/seewo/share/example/when/EnumA.ordinal:()I
+      30: istore_2
+      31: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      34: iload_2
+      35: invokevirtual #37                 // Method java/io/PrintStream.println:(I)V
+      38: getstatic     #45                 // Field com/seewo/share/example/when/FakeEnumA.A_1:Lcom/seewo/share/example/when/FakeEnumA;
+      41: invokevirtual #46                 // Method com/seewo/share/example/when/FakeEnumA.ordinal:()I
+      44: istore_2
+      45: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      48: iload_2
+      49: invokevirtual #37                 // Method java/io/PrintStream.println:(I)V
+      52: getstatic     #48                 // Field com/seewo/share/example/when/FakeEnumA.A_2:Lcom/seewo/share/example/when/FakeEnumA;
+      55: invokevirtual #46                 // Method com/seewo/share/example/when/FakeEnumA.ordinal:()I
+      58: istore_2
+      59: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      62: iload_2
+      63: invokevirtual #37                 // Method java/io/PrintStream.println:(I)V
+      66: aload_1
+      67: astore_2
+      68: aload_2
+      69: getstatic     #51                 // Field com/seewo/share/example/when/FakeEnumA.A_3:Lcom/seewo/share/example/when/FakeEnumA;
+      72: if_acmpne     88
+      75: ldc           #53                 // String I'm A_1
+      77: astore_3
+      78: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      81: aload_3
+      82: invokevirtual #56                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+      85: goto          118
+      88: aload_2
+      89: getstatic     #48                 // Field com/seewo/share/example/when/FakeEnumA.A_2:Lcom/seewo/share/example/when/FakeEnumA;
+      92: if_acmpne     108
+      95: ldc           #58                 // String I'm A_2
+      97: astore_3
+      98: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+     101: aload_3
+     102: invokevirtual #56                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+     105: goto          118
+     108: ldc           #60                 // String else
+     110: astore_3
+     111: getstatic     #31                 // Field java/lang/System.out:Ljava/io/PrintStream;
+     114: aload_3
+     115: invokevirtual #56                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+     118: return
+}
+</code></pre></td></tr></tbody></table></div>
+</div>
+<p>首先，生成的字节码中已经没有了EnumSwitchMapping这个类，那么再看看字节码，字节码中也没有了tableswitch，而是使用了if_acmpne进行比较判断。</p>
+
+<p>那么if_acmpne是怎么比较的呢 ↓</p>
+
+<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>if_acmpne pops the top two object references off the stack and compares them. If the two object references are not equal (i.e. if they refer to different objects), execution branches to the address (pc + branchoffset), where pc is the address of the if_acmpne opcode in the bytecode and branchoffset is a 16-bit signed integer parameter following the if_acmpne opcode in the bytecode. If the object references refer to the same object, execution continues at the next instruction.
+</code></pre></td></tr></tbody></table></div>
+</div>
+
+<p>可以看到，if_acmpne是对两个对象的引用进行比较，如果是两个对象的不相等，则进行跳转。</p>
+
+<p>由此可见if_acmpne进行的是对象引用的比较，而EnumA.A_1与FakeEnumA.A_1属于不同的对象，那么72: if_acmpne比较EnumA.A_1与FakeEnumA.A_1，发现两者不相等，跳转至88: aload_2，加载FakeNumA.A_2，与EnumA.A_1进行比较，仍然不相等，最终跳转到108进入else。</p>
+
+<p>因此，最终输出了”else”。</p>
+
+<h2 id="问题原因">问题原因</h2>
+
+<p>（1）Kotlin 1.2 编译实现when语句时，在value为枚举类型的情况下，未进行类型校验，并且使用的Mapping关系映射+tableswitch实现when条件判断和分支跳转；</p>
+
+<p>（2）Kotlin 1.2 在编译生成Mapping关系映射生成代码时，仅判断枚举类型name，而两个枚举类中的命名一致，导致Mapping关系映射正常生成，但是错误映射到不相等的分支，最终输出”I’m A_1”；</p>
+
+<p>（3）Kotlin 1.3 中，对when的编译实现使用了if_acmpne，进行对象引用比较，代码执行按正常逻辑走入else分支。</p>
 
 <h2 id="解决方案">解决方案</h2>
 
-<ol>
-  <li>
-    <p>经确认后，将该JAR从扩展库目录中移除，处理后恢复正常；</p>
-  </li>
-  <li>
-    <p>禁止将业务JAR包放到JAVA库目录中，避免相关问题的再次发生；</p>
-  </li>
-  <li>
-    <p>在对模块进行JAR包封装，或进行SDK开发时，应尽可能较少相关第三方库依赖，避免与引用方依赖发生冲突；</p>
-  </li>
-  <li>
-    <p>如果无法避免引用第三方常用类库，可以使用maven shade插件，对相关第三方类库的包名进行变更，以此避免相关问题。</p>
-  </li>
-</ol>
+<p>调整when比较的条件，使用相同对象进行比较，解决了该问题。</p>
 
 
       
@@ -586,10 +873,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
         <div class="post-tags">
           
             
-            <a href="/tag/#/JVM" rel="tag"># JVM</a>
-          
-            
-            <a href="/tag/#/NoSuchMethodError" rel="tag"># NoSuchMethodError</a>
+            <a href="/tag/#/Kotlin" rel="tag"># Kotlin</a>
           
         </div>
       
@@ -605,18 +889,14 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/kotlin/2019/02/10/kotlin-when/" rel="next" title="Kotlin升级导致的when异常问题">
-                <i class="fa fa-chevron-left"></i> Kotlin升级导致的when异常问题
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/common/mysql/2018/07/05/character-coding/" rel="prev" title="字符编码">
-                字符编码 <i class="fa fa-chevron-right"></i>
+              <a href="/jvm/2018/07/13/jvm-classload-priority/" rel="prev" title="Tomcat类加载NoSuchMethodError异常问题">
+                Tomcat类加载NoSuchMethodError异常问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -774,7 +1054,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常信息"> <span class="nav-number">1</span> <span class="nav-text">异常信息</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常分析"> <span class="nav-number">2</span> <span class="nav-text">异常分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常原因"> <span class="nav-number">3</span> <span class="nav-text">异常原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">4</span> <span class="nav-text">解决方案</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题背景"> <span class="nav-number">1</span> <span class="nav-text">问题背景</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常现象"> <span class="nav-number">2</span> <span class="nav-text">异常现象</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题分析"> <span class="nav-number">3</span> <span class="nav-text">问题分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#kotlin12的字节码实现"> <span class="nav-number">4</span> <span class="nav-text">Kotlin1.2的字节码实现</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题原因"> <span class="nav-number">5</span> <span class="nav-text">问题原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">6</span> <span class="nav-text">解决方案</span> </a> </li>
     </ol>
   </div>
             
@@ -930,9 +1210,9 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
       
       <script type="text/javascript">
           var disqus_config = function () {
-              this.page.url = 'http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/';
-              this.page.identifier = '/jvm/2018/07/13/jvm-classload-priority/';
-              this.page.title = 'Tomcat类加载NoSuchMethodError异常问题';
+              this.page.url = 'http://localhost:4000/kotlin/2019/02/10/kotlin-when/';
+              this.page.identifier = '/kotlin/2019/02/10/kotlin-when/';
+              this.page.title = 'Kotlin升级导致的when异常问题';
           };
           var d = document, s = d.createElement('script');
           s.src = 'https://Star.disqus.com/embed.js';

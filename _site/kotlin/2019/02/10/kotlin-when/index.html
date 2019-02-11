@@ -117,14 +117,14 @@
 <meta property="og:site_name" content="To the Moon">
 <meta property="og:description" content="送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.png">
-<meta property="og:image" content="ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.jpeg">
+<meta property="og:image" content="ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_5.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kotlin升级导致的when异常问题">
 <meta name="twitter:description" content="送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.jpeg">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -488,7 +488,7 @@ when (enumA) {
 
 <p>而在新版本发布后，代码执行， 输出了“else”。。</p>
 
-<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.png" alt="kotlin_when" /></p>
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_1.jpeg" alt="kotlin_when" /></p>
 
 <p>可以确定的是这段代码相关内容没有任何改动，那么为什么会出现两种不同的结果呢？</p>
 
@@ -500,7 +500,7 @@ when (enumA) {
 
 <p>咋办。。</p>
 
-<p>![kotlin_when]https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.png)</p>
+<p>![kotlin_when]https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg)</p>
 
 <p>既然代码没有变过，那么项目有没有其他变更呢？</p>
 
@@ -512,7 +512,7 @@ when (enumA) {
 
 <p>Kotlin代码最终也是编译生成字节码跑在JVM上的，那么来看看字节码吧~</p>
 
-<h2 id="kotlin12的字节码实现">Kotlin1.2的字节码实现</h2>
+<p><strong>Kotlin1.2的字节码实现</strong></p>
 
 <p>先看看Kotlin 1.2的时候，这段代码的字节码是怎样的 ↓</p>
 
@@ -558,13 +558,13 @@ when (enumA) {
 
 <p>比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。</p>
 
-<p><img src="ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.png" alt="kotlin_when" /></p>
+<p><img src="ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg" alt="kotlin_when" /></p>
 
 <p>oridinal不是返回的枚举中类型序号吗。。。</p>
 
 <p>所以这个比较只是在比较序号的吗。。。</p>
 
-<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.png" alt="kotlin_when" /></p>
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_4.jpg" alt="kotlin_when" /></p>
 
 <p>EnumA和FakeEnumA中枚举类型声明的顺序确实是一样的，那如果我把FakeEnumA中的定义顺序换一下，不就正常了吗。。</p>
 
@@ -1053,7 +1053,7 @@ when (enumA) {
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题背景"> <span class="nav-number">1</span> <span class="nav-text">问题背景</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常现象"> <span class="nav-number">2</span> <span class="nav-text">异常现象</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题分析"> <span class="nav-number">3</span> <span class="nav-text">问题分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#kotlin12的字节码实现"> <span class="nav-number">4</span> <span class="nav-text">Kotlin1.2的字节码实现</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题原因"> <span class="nav-number">5</span> <span class="nav-text">问题原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">6</span> <span class="nav-text">解决方案</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题背景"> <span class="nav-number">1</span> <span class="nav-text">问题背景</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常现象"> <span class="nav-number">2</span> <span class="nav-text">异常现象</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题分析"> <span class="nav-number">3</span> <span class="nav-text">问题分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题原因"> <span class="nav-number">4</span> <span class="nav-text">问题原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">5</span> <span class="nav-text">解决方案</span> </a> </li>
     </ol>
   </div>
             

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-11T17:19:35+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">Kotlin升级导致的when异常问题</title><link href="http://localhost:4000/kotlin/2019/02/10/kotlin-when/" rel="alternate" type="text/html" title="Kotlin升级导致的when异常问题" /><published>2019-02-11T00:15:36+08:00</published><updated>2019-02-11T00:15:36+08:00</updated><id>http://localhost:4000/kotlin/2019/02/10/kotlin-when</id><content type="html" xml:base="http://localhost:4000/kotlin/2019/02/10/kotlin-when/">&lt;p&gt;送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-11T17:21:33+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">Kotlin升级导致的when异常问题</title><link href="http://localhost:4000/kotlin/2019/02/10/kotlin-when/" rel="alternate" type="text/html" title="Kotlin升级导致的when异常问题" /><published>2019-02-11T00:15:36+08:00</published><updated>2019-02-11T00:15:36+08:00</updated><id>http://localhost:4000/kotlin/2019/02/10/kotlin-when</id><content type="html" xml:base="http://localhost:4000/kotlin/2019/02/10/kotlin-when/">&lt;p&gt;送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。&lt;/p&gt;
 
 &lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
 
@@ -57,7 +57,7 @@ when (enumA) {
 
 &lt;p&gt;咋办。。&lt;/p&gt;
 
-&lt;p&gt;![kotlin_when]https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg&quot; alt=&quot;kotlin_when&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;既然代码没有变过，那么项目有没有其他变更呢？&lt;/p&gt;
 
@@ -115,7 +115,7 @@ when (enumA) {
 
 &lt;p&gt;比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg&quot; alt=&quot;kotlin_when&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg&quot; alt=&quot;kotlin_when&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;oridinal不是返回的枚举中类型序号吗。。。&lt;/p&gt;
 

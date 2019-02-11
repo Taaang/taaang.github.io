@@ -66,7 +66,7 @@ when (enumA) {
 
 咋办。。
 
-![kotlin_when]https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_2.jpg)
 
 既然代码没有变过，那么项目有没有其他变更呢？
 
@@ -124,7 +124,7 @@ Code:
 
 比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。
 
-![kotlin_when](ihttps://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg)
+![kotlin_when](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/img_kotlin_when_3.jpeg)
 
 oridinal不是返回的枚举中类型序号吗。。。
 

@@ -40,7 +40,7 @@ HK - Product Line Suffix，又称 SKU Suffix，SKU 后缀，描述处理器能�
 
 ## AMD Ryzen 系列处理器
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/amd_ryzen.png){:height="300" width="300"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/amd_ryzen.jpg){:height="300" width="300"}
 
 Ryzen  - Brand，品牌、商标  
 7 - Segment，段号，段号越大性能越好  

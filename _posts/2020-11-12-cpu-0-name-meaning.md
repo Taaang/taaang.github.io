@@ -31,7 +31,7 @@ HK - Product Line Suffix，又称 SKU Suffix，SKU 后缀，描述处理器能�
 
 ## Intel Xeon 系列处理器
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_xeon.png){:height="300" width="300"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_xeon.png){:height="500" width="500"}
 
 和 Intel Core 处理器家族的命名类似，日常用的不多，不作详细说明。
 （可参考[What Do Intel® Processor Numbers Mean?](https://www.intel.cn/content/www/cn/zh/processors/processor-numbers-data-center.html)）

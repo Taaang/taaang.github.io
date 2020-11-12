@@ -323,7 +323,7 @@
     <link itemprop="mainEntityOfPage" href="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qi">
+      <meta itemprop="name" content="Taaang">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="assets/images/avatar.gif">
     </span>
@@ -446,14 +446,13 @@
 
   <p>最近对项目进行测试，突然出现Communications link failure异常，原文如下：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6</pre></td><td class="code"><pre class="highlight"><code>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6</pre></td><td class="code"><pre class="highlight"><code>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 The last packet successfully received from the server was 20,096 milliseconds ago.The last packet sent successfully to the server was 0 milliseconds ago.
     at sun.reflect.GeneratedConstructorAccessor84.newInstance(Unknown Source) ~[?:?]
     at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_75]
     ...
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>查看MySQL Status的Aborted_clients，变化如下：
 请求接口前：</p>
@@ -483,7 +482,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
 
 <p>其中testOnBorrow和testOnReturn是默认不开启的，testWhileIdle默认为true，查看获取连接的相关代码，发现如下：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20</pre></td><td class="code"><pre class="highlight"><code>if (isTestWhileIdle()) {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20</pre></td><td class="code"><pre class="highlight"><code>if (isTestWhileIdle()) {
     final long currentTimeMillis = System.currentTimeMillis();
     final long lastActiveTimeMillis = poolableConnection.getConnectionHolder().getLastActiveTimeMillis();
     final long idleMillis = currentTimeMillis - lastActiveTimeMillis;
@@ -503,8 +502,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
         }
     }
 }
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>其中，默认的DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS为60s，即默认对超过60s的未活动连接进行检测，所以线上MySQL配置600s也没有出现Communications link failure。</p>
 
@@ -630,8 +628,8 @@ The last packet successfully received from the server was 20,096 milliseconds ag
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
-               alt="Qi" />
-          <p class="site-author-name" itemprop="name">Qi</p>
+               alt="Taaang" />
+          <p class="site-author-name" itemprop="name">Taaang</p>
            
               <p class="site-description motion-element" itemprop="description">If you're with me, then everything's alright.</p>
           
@@ -641,7 +639,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -652,7 +650,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -663,7 +661,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -707,11 +705,11 @@ The last packet successfully received from the server was 20,096 milliseconds ag
   
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Qi</span>
+  <span class="author" itemprop="copyrightHolder">Taaang</span>
 </div>
 
         

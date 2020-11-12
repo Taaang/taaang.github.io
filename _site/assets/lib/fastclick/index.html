@@ -317,7 +317,7 @@
   
     <h1 id="fastclick">FastClick</h1>
 
-<p>FastClick is a simple, easy-to-use library for eliminating the 300ms delay between a physical tap and the firing of a <code class="highlighter-rouge">click</code> event on mobile browsers. The aim is to make your application feel less laggy and more responsive while avoiding any interference with your current logic.</p>
+<p>FastClick is a simple, easy-to-use library for eliminating the 300ms delay between a physical tap and the firing of a <code class="language-plaintext highlighter-rouge">click</code> event on mobile browsers. The aim is to make your application feel less laggy and more responsive while avoiding any interference with your current logic.</p>
 
 <p>FastClick is developed by <a href="http://labs.ft.com/">FT Labs</a>, part of the Financial Times.</p>
 
@@ -350,70 +350,63 @@
 
 <p>FastClick doesn’t attach any listeners on desktop browsers.</p>
 
-<p>Chrome 32+ on Android with <code class="highlighter-rouge">width=device-width</code> in the <a href="https://developer.mozilla.org/en-US/docs/Mobile/Viewport_meta_tag">viewport meta tag</a> doesn’t have a 300ms delay, therefore listeners aren’t attached.</p>
+<p>Chrome 32+ on Android with <code class="language-plaintext highlighter-rouge">width=device-width</code> in the <a href="https://developer.mozilla.org/en-US/docs/Mobile/Viewport_meta_tag">viewport meta tag</a> doesn’t have a 300ms delay, therefore listeners aren’t attached.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
 
-<p>Same goes for Chrome on Android (all versions) with <code class="highlighter-rouge">user-scalable=no</code> in the viewport meta tag. But be aware that <code class="highlighter-rouge">user-scalable=no</code> also disables pinch zooming, which may be an accessibility concern.</p>
+<p>Same goes for Chrome on Android (all versions) with <code class="language-plaintext highlighter-rouge">user-scalable=no</code> in the viewport meta tag. But be aware that <code class="language-plaintext highlighter-rouge">user-scalable=no</code> also disables pinch zooming, which may be an accessibility concern.</p>
 
-<p>For IE11+, you can use <code class="highlighter-rouge">touch-action: manipulation;</code> to disable double-tap-to-zoom on certain elements (like links and buttons).  For IE10 use <code class="highlighter-rouge">-ms-touch-action: manipulation</code>.</p>
+<p>For IE11+, you can use <code class="language-plaintext highlighter-rouge">touch-action: manipulation;</code> to disable double-tap-to-zoom on certain elements (like links and buttons).  For IE10 use <code class="language-plaintext highlighter-rouge">-ms-touch-action: manipulation</code>.</p>
 
 <h2 id="usage">Usage</h2>
 
 <p>Include fastclick.js in your JavaScript bundle or add it to your HTML page like this:</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'application/javascript'</span> <span class="na">src=</span><span class="s">'/path/to/fastclick.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">'application/javascript'</span> <span class="na">src=</span><span class="s">'/path/to/fastclick.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
 
 <p>The script must be loaded prior to instantiating FastClick on any element of the page.</p>
 
-<p>To instantiate FastClick on the <code class="highlighter-rouge">body</code>, which is the recommended method of use:</p>
+<p>To instantiate FastClick on the <code class="language-plaintext highlighter-rouge">body</code>, which is the recommended method of use:</p>
 
-<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="s1">'addEventListener'</span> <span class="k">in</span> <span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'DOMContentLoaded'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">addEventListener</span><span class="dl">'</span> <span class="k">in</span> <span class="nb">document</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">DOMContentLoaded</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 		<span class="nx">FastClick</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
 	<span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Or, if you’re using jQuery:</p>
 
-<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 	<span class="nx">FastClick</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
 <span class="p">});</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
-<p>If you’re using Browserify or another CommonJS-style module system, the <code class="highlighter-rouge">FastClick.attach</code> function will be returned when you call <code class="highlighter-rouge">require('fastclick')</code>. As a result, the easiest way to use FastClick with these loaders is as follows:</p>
+<p>If you’re using Browserify or another CommonJS-style module system, the <code class="language-plaintext highlighter-rouge">FastClick.attach</code> function will be returned when you call <code class="language-plaintext highlighter-rouge">require('fastclick')</code>. As a result, the easiest way to use FastClick with these loaders is as follows:</p>
 
-<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">attachFastClick</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fastclick'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">attachFastClick</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fastclick</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">attachFastClick</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="minified">Minified</h3>
 
-<p>Run <code class="highlighter-rouge">make</code> to build a minified version of FastClick using the Closure Compiler REST API. The minified file is saved to <code class="highlighter-rouge">build/fastclick.min.js</code> or you can <a href="http://build.origami.ft.com/bundles/js?modules=fastclick">download a pre-minified version</a>.</p>
+<p>Run <code class="language-plaintext highlighter-rouge">make</code> to build a minified version of FastClick using the Closure Compiler REST API. The minified file is saved to <code class="language-plaintext highlighter-rouge">build/fastclick.min.js</code> or you can <a href="http://build.origami.ft.com/bundles/js?modules=fastclick">download a pre-minified version</a>.</p>
 
-<p>Note: the pre-minified version is built using <a href="http://origami.ft.com/docs/developer-guide/build-service/">our build service</a> which exposes the <code class="highlighter-rouge">FastClick</code> object through <code class="highlighter-rouge">Origami.fastclick</code> and will have the Browserify/CommonJS API (see above).</p>
+<p>Note: the pre-minified version is built using <a href="http://origami.ft.com/docs/developer-guide/build-service/">our build service</a> which exposes the <code class="language-plaintext highlighter-rouge">FastClick</code> object through <code class="language-plaintext highlighter-rouge">Origami.fastclick</code> and will have the Browserify/CommonJS API (see above).</p>
 
-<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">attachFastClick</span> <span class="o">=</span> <span class="nx">Origami</span><span class="p">.</span><span class="nx">fastclick</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">attachFastClick</span> <span class="o">=</span> <span class="nx">Origami</span><span class="p">.</span><span class="nx">fastclick</span><span class="p">;</span>
 <span class="nx">attachFastClick</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="amd">AMD</h3>
 
-<p>FastClick has AMD (Asynchronous Module Definition) support. This allows it to be lazy-loaded with an AMD loader, such as <a href="http://requirejs.org/">RequireJS</a>. Note that when using the AMD style require, the full <code class="highlighter-rouge">FastClick</code> object will be returned, <em>not</em> <code class="highlighter-rouge">FastClick.attach</code></p>
+<p>FastClick has AMD (Asynchronous Module Definition) support. This allows it to be lazy-loaded with an AMD loader, such as <a href="http://requirejs.org/">RequireJS</a>. Note that when using the AMD style require, the full <code class="language-plaintext highlighter-rouge">FastClick</code> object will be returned, <em>not</em> <code class="language-plaintext highlighter-rouge">FastClick.attach</code></p>
 
-<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">FastClick</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fastclick'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">FastClick</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fastclick</span><span class="dl">'</span><span class="p">);</span>
 <span class="nx">FastClick</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="package-managers">Package managers</h3>
 
@@ -423,26 +416,24 @@
 
 <h2 id="advanced">Advanced</h2>
 
-<h3 id="ignore-certain-elements-with-needsclick">Ignore certain elements with <code class="highlighter-rouge">needsclick</code></h3>
+<h3 id="ignore-certain-elements-with-needsclick">Ignore certain elements with <code class="language-plaintext highlighter-rouge">needsclick</code></h3>
 
-<p>Sometimes you need FastClick to ignore certain elements. You can do this easily by adding the <code class="highlighter-rouge">needsclick</code> class.</p>
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"needsclick"</span><span class="nt">&gt;</span>Ignored by FastClick<span class="nt">&lt;/a&gt;</span>
-</code></pre>
-</div>
+<p>Sometimes you need FastClick to ignore certain elements. You can do this easily by adding the <code class="language-plaintext highlighter-rouge">needsclick</code> class.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"needsclick"</span><span class="nt">&gt;</span>Ignored by FastClick<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
 
 <h4 id="use-case-1-non-synthetic-click-required">Use case 1: non-synthetic click required</h4>
 
-<p>Internally, FastClick uses <code class="highlighter-rouge">document.createEvent</code> to fire a synthetic <code class="highlighter-rouge">click</code> event as soon as <code class="highlighter-rouge">touchend</code> is fired by the browser. It then suppresses the additional <code class="highlighter-rouge">click</code> event created by the browser after that. In some cases, the non-synthetic <code class="highlighter-rouge">click</code> event created by the browser is required, as described in the <a href="http://ftlabs.github.com/fastclick/examples/focus.html">triggering focus example</a>.</p>
+<p>Internally, FastClick uses <code class="language-plaintext highlighter-rouge">document.createEvent</code> to fire a synthetic <code class="language-plaintext highlighter-rouge">click</code> event as soon as <code class="language-plaintext highlighter-rouge">touchend</code> is fired by the browser. It then suppresses the additional <code class="language-plaintext highlighter-rouge">click</code> event created by the browser after that. In some cases, the non-synthetic <code class="language-plaintext highlighter-rouge">click</code> event created by the browser is required, as described in the <a href="http://ftlabs.github.com/fastclick/examples/focus.html">triggering focus example</a>.</p>
 
-<p>This is where the <code class="highlighter-rouge">needsclick</code> class comes in. Add the class to any element that requires a non-synthetic click.</p>
+<p>This is where the <code class="language-plaintext highlighter-rouge">needsclick</code> class comes in. Add the class to any element that requires a non-synthetic click.</p>
 
 <h4 id="use-case-2-twitter-bootstrap-222-dropdowns">Use case 2: Twitter Bootstrap 2.2.2 dropdowns</h4>
 
-<p>Another example of when to use the <code class="highlighter-rouge">needsclick</code> class is with dropdowns in Twitter Bootstrap 2.2.2. Bootstrap add its own <code class="highlighter-rouge">touchstart</code> listener for dropdowns, so you want to tell FastClick to ignore those. If you don’t, touch devices will automatically close the dropdown as soon as it is clicked, because both FastClick and Bootstrap execute the synthetic click, one opens the dropdown, the second closes it immediately after.</p>
+<p>Another example of when to use the <code class="language-plaintext highlighter-rouge">needsclick</code> class is with dropdowns in Twitter Bootstrap 2.2.2. Bootstrap add its own <code class="language-plaintext highlighter-rouge">touchstart</code> listener for dropdowns, so you want to tell FastClick to ignore those. If you don’t, touch devices will automatically close the dropdown as soon as it is clicked, because both FastClick and Bootstrap execute the synthetic click, one opens the dropdown, the second closes it immediately after.</p>
 
-<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-toggle needsclick"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span><span class="nt">&gt;</span>Dropdown<span class="nt">&lt;/a&gt;</span>
-</code></pre>
-</div>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-toggle needsclick"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span><span class="nt">&gt;</span>Dropdown<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
 
 <h2 id="examples">Examples</h2>
 
@@ -450,13 +441,13 @@
 
 <ul>
   <li><a href="http://ftlabs.github.com/fastclick/examples/layer.html">basic use</a> showing the increase in perceived responsiveness</li>
-  <li><a href="http://ftlabs.github.com/fastclick/examples/focus.html">triggering focus</a> on an input element from a <code class="highlighter-rouge">click</code> handler</li>
+  <li><a href="http://ftlabs.github.com/fastclick/examples/focus.html">triggering focus</a> on an input element from a <code class="language-plaintext highlighter-rouge">click</code> handler</li>
   <li><a href="http://ftlabs.github.com/fastclick/examples/input.html">input element</a> which never receives clicks but gets fast focus</li>
 </ul>
 
 <h2 id="tests">Tests</h2>
 
-<p>There are no automated tests. The files in <code class="highlighter-rouge">tests/</code> are manual reduced test cases. We’ve had a think about how best to test these cases, but they tend to be very browser/device specific and sometimes subjective which means it’s not so trivial to test.</p>
+<p>There are no automated tests. The files in <code class="language-plaintext highlighter-rouge">tests/</code> are manual reduced test cases. We’ve had a think about how best to test these cases, but they tend to be very browser/device specific and sometimes subjective which means it’s not so trivial to test.</p>
 
 <h2 id="credits-and-collaboration">Credits and collaboration</h2>
 
@@ -495,8 +486,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
-               alt="Qi" />
-          <p class="site-author-name" itemprop="name">Qi</p>
+               alt="Taaang" />
+          <p class="site-author-name" itemprop="name">Taaang</p>
            
               <p class="site-description motion-element" itemprop="description">If you're with me, then everything's alright.</p>
           
@@ -506,7 +497,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -517,7 +508,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -528,7 +519,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -572,11 +563,11 @@
   
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Qi</span>
+  <span class="author" itemprop="copyrightHolder">Taaang</span>
 </div>
 
         

@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.2">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-11T17:26:05+08:00</updated><id>http://localhost:4000/</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Qi</name></author><entry><title type="html">Kotlin升级导致的when异常问题</title><link href="http://localhost:4000/kotlin/2019/02/10/kotlin-when/" rel="alternate" type="text/html" title="Kotlin升级导致的when异常问题" /><published>2019-02-11T00:15:36+08:00</published><updated>2019-02-11T00:15:36+08:00</updated><id>http://localhost:4000/kotlin/2019/02/10/kotlin-when</id><content type="html" xml:base="http://localhost:4000/kotlin/2019/02/10/kotlin-when/">&lt;p&gt;送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-12T12:09:15+08:00</updated><id>http://localhost:4000/atom.xml</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Taaang</name></author><entry><title type="html">CPU - 命名</title><link href="http://localhost:4000/cpu/2020/11/10/cpu-0-name-meaning/" rel="alternate" type="text/html" title="CPU - 命名" /><published>2020-11-10T00:00:00+08:00</published><updated>2020-11-10T00:00:00+08:00</updated><id>http://localhost:4000/cpu/2020/11/10/cpu-0-name-meaning</id><content type="html" xml:base="http://localhost:4000/cpu/2020/11/10/cpu-0-name-meaning/">&lt;p&gt;我们日常总会看到各种各样的CPU，苹果的A12、A13，Intel 的 i3、i5、i7等，同时还会带上一系列的后缀，比如 A10X、i9 - 9880H，不同的后缀具有不同的含义。&lt;/p&gt;
+
+&lt;h2 id=&quot;苹果a系列处理器&quot;&gt;苹果A系列处理器&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/apple_a.png&quot; alt=&quot;&quot; height=&quot;300&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Apple - Brand 品牌、商标&lt;br /&gt;
+A - 产品型号&lt;br /&gt;
+12 - 产品代，第十二代产品&lt;br /&gt;
+X - 型号，同代中区分不同配置、参数的产品。A12Z 比 A12 增加了两个高性能大核心；A12X 相比于 A12Z ，开启了第八颗GPU核心。&lt;br /&gt;
+Bionic - 后缀。从A10开始，CPU名字后面会加入一个单词。A10 Fusion（融合），融合表示首次使用大小核融合；A11 Bionic（仿生），代表集成了神经网络引擎，为机器学习所需的高速运算提供支持，例如FaceID、AR等。&lt;/p&gt;
+
+&lt;h2 id=&quot;intel-core-i-系列处理器&quot;&gt;Intel Core i 系列处理器&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_core.png&quot; alt=&quot;&quot; height=&quot;300&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Intel Core - Brand，品牌、商标&lt;br /&gt;
+i7 - Brand Modifier，产品型号&lt;br /&gt;
+9 - Generation 产品代，第九代产品&lt;br /&gt;
+980 - SKU Numeric Digits，SKU编号，一般越大代表性能约强劲&lt;br /&gt;
+HK - Product Line Suffix，又称 SKU Suffix，SKU 后缀，描述处理器能力。例如，H代表搭载高性能集成显卡；K代表未锁可超频等等&lt;/p&gt;
+
+&lt;h2 id=&quot;intel-xeon-系列处理器&quot;&gt;Intel Xeon 系列处理器&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_xeon.png&quot; alt=&quot;&quot; height=&quot;300&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;和 Intel Core 处理器家族的命名类似，日常用的不多，不作详细说明。
+（可参考&lt;a href=&quot;https://www.intel.cn/content/www/cn/zh/processors/processor-numbers-data-center.html&quot;&gt;What Do Intel® Processor Numbers Mean?&lt;/a&gt;）&lt;/p&gt;
+
+&lt;p&gt;该系列属于服务器级别的处理器，在云计算、实时分析、大数据处理、工业设计等相关行业会有用到，拥有更高的效率和稳定性。处理器家族区分出三大类别，E系列、D系列和W系列，E系列为入门级服务器解决方案，D系列针对空间和电源受限的环境提供了负载优化，W系列为最高级别的终极处理平台。&lt;/p&gt;
+
+&lt;h2 id=&quot;amd-ryzen-系列处理器&quot;&gt;AMD Ryzen 系列处理器&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/amd_ryzen.png&quot; alt=&quot;&quot; height=&quot;300&quot; width=&quot;300&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Ryzen  - Brand，品牌、商标&lt;br /&gt;
+7 - Segment，段号，段号越大性能越好&lt;br /&gt;
+1 - Generation 产品代，第1代产品&lt;br /&gt;
+7 - Performance Level，性能分级，分级越大性能越高&lt;br /&gt;
+00 - Model Number，型号，类似SKU Number&lt;br /&gt;
+X - Power Suffix，后缀，描述处理器能力。&lt;/p&gt;</content><author><name>Taaang</name></author><category term="CPU" /><category term="CPU" /><summary type="html">我们日常总会看到各种各样的CPU，苹果的A12、A13，Intel 的 i3、i5、i7等，同时还会带上一系列的后缀，比如 A10X、i9 - 9880H，不同的后缀具有不同的含义。</summary></entry><entry><title type="html">Kotlin升级导致的when异常问题</title><link href="http://localhost:4000/kotlin/2019/02/11/kotlin-when/" rel="alternate" type="text/html" title="Kotlin升级导致的when异常问题" /><published>2019-02-11T00:15:36+08:00</published><updated>2019-02-11T00:15:36+08:00</updated><id>http://localhost:4000/kotlin/2019/02/11/kotlin-when</id><content type="html" xml:base="http://localhost:4000/kotlin/2019/02/11/kotlin-when/">&lt;p&gt;送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。&lt;/p&gt;
 
 &lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
 
@@ -7,37 +47,34 @@
 &lt;p&gt;两个枚举类，分别定义如下：
 EnumA ↓&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class EnumA(var value: Int) {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class EnumA(var value: Int) {
 
     A_1(1),
     A_2(2)
 
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;FakeEnumA ↓&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class FakeEnumA(var value: Int) {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class FakeEnumA(var value: Int) {
 
     A_1(1),
     A_2(2)
 
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;代码里进行了一段神奇的操作：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val enumA = EnumA.A_1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;val enumA = EnumA.A_1
 
 when (enumA) {
     FakeEnumA.A_1 -&amp;gt; println(&quot;I'm A_1&quot;)
     FakeEnumA.A_2 -&amp;gt; println(&quot;I'm A_2&quot;)
     else -&amp;gt; println(&quot;else&quot;)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;代码正常编译，理论上来说，不同类型比较，应该进入else，而结果确实进入了else。&lt;/p&gt;
 
@@ -73,7 +110,7 @@ when (enumA) {
 
 &lt;p&gt;先看看Kotlin 1.2的时候，这段代码的字节码是怎样的 ↓&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Code:
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Code:
    0: aload_0
    1: ldc           #9                  // String args
    3: invokestatic  #15                 // Method kotlin/jvm/internal/Intrinsics.checkParameterIsNotNull:(Ljava/lang/Object;Ljava/lang/String;)V
@@ -109,8 +146,7 @@ when (enumA) {
   76: return
 }
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;从上面的字节码看，好像并没有啥问题，生成映射、取值、获得映射结果，比较。。&lt;/p&gt;
 
 &lt;p&gt;比较。。。比。。。较。。。tableswitch。。oridinal。。。oridinal。。。&lt;/p&gt;
@@ -133,7 +169,7 @@ when (enumA) {
 
 &lt;p&gt;继续看字节码:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
   public static final int[] $EnumSwitchMapping$0;
 
   static {};
@@ -155,8 +191,7 @@ when (enumA) {
       31: return
 }
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;该Mapping中，基于EnumA中的元素个数，创建了一个数组，数组中的对应关系是怎样的呢，我们按照字节码一步步来看:&lt;/p&gt;
 
@@ -217,7 +252,7 @@ when (enumA) {
 
 &lt;p&gt;在Kotlin 1.2编译生成的字节码中，EnumSwitchMapping主要保存了ordinal到tableswitch的映射关系，字节码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
   public static final int[] $EnumSwitchMapping$0;
 
   static {};
@@ -238,8 +273,7 @@ when (enumA) {
       30: iastore
       31: return
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;可以看出整个Mapping的生成似乎和FakeEnumA没有任何关系，但是实际上是这样的吗？&lt;/p&gt;
 
@@ -247,38 +281,35 @@ when (enumA) {
 
 &lt;p&gt; 1.FakeEnumA添加一个新的类型A_3，代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class FakeEnumA(var value: Int) {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;enum class FakeEnumA(var value: Int) {
     A_1(1),
     A_2(2),
     A_3(3)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt; 2.when跳转中，把FakeEnumA.A_1改为FakeEnumA.A_3，代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;when (enumA) {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;when (enumA) {
     FakeEnumA.A_3 -&amp;gt; println(&quot;I'm A_1&quot;)
     FakeEnumA.A_2 -&amp;gt; println(&quot;I'm A_2&quot;)
     else -&amp;gt; println(&quot;else&quot;)
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;以上代码均正常编译通过，如果整个过程和FakeEnumA没有关系的话，那么应该会正常运行，并输出”I’m A_1”。&lt;/p&gt;
 
 &lt;p&gt;但是实际执行却抛出异常：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Exception in thread &quot;main&quot; java.lang.NoSuchFieldError: A_3
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Exception in thread &quot;main&quot; java.lang.NoSuchFieldError: A_3
         at com.share.example.when.EnumTestMainKt$WhenMappings.&amp;lt;clinit&amp;gt;(Unknown Source)
         at com.share.example.when.EnumTestMainKt.main(EnumTestMain.kt:17)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;在运行时抛出了NoSuchFieldError,说明在编译的时候时候，编译器校验正常通过，但在运行的时候，发现A_3找不到了，抛出异常。&lt;/p&gt;
 
 &lt;p&gt;此时的EnumSwitchMapping字节码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt$WhenMappings {
   public static final int[] $EnumSwitchMapping$0;
 
   static {};
@@ -299,8 +330,7 @@ when (enumA) {
       30: iastore
       31: return
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;可以看到，是在类的静态初始化域中，对类内的数组对象进行了初始化，并赋值，其中12: getstatic尝试获取EnumA中的A_3时，发现找不到对应的枚举类型。&lt;/p&gt;
 
@@ -312,7 +342,7 @@ when (enumA) {
 
 &lt;p&gt;我们看一看使用Kotlin 1.3编译后生成的字节码：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;public final class com.seewo.share.example.when.EnumTestMainKt {
   public static final void main(java.lang.String[]);
     Code:
        0: aload_0
@@ -371,15 +401,13 @@ when (enumA) {
      115: invokevirtual #56                 // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
      118: return
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;首先，生成的字节码中已经没有了EnumSwitchMapping这个类，那么再看看字节码，字节码中也没有了tableswitch，而是使用了if_acmpne进行比较判断。&lt;/p&gt;
 
 &lt;p&gt;那么if_acmpne是怎么比较的呢 ↓&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if_acmpne pops the top two object references off the stack and compares them. If the two object references are not equal (i.e. if they refer to different objects), execution branches to the address (pc + branchoffset), where pc is the address of the if_acmpne opcode in the bytecode and branchoffset is a 16-bit signed integer parameter following the if_acmpne opcode in the bytecode. If the object references refer to the same object, execution continues at the next instruction.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if_acmpne pops the top two object references off the stack and compares them. If the two object references are not equal (i.e. if they refer to different objects), execution branches to the address (pc + branchoffset), where pc is the address of the if_acmpne opcode in the bytecode and branchoffset is a 16-bit signed integer parameter following the if_acmpne opcode in the bytecode. If the object references refer to the same object, execution continues at the next instruction.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;可以看到，if_acmpne是对两个对象的引用进行比较，如果是两个对象的不相等，则进行跳转。&lt;/p&gt;
 
@@ -397,11 +425,11 @@ when (enumA) {
 
 &lt;h2 id=&quot;解决方案&quot;&gt;解决方案&lt;/h2&gt;
 
-&lt;p&gt;调整when比较的条件，使用相同对象进行比较，解决了该问题。&lt;/p&gt;</content><author><name>Qi</name></author><category term="Kotlin" /><summary type="html">送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。</summary></entry><entry><title type="html">Tomcat类加载NoSuchMethodError异常问题</title><link href="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/" rel="alternate" type="text/html" title="Tomcat类加载NoSuchMethodError异常问题" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/13/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/13/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
+&lt;p&gt;调整when比较的条件，使用相同对象进行比较，解决了该问题。&lt;/p&gt;</content><author><name>Taaang</name></author><category term="Kotlin" /><category term="Kotlin" /><summary type="html">送测结束，开心上线，结果线上突然报错，发现代码走到了一个理论上不可能走到的分支里，又遇到鬼故事了_(:з」∠)_ GG。</summary></entry><entry><title type="html">Tomcat类加载NoSuchMethodError异常问题</title><link href="http://localhost:4000/jvm/2018/07/14/jvm-classload-priority/" rel="alternate" type="text/html" title="Tomcat类加载NoSuchMethodError异常问题" /><published>2018-07-14T06:15:36+08:00</published><updated>2018-07-14T06:15:36+08:00</updated><id>http://localhost:4000/jvm/2018/07/14/jvm-classload-priority</id><content type="html" xml:base="http://localhost:4000/jvm/2018/07/14/jvm-classload-priority/">&lt;p&gt;最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。&lt;/p&gt;
 
 &lt;h2 id=&quot;异常信息&quot;&gt;异常信息&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[ERROR] 15:35:43.751 c.c.m.o.e.GlobalExceptionHandler(31) - Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[ERROR] 15:35:43.751 c.c.m.o.e.GlobalExceptionHandler(31) - Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;
 org.springframework.web.util.NestedServletException: Handler dispatch failed; nested exception is java.lang.NoSuchMethodError: com.google.common.base.Splitter.splitToList(Ljava/lang/CharSequence;)Ljava/util/List;
         at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:978)
         at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:897)
@@ -419,8 +447,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
         at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
         at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
         at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;异常分析&quot;&gt;异常分析&lt;/h2&gt;
 
@@ -511,7 +538,7 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
   &lt;li&gt;
     &lt;p&gt;如果无法避免引用第三方常用类库，可以使用maven shade插件，对相关第三方类库的包名进行变更，以此避免相关问题。&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Qi</name></author><category term="JVM" /><category term="NoSuchMethodError" /><summary type="html">最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。</summary></entry><entry><title type="html">字符编码</title><link href="http://localhost:4000/common/mysql/2018/07/05/character-coding/" rel="alternate" type="text/html" title="字符编码" /><published>2018-07-06T02:16:30+08:00</published><updated>2018-07-06T02:16:30+08:00</updated><id>http://localhost:4000/common/mysql/2018/07/05/character-coding</id><content type="html" xml:base="http://localhost:4000/common/mysql/2018/07/05/character-coding/">&lt;p&gt; &lt;/p&gt;
+&lt;/ol&gt;</content><author><name>Taaang</name></author><category term="JVM" /><category term="JVM" /><category term="NoSuchMethodError" /><summary type="html">最近在开发环境中进行项目部署测试，再次遇一个鬼故事。项目maven打包正常，Tomcat上项目正常启动，但是在调用某个类的特定方法时，出现NoSuchMethodError异常，反编确认对应的JAR包中包含该类和对应的方法，但是JVM依旧报错。</summary></entry><entry><title type="html">字符编码</title><link href="http://localhost:4000/common/mysql/2018/07/06/character-coding/" rel="alternate" type="text/html" title="字符编码" /><published>2018-07-06T02:16:30+08:00</published><updated>2018-07-06T02:16:30+08:00</updated><id>http://localhost:4000/common/mysql/2018/07/06/character-coding</id><content type="html" xml:base="http://localhost:4000/common/mysql/2018/07/06/character-coding/">&lt;p&gt; &lt;/p&gt;
 
 &lt;h2 id=&quot;字符字符集和字符编码&quot;&gt;字符、字符集和字符编码&lt;/h2&gt;
 
@@ -544,29 +571,27 @@ org.springframework.web.util.NestedServletException: Handler dispatch failed; ne
 
 &lt;p&gt;&lt;strong&gt;ASCII&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;单字节编码字符集，最高位不使用，常设为0.
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;单字节编码字符集，最高位不使用，常设为0.
 
 0~31及127为控制码，共33个
 
 32~126是字符，共95个
 
 空间占用：1字节
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;不够用了怎么办 -&amp;gt; LATIN-1（ISO-8859-1）&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ASCII扩展字符集，启用最高位。
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ASCII扩展字符集，启用最高位。
 
 0~127位与ASCII相同，新开启的128~255收录新字符。
 
 空间占用：1字节
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;有中文了怎么办 -&amp;gt; GB2312&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;有中文了怎么办？常用中文字符有6000多个~
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;有中文了怎么办？常用中文字符有6000多个~
 
 GB2312解决了中文问题，包含常用中文字符
 
@@ -575,12 +600,11 @@ GB2312解决了中文问题，包含常用中文字符
 当两个大于127的字符连在一起时，就表示一个汉字，前一个为高字节（0xA1到0xF7），后一个为低字节（0xA1到0xFE），可以组合出7000+的汉字。其中，高字节等于字符区号+0xA0，低字节等于字符所在区中的位置+0xA0。
 
 同时，GB2312也对一些特殊字符、数字和标点等进行了重新编码，重新编码的这一批字符，就是我们常说的“全角”字符，而127位以下的这些字符就被称为“半角”字符。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;哎呀，中文那么多不够用啊 -&amp;gt; GBK&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;基于GB2312进行扩展，不再要求低字节一定是127之后的编码，只要第一个字节是大于127的，那么代表这是一个汉字的开始。
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;基于GB2312进行扩展，不再要求低字节一定是127之后的编码，只要第一个字节是大于127的，那么代表这是一个汉字的开始。
 
 GBK包含了GB2312的所有内容，同时又增加了近20000个新的汉字。
 
@@ -597,33 +621,29 @@ a机智
 
 之后一共4个字节，分别对应“机智”，查询后匹配bbfa对应”机“，d6c7对应”智”
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;繁体字  -&amp;gt; BIG5&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;虽然GBK支持少量繁体中文，但是数量有限，于是就出现了BIG5啦。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;虽然GBK支持少量繁体中文，但是数量有限，于是就出现了BIG5啦。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;ISO表示我坐不住了 -&amp;gt; UNICODE&lt;/strong&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的国家，不同的语言，编码太多，就会出现兼容、转换等问题。这时候，ISO坐不住了。
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的国家，不同的语言，编码太多，就会出现兼容、转换等问题。这时候，ISO坐不住了。
 
 ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Universal Multiple-Octet Coded Character Set），为了能够同时包含大量的字符，UNICODE使用2个字节来统一表示，对于ASCII中低于127位的字符保持不变，其他全部重新编码。
 
 前面有提到，UNICODE是字符集，并不能代表字符编码，UNICODE拥有多种编码方式，包括为UTF-8、UTF-16。（UCS Transfer Format，UCS是UNICDOE的简称）
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;字符与字节&quot;&gt;字符与字节&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的编码的字符串，其长度和大小怎么计算？
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;不同的编码的字符串，其长度和大小怎么计算？
 
 字符串长度：字符串的实际长度，计算字符长度，strlen结果；
 字符串大小：字符串的空间占用大小，需要结合字符编码进行大小计算。
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;mysql下的字符编码&quot;&gt;MySQL下的字符编码&lt;/h2&gt;
 
@@ -674,14 +694,13 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
 
 &lt;h2 id=&quot;mysql表字符集修改&quot;&gt;MySQL表字符集修改&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;修改表字符集（新数据生效）
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;修改表字符集（新数据生效）
 	ALTER TABLE  … CHARACTER SET …
 修改表字符集（新旧数据生效）
 	ALTER TABLE  … CONVERT TO CHARACTER SET …
 修改当前会话字符集
 	SET NAMES …（client、result、connection）
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>Qi</name></author><category term="MySQL" /><category term="Character Coding" /><summary type="html"> </summary></entry><entry><title type="html">ElasticSearch分组相关性写入</title><link href="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="alternate" type="text/html" title="ElasticSearch分组相关性写入" /><published>2018-05-25T07:31:30+08:00</published><updated>2018-05-25T07:31:30+08:00</updated><id>http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write</id><content type="html" xml:base="http://localhost:4000/elasticsearch/2018/05/24/elasticsearch-group-write/">&lt;p&gt;随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Taaang</name></author><category term="Common" /><category term="MySQL" /><category term="MySQL" /><category term="Character Coding" /><summary type="html"> </summary></entry><entry><title type="html">ElasticSearch分组相关性写入</title><link href="http://localhost:4000/elasticsearch/2018/05/25/elasticsearch-group-write/" rel="alternate" type="text/html" title="ElasticSearch分组相关性写入" /><published>2018-05-25T07:31:30+08:00</published><updated>2018-05-25T07:31:30+08:00</updated><id>http://localhost:4000/elasticsearch/2018/05/25/elasticsearch-group-write</id><content type="html" xml:base="http://localhost:4000/elasticsearch/2018/05/25/elasticsearch-group-write/">&lt;p&gt;随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。
 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。&lt;/p&gt;
 
 &lt;p&gt;起初我们对原因进行分析，认为是数据索引过多导致数据节点写入过慢。于是，在每天晚上定时对最近三天的数据进行分析，找出哪些产品的数据量比较小，并将数据量较小的数据索引进行合并，以减少索引数量；同时每天定时关闭一周前的数据索引转为冷数据，以减轻集群负担，使ES集群的写入和查询速度均得到提升。&lt;/p&gt;
@@ -881,18 +900,17 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
 但是从最终测试结果来看，实际数据写入速度并没有太明显的提升。对原因进行分析后，发现原因如下：&lt;/p&gt;
 
   &lt;p&gt;之前对数据量较少的产品数据索引进行合并，部分不同产品的数据已经是写入到同一个合并后的索引。而在实际场景中，大部分产品的数据量都是很小的，绝大部分的产品数据都是写入到这个合并索引中，所以从另一个角度上减少了单次数据提交所需要写入的索引数，导致优化数据写入后的效果并不明显。&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Qi</name></author><category term="ElasticSearch" /><summary type="html">随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。</summary></entry><entry><title type="html">Java Jar包变更导致JVM崩溃问题</title><link href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/" rel="alternate" type="text/html" title="Java Jar包变更导致JVM崩溃问题" /><published>2018-04-02T18:23:10+08:00</published><updated>2018-04-02T18:23:10+08:00</updated><id>http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify</id><content type="html" xml:base="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">&lt;p&gt;最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;异常（一）
+&lt;/blockquote&gt;</content><author><name>Taaang</name></author><category term="ElasticSearch" /><category term="ElasticSearch" /><summary type="html">随着业务发展，越来越多的业务数据接入到Elasticsearch集群中，基于ES的全文索引和聚合分析功能进行简单的数据分析和日志查找。 在设计之初出于数据量和数据隔离的考虑，每个产品都以日期进行划分，生成数据索引。但是，随着新的产品越来越多，单个产品按日期划分，导致集群中的索引数量不断增加，ES集群的写入速度也越来越慢。</summary></entry><entry><title type="html">Java Jar包变更导致JVM崩溃问题</title><link href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/" rel="alternate" type="text/html" title="Java Jar包变更导致JVM崩溃问题" /><published>2018-04-02T18:23:10+08:00</published><updated>2018-04-02T18:23:10+08:00</updated><id>http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify</id><content type="html" xml:base="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">&lt;p&gt;最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;异常（一）
 JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException
         ...
         at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
         at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
         at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
         ... 10 more
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;或者&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;异常（二）
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;异常（二）
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 J 128  java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58]
 J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes)
@@ -903,8 +921,7 @@ J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/UR
 J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188]
 J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes)
 J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;可以看出，崩溃原因均可归结为Class加载失败导致的，而加载的这个Class是一个JAVA Agent中的一个类。&lt;/p&gt;
 
@@ -924,7 +941,7 @@ J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apa
 
 &lt;p&gt; 2.  对Tomcat源码进行调试，发现在AppClassLoader中，包含宝对应Java Agent的JAR包路径，并在加载过程中检查该JAR包中是否包含对应的Class，相关代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;URLClassLoader.java
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;URLClassLoader.java
 
 
 protected Class&amp;lt;?&amp;gt; findClass(final String name)
@@ -956,12 +973,11 @@ protected Class&amp;lt;?&amp;gt; findClass(final String name)
     }
     return result;
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;其中，&lt;code class=&quot;highlighter-rouge&quot;&gt;ucp.getResource(path, false)&lt;/code&gt;尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：&lt;/p&gt;
+&lt;p&gt;其中，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ucp.getResource(path, false)&lt;/code&gt;尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ZipFile.java
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ZipFile.java
 
 
 /**
@@ -988,8 +1004,7 @@ public ZipEntry getEntry(String name) {
     }
     return null;
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;正常情况下在JAVA Agent的JAR包中搜索，能找到对应的Class信息，即getEntry方法返回非0；而出现异常时，getEntry方法返回0。&lt;/p&gt;
 
@@ -1007,7 +1022,7 @@ public ZipEntry getEntry(String name) {
 
 &lt;p&gt;最终，根据错误的异常信息，在Java官网找到了相似的异常，其实这是JAVA本身就存在的一个问题：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID 1296729.1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ID 1296729.1
 
 Java Virtual Machine (JVM) crashes in java.util.zip.ZipFile.getEntry() during Class Loading (文档 ID 1296729.1） -  Random crashes during classloading while a jar/zip file is being accessed.  Here is a typical stack trace. Please notice that a custom classloader calls java.util.zip.ZipFile.getEntry() and the crash happens somewhere in libzip or libc or a native windows dll：
 
@@ -1034,12 +1049,11 @@ j weblogic.utils.classloaders.ChangeAwareClassLoader.findClass(Ljava/lang/String
 J java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
 J weblogic.utils.classloaders.ChangeAwareClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class;
 j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;其中，三种情况可能导致该问题发生：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;There are three possible scenarios here:
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;There are three possible scenarios here:
 
 1. While a class is in use it is dynamically reloaded from a jar file.
 2. While a jar file is being accessed by the class loader, the jar file is being modified.
@@ -1049,8 +1063,7 @@ j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
 Please note that a crash may happen even a long time after a jarfile was modified as classloaders keep references to jarfiles.
 
 Another possible sceanrio is when Java or the application itself is being patched while the application is running.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;而这次问题的发生是由于第二点引起的，我们在对JAVA Agent版本进行更新时，是使用覆盖源文件的方式进行，随着Tomcat或者JVM重启去重新加载新的Agent JAR包。&lt;/p&gt;
 
@@ -1060,21 +1073,19 @@ Another possible sceanrio is when Java or the application itself is being patche
 
 &lt;h2 id=&quot;解决方案&quot;&gt;解决方案&lt;/h2&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
 （https://stackoverflow.com/questions/38326183/jvm-crashed-in-java-util-zip-zipfile-getentry）
 2. 启动时关闭MemoryMapping。JAVA Bug Fixs - 6929479
 （http://www.oracle.com/us/technologies/java/overview-156328.html）
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</content><author><name>Qi</name></author><category term="JVM" /><summary type="html">最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)</summary></entry><entry><title type="html">MySQL Communications link failure问题</title><link href="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/" rel="alternate" type="text/html" title="MySQL Communications link failure问题" /><published>2016-12-10T19:34:29+08:00</published><updated>2016-12-10T19:34:29+08:00</updated><id>http://localhost:4000/common/2016/12/10/mysql-communications-link-failure</id><content type="html" xml:base="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/">&lt;p&gt;最近对项目进行测试，突然出现Communications link failure异常，原文如下：&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Taaang</name></author><category term="JVM" /><category term="JVM" /><summary type="html">最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)</summary></entry><entry><title type="html">MySQL Communications link failure问题</title><link href="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/" rel="alternate" type="text/html" title="MySQL Communications link failure问题" /><published>2016-12-10T19:34:29+08:00</published><updated>2016-12-10T19:34:29+08:00</updated><id>http://localhost:4000/common/2016/12/10/mysql-communications-link-failure</id><content type="html" xml:base="http://localhost:4000/common/2016/12/10/mysql-communications-link-failure/">&lt;p&gt;最近对项目进行测试，突然出现Communications link failure异常，原文如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 
 The last packet successfully received from the server was 20,096 milliseconds ago.The last packet sent successfully to the server was 0 milliseconds ago.
     at sun.reflect.GeneratedConstructorAccessor84.newInstance(Unknown Source) ~[?:?]
     at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45) ~[?:1.7.0_75]
     ...
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;查看MySQL Status的Aborted_clients，变化如下：
 请求接口前：&lt;/p&gt;
@@ -1104,7 +1115,7 @@ The last packet successfully received from the server was 20,096 milliseconds ag
 
 &lt;p&gt;其中testOnBorrow和testOnReturn是默认不开启的，testWhileIdle默认为true，查看获取连接的相关代码，发现如下：&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (isTestWhileIdle()) {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;if (isTestWhileIdle()) {
     final long currentTimeMillis = System.currentTimeMillis();
     final long lastActiveTimeMillis = poolableConnection.getConnectionHolder().getLastActiveTimeMillis();
     final long idleMillis = currentTimeMillis - lastActiveTimeMillis;
@@ -1124,7 +1135,6 @@ The last packet successfully received from the server was 20,096 milliseconds ag
         }
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;其中，默认的DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS为60s，即默认对超过60s的未活动连接进行检测，所以线上MySQL配置600s也没有出现Communications link failure。&lt;/p&gt;</content><author><name>Qi</name></author><category term="MySQL" /><summary type="html">最近对项目进行测试，突然出现Communications link failure异常，原文如下：</summary></entry></feed>
+&lt;p&gt;其中，默认的DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS为60s，即默认对超过60s的未活动连接进行检测，所以线上MySQL配置600s也没有出现Communications link failure。&lt;/p&gt;</content><author><name>Taaang</name></author><category term="Common" /><category term="MySQL" /><summary type="html">最近对项目进行测试，突然出现Communications link failure异常，原文如下：</summary></entry></feed>

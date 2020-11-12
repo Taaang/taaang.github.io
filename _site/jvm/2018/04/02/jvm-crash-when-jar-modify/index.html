@@ -318,7 +318,7 @@
     <link itemprop="mainEntityOfPage" href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Qi">
+      <meta itemprop="name" content="Taaang">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="assets/images/avatar.gif">
     </span>
@@ -440,17 +440,16 @@
 
 
   <p>最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：</p>
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>异常（一）
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>异常（一）
 JException in thread "data_send_thread_1" java.lang.NoClassDefFoundError: com/****/StreamResetException
         ...
         at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
         at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
         at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
         ... 10 more
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 <p>或者</p>
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>异常（二）
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>异常（二）
 Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
 J 128  java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58]
 J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes)
@@ -461,8 +460,7 @@ J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/UR
 J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188]
 J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes)
 J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>可以看出，崩溃原因均可归结为Class加载失败导致的，而加载的这个Class是一个JAVA Agent中的一个类。</p>
 
@@ -482,7 +480,7 @@ J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apa
 
 <p> 2.  对Tomcat源码进行调试，发现在AppClassLoader中，包含宝对应Java Agent的JAR包路径，并在加载过程中检查该JAR包中是否包含对应的Class，相关代码如下：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32</pre></td><td class="code"><pre class="highlight"><code>URLClassLoader.java
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32</pre></td><td class="code"><pre class="highlight"><code>URLClassLoader.java
 
 
 protected Class&lt;?&gt; findClass(final String name)
@@ -514,12 +512,11 @@ protected Class&lt;?&gt; findClass(final String name)
     }
     return result;
 }
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
-<p>其中，<code class="highlighter-rouge">ucp.getResource(path, false)</code>尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：</p>
+<p>其中，<code class="language-plaintext highlighter-rouge">ucp.getResource(path, false)</code>尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ZipFile.java
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ZipFile.java
 
 
 /**
@@ -546,8 +543,7 @@ public ZipEntry getEntry(String name) {
     }
     return null;
 }
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>正常情况下在JAVA Agent的JAR包中搜索，能找到对应的Class信息，即getEntry方法返回非0；而出现异常时，getEntry方法返回0。</p>
 
@@ -565,7 +561,7 @@ public ZipEntry getEntry(String name) {
 
 <p>最终，根据错误的异常信息，在Java官网找到了相似的异常，其实这是JAVA本身就存在的一个问题：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ID 1296729.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ID 1296729.1
 
 Java Virtual Machine (JVM) crashes in java.util.zip.ZipFile.getEntry() during Class Loading (文档 ID 1296729.1） -  Random crashes during classloading while a jar/zip file is being accessed.  Here is a typical stack trace. Please notice that a custom classloader calls java.util.zip.ZipFile.getEntry() and the crash happens somewhere in libzip or libc or a native windows dll：
 
@@ -592,12 +588,11 @@ j weblogic.utils.classloaders.ChangeAwareClassLoader.findClass(Ljava/lang/String
 J java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
 J weblogic.utils.classloaders.ChangeAwareClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class;
 j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>其中，三种情况可能导致该问题发生：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>There are three possible scenarios here:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>There are three possible scenarios here:
 
 1. While a class is in use it is dynamically reloaded from a jar file.
 2. While a jar file is being accessed by the class loader, the jar file is being modified.
@@ -607,8 +602,7 @@ j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
 Please note that a crash may happen even a long time after a jarfile was modified as classloaders keep references to jarfiles.
 
 Another possible sceanrio is when Java or the application itself is being patched while the application is running.
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 <p>而这次问题的发生是由于第二点引起的，我们在对JAVA Agent版本进行更新时，是使用覆盖源文件的方式进行，随着Tomcat或者JVM重启去重新加载新的Agent JAR包。</p>
 
@@ -618,12 +612,11 @@ Another possible sceanrio is when Java or the application itself is being patche
 
 <h2 id="解决方案">解决方案</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
 （https://stackoverflow.com/questions/38326183/jvm-crashed-in-java-util-zip-zipfile-getentry）
 2. 启动时关闭MemoryMapping。JAVA Bug Fixs - 6929479
 （http://www.oracle.com/us/technologies/java/overview-156328.html）
-</code></pre></td></tr></tbody></table></div>
-</div>
+</code></pre></td></tr></tbody></table></div></div>
 
 
       
@@ -671,7 +664,7 @@ Another possible sceanrio is when Java or the application itself is being patche
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/elasticsearch/2018/05/24/elasticsearch-group-write/" rel="next" title="ElasticSearch分组相关性写入">
+              <a href="/elasticsearch/2018/05/25/elasticsearch-group-write/" rel="next" title="ElasticSearch分组相关性写入">
                 <i class="fa fa-chevron-left"></i> ElasticSearch分组相关性写入
               </a>
             
@@ -760,8 +753,8 @@ Another possible sceanrio is when Java or the application itself is being patche
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/avatar.gif"
-               alt="Qi" />
-          <p class="site-author-name" itemprop="name">Qi</p>
+               alt="Taaang" />
+          <p class="site-author-name" itemprop="name">Taaang</p>
            
               <p class="site-description motion-element" itemprop="description">If you're with me, then everything's alright.</p>
           
@@ -771,7 +764,7 @@ Another possible sceanrio is when Java or the application itself is being patche
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -782,7 +775,7 @@ Another possible sceanrio is when Java or the application itself is being patche
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -793,7 +786,7 @@ Another possible sceanrio is when Java or the application itself is being patche
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -865,11 +858,11 @@ Another possible sceanrio is when Java or the application itself is being patche
   
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Qi</span>
+  <span class="author" itemprop="copyrightHolder">Taaang</span>
 </div>
 
         

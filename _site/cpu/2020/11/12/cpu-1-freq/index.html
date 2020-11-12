@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JVM," />
+  <meta name="keywords" content="CPU," />
 
 
 
@@ -109,20 +109,24 @@
 
 
 
-<meta name="description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
-<meta name="keywords" content="JVM">
+<meta name="description" content="以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。">
+<meta name="keywords" content="CPU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Jar包变更导致JVM崩溃问题">
-<meta property="og:url" content="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
+<meta property="og:title" content="CPU - 主频">
+<meta property="og:url" content="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/">
 <meta property="og:site_name" content="To the Moon">
-<meta property="og:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
+<meta property="og:description" content="以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png?raw=true">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_2.png?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/i7-8700.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_freq_chaning.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_turbo_close.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_0_status.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_usage_freq_0.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_usage_freq_1.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Jar包变更导致JVM崩溃问题">
-<meta name="twitter:description" content="最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为： 异常（一） JException in thread &quot;data_send_thread_1&quot; java.lang.NoClassDefFoundError: com/****/StreamResetException ... at java.lang.ClassLoader.loadClass(ClassLoader.java:424) at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331) at java.lang.ClassLoader.loadClass(ClassLoader.java:357) ... 10 more 或者 异常（二） Java frames: (J=compiled Java code, j=interpreted, Vv=VM code) J 128 java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58] J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes) J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140] v ~StubRoutines::call_stub J 933 java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object; J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94] J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188] J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes) J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)">
-<meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png?raw=true">
+<meta name="twitter:title" content="CPU - 主频">
+<meta name="twitter:description" content="以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/i7-8700.jpg">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -155,7 +159,7 @@
 
 
 
-  <title>Java Jar包变更导致JVM崩溃问题 | To the Moon</title>
+  <title>CPU - 主频 | To the Moon</title>
   
 
 
@@ -315,7 +319,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Taaang">
@@ -335,7 +339,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            Java Jar包变更导致JVM崩溃问题
+            CPU - 主频
           
         </h1>
         
@@ -349,8 +353,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-02T18:23:10+08:00">
-                2018-04-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-12T00:00:00+08:00">
+                2020-11-12
               </time>
             
 
@@ -373,8 +377,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/JVM" itemprop="url" rel="index">
-                    <span itemprop="name">JVM</span>
+                  <a href="/category/#/CPU" itemprop="url" rel="index">
+                    <span itemprop="name">CPU</span>
                   </a>
                 </span>
 
@@ -391,9 +395,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/jvm/2018/04/02/jvm-crash-when-jar-modify/#comments" itemprop="discussionUrl">
+                <a href="/cpu/2020/11/12/cpu-1-freq/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/jvm/2018/04/02/jvm-crash-when-jar-modify/" itemprop="commentCount"></span>
+                        data-disqus-identifier="/cpu/2020/11/12/cpu-1-freq/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -439,184 +443,365 @@
 
 
 
-  <p>最近部分线上JAVA项目和Tomcat出现无规律性崩溃，崩溃信息主要为：</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>异常（一）
-JException in thread "data_send_thread_1" java.lang.NoClassDefFoundError: com/****/StreamResetException
-        ...
-        at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
-        at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-        ... 10 more
-</code></pre></td></tr></tbody></table></div></div>
-<p>或者</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>异常（二）
-Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
-J 128  java.util.zip.ZipFile.getEntry(J[BZ)J (0 bytes) @ 0x00007f62450db198 [0x00007f62450db140+0x58]
-J 103670 C2 sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; (85 bytes)
-J 92261 C2 java.net.URLClassLoader$2.run()Ljava/lang/Object; (5 bytes) @ 0x00007f624b5aa3c0 [0x00007f624b5aa280+0x140]
-v  ~StubRoutines::call_stub
-J 933  java.security.AccessController.doPrivileged(Ljava/security/PrivilegedAction;Ljava/security/AccessControlContext;)Ljava/lang/Object;
-J 107440 C2 java.net.URLClassLoader.findResource(Ljava/lang/String;)Ljava/net/URL; (37 bytes) @ 0x00007f624df35394 [0x00007f624df35300+0x94]
-J 107175 C2 java.lang.ClassLoader.getResource(Ljava/lang/String;)Ljava/net/URL; (36 bytes) @ 0x00007f6249f14f28 [0x00007f6249f14da0+0x188]
-J 107117 C2 org.apache.catalina.loader.WebappClassLoaderBase.getResourceAsStream(Ljava/lang/String;)Ljava/io/InputStream; (354 bytes)
-J 107084 C2 org.apache.catalina.startup.ContextConfig.checkHandlesTypes(Lorg/apache/tomcat/util/bcel/classfile/JavaClass;)V (462 bytes)
+  <p>以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/i7-8700.jpg" alt="" height="500" width="500" /></p>
+
+<h3 id="如何理解主频">如何理解主频</h3>
+
+<p>CPU主频越高，单核性能越强，CPU的运算速度更快。</p>
+
+<p>应该如何理解？</p>
+
+<p>程序执行时间 ≈ 程序指令数 * 指令平均时钟周期（CPI） * 单个时钟周期时间</p>
+
+<p>其中在程序代码确定的情况下，即 程序指令数 * 指令平均时钟周期（CPI）得到的时钟周期总数固定，则单个时钟周期时间决定程序的执行时间，而主频决定了单个时钟周期的时间。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>主频 = 1s / 时钟周期时间
 </code></pre></td></tr></tbody></table></div></div>
 
-<p>可以看出，崩溃原因均可归结为Class加载失败导致的，而加载的这个Class是一个JAVA Agent中的一个类。</p>
+<p>举个栗子，假设CPU在一个时钟周期执行一条运算指令，CPU 1GHz 和 2GHz，意味着1ns和0.5ns执行1条运算指令，0.5ns相比于1ns快了一倍，自然运算速度也更快。
+（但是实际上更复杂一些，指令周期包含取指令、执行指令，一个指令周期由若干个机器周期组成，机器周期由多个时钟周期组成）</p>
 
-<h2 id="异常一线程进行类加载时抛出">异常（一）：线程进行类加载时抛出</h2>
+<h3 id="cpu是以主频稳定运行的吗">CPU是以主频稳定运行的吗</h3>
 
-<p>当对象创建时，ClassLoader会先判断对象对应的类是否已经加载过，如果没有，则会优先进行加载。但在当前场景下，ClassLoader进行类加载时，抛出了NoClassDefFoundError异常。</p>
+<p>要解释这个问题，先来看看CPU频率是怎么定义的。</p>
 
-<p>其中，NoClassDefFoundError与ClassNotFoundException是有区别的。ClassNotFoundException是在进行动态类加载时出现，往往实现不知道这个类是否存在，比如调用Class.forName，通过反射进行类加载时容易出现这个异常；NoClassDefFoundError遇到的并不多，一般是在编译时明确该类存在，但是在运行时进行加载的时候，找不到该类的定义。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2</pre></td><td class="code"><pre class="highlight"><code>处理器基本频率
+处理器基本频率表示处理器晶体管打开和关闭的速率。处理器基本频率是 TDP 定义的操作点。频率以千兆赫兹 (GHz) 或每秒十亿次循环计。
+</code></pre></td></tr></tbody></table></div></div>
 
-<h2 id="异常二tomcat类加载时抛出">异常（二）：Tomcat类加载时抛出</h2>
+<p>以 Intel 的 CPU 为例，官方给出的CPU频率为基础频率，是 TDP 定义的操作点。说简单点，即CPU在TDP功耗下，能长时间稳定运行的最大频率（注意，并不是指CPU最多只能跑到这个最大频率，后面我们会讲到）。</p>
 
-<p>Tomcat作为Web应用容器，为每一个Web应用创建一个单独的WebAppClassLoader，用于加载这个应用所需要的类，同时也以此将不同项目所需要的类隔离开来。从异常信息可以看出，当ClassLoader尝试去加载一个类时，首先进行Jar包扫描，找到对应的Class在哪个Jar报中，然后通过特殊的权限控制方式，读取Jar包进行类加载。而Jar包本身以Zip格式为基础，所以通过ZipFile获取文件入口，而此时抛出异常。</p>
+<p>想要查看到实际CPU的频率，可以通过/proc/cpuinfo查看每个核心的信息：</p>
 
-<h2 id="异常分析">异常分析</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>grep -E 'cpu MHz|processor' /proc/cpuinfo
+</code></pre></td></tr></tbody></table></div></div>
 
-<p> 1.  NoClassDefFoundError为JVM运行时异常，是在尝试加载Class时无法找到抛出的；</p>
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_freq_chaning.jpg" alt="" height="500" width="500" /></p>
 
-<p> 2.  对Tomcat源码进行调试，发现在AppClassLoader中，包含宝对应Java Agent的JAR包路径，并在加载过程中检查该JAR包中是否包含对应的Class，相关代码如下：</p>
+<p>可以看到核心的频率是在不断变化的。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27<br/>28<br/>29<br/>30<br/>31<br/>32</pre></td><td class="code"><pre class="highlight"><code>URLClassLoader.java
+<h3 id="为什么cpu实际频率会超过基础频率">为什么CPU实际频率会超过基础频率</h3>
 
+<p>从上图中可以发现，i7 - 8700 的基础频率是 3.2 GHz，而实际的核心频率已经达到 4.4 GHz 左右，超过了基础频率，原因是 Intel 的 Trubo Boost 睿频加速技术（AMD 也有类似的技术，Trubo Core），根据需要动态调节处理器频率，允许CPU在一段时间内超越它的基础频率， i7 - 8700的最大睿频频率可以达到4.6 GHz。</p>
 
-protected Class&lt;?&gt; findClass(final String name)
-    throws ClassNotFoundException
+<p>现代 Intel CPU 基本都支持睿频，并自动开启，同时也是可以通过配置开启或关闭的，</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>echo 1 &gt; /sys/devices/system/cpu/intel_pstate/no_trubo
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>默认为0，表示开启睿频，配置为1则关闭睿频，关闭后，CPU频率稳定在 3.2 GHz左右</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_turbo_close.jpg" alt="" height="500" width="500" /></p>
+
+<p>（超频也可以让 CPU 实际频率超过基础频率，需要 CPU 和主板支持）</p>
+
+<h3 id="除了cpu的频率可以调整吗">除了CPU的频率可以调整吗</h3>
+
+<p>答案当然是肯定的，为了实现CPU调频，Linux 内核提供了 cpufreq 子模块来完成这一目的。</p>
+
+<ul>
+  <li>cpufreq 子模块
+该模块包含四个部分：Core Framework 核心框架、Scaling Governor 调频器、Scaling Driver 调频驱动、Scaling Policy 调频策略，它们之间的关系如下：</li>
+</ul>
+
+<p>[image:C1982B07-5318-4BA3-972C-B221FCC70DB0-2811-0000EFB8FBA18A0C/69BB1BAC-CF2D-4E43-B197-37DC2A7D325E.png]</p>
+
+<ol>
+  <li>核心框架，提供通用的代码框架和接口来支持CPU调频
+<code class="language-plaintext highlighter-rouge">linux/include/cpufreq.h 中定义了数据结构和接口来</code></li>
+  <li>调频器，实现了不同的算法来评估所需的CPU频率
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15</pre></td><td class="code"><pre class="highlight"><code>struct cpufreq_governor {
+ char	name[CPUFREQ_NAME_LEN];
+ int	(*init)(struct cpufreq_policy *policy);
+ void	(*exit)(struct cpufreq_policy *policy);
+ int	(*start)(struct cpufreq_policy *policy);
+ void	(*stop)(struct cpufreq_policy *policy);
+ void	(*limits)(struct cpufreq_policy *policy);
+ ssize_t	(*show_setspeed)	(struct cpufreq_policy *policy,
+                  char *buf);
+ int	(*store_setspeed)	(struct cpufreq_policy *policy,
+                  unsigned int freq);
+ bool			dynamic_switching;
+ struct list_head	governor_list;
+ struct module		*owner;
+};
+</code></pre></td></tr></tbody></table></div>    </div>
+    <p>struct 中给出了调频器设计的核心数据结构和方法，方法均为函数指针，不同的调频器可以自由定义实现</p>
+  </li>
+  <li>
+    <p>调频驱动，与硬件直接通信，获取调频器所需要的效能状态，提供接口进行调整
+```
+struct cpufreq_driver {
+ char		name[CPUFREQ_NAME_LEN];
+ u8		flags;
+ void		*driver_data;</p>
+
+    <p>int		(<em>init)(struct cpufreq_policy *policy);
+ int		(</em>verify)(struct cpufreq_policy_data *policy);</p>
+
+    <p>int		(*setpolicy)(struct cpufreq_policy *policy);</p>
+
+    <p>int		(<em>target)(struct cpufreq_policy *policy,
+               unsigned int target_freq,
+               unsigned int relation);	/</em> Deprecated <em>/
+ int		(</em>target_index)(struct cpufreq_policy <em>policy,
+                 unsigned int index);
+ unsigned int	(</em>fast_switch)(struct cpufreq_policy *policy,
+                    unsigned int target_freq);</p>
+  </li>
+</ol>
+
+<p>unsigned int	(*resolve_freq)(struct cpufreq_policy *policy,
+					unsigned int target_freq);</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25</pre></td><td class="code"><pre class="highlight"><code>unsigned int	(*get_intermediate)(struct cpufreq_policy *policy,
+				    unsigned int index);
+int		(*target_intermediate)(struct cpufreq_policy *policy,
+				       unsigned int index);
+
+unsigned int	(*get)(unsigned int cpu);
+
+void		(*update_limits)(unsigned int cpu);
+
+/* optional */
+int		(*bios_limit)(int cpu, unsigned int *limit);
+
+int		(*online)(struct cpufreq_policy *policy);
+int		(*offline)(struct cpufreq_policy *policy);
+int		(*exit)(struct cpufreq_policy *policy);
+void		(*stop_cpu)(struct cpufreq_policy *policy);
+int		(*suspend)(struct cpufreq_policy *policy);
+int		(*resume)(struct cpufreq_policy *policy);
+
+void		(*ready)(struct cpufreq_policy *policy);
+
+struct freq_attr **attr;
+
+bool		boost_enabled;
+int		(*set_boost)(struct cpufreq_policy *policy, int state); }; ```
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>在配置中，cpufreq 提供了一些通用的调频器，不同的调频器提供了功能不同的调频算法，用于不同的场合。</p>
+
+<p><em>performance</em>
+会在 scaling_max_freq 限制的范围内，尽可能进入高频率状态
+<em>powersave</em>
+会在 scaling_min_freq 限制的范围内，尽可能进入低频率状态
+<em>userspace</em>
+该调频器不做任何配置，允许通过 scaling_setspeed 自定义 CPU 频率
+<em>ondemand</em>
+定时基于 CPU 负载进行频率动态设置的方式，负载低时降频，负载高时升频（以牺牲 transition_latency 为代价，当系统在忙和闲之间切换频繁时效果并不好）
+<em>conservative</em>
+与 ondemand 类似，定时基于 CPU 负载进行调频，不同在于频率调整采用逐步递变的方式。
+<em>schedutil</em>
+基于 CPU 使用率，利用内核机制 - utilization update callback， 通过负载变化回调机制来进行调频的方法（相比于 ondemand 和 conservative 的定时获取，能更快获取 CPU 负载变化进行调整）</p>
+
+<ol>
+  <li>每个 CPU 核心独有一份调频策略，保存有当前 CPU 频率状态、调频器、调频驱动和策略配置等</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19</pre></td><td class="code"><pre class="highlight"><code>struct cpufreq_policy {
+	cpumask_var_t		cpus;	/* Online CPUs only */
+	cpumask_var_t		related_cpus; /* Online + Offline CPUs */
+	cpumask_var_t		real_cpus; /* Related and present */
+	unsigned int		cpu;    /* cpu managing this policy, must be online */
+	struct cpufreq_cpuinfo	cpuinfo;/* see above */
+	unsigned int		min;    /* in kHz */
+	unsigned int		max;    /* in kHz */
+	unsigned int		cur;    /* in kHz, only needed if cpufreq governors are used */
+	unsigned int		policy; /* see above */
+	unsigned int		last_policy; /* policy before unplug */
+	struct cpufreq_governor	*governor; /* see below */
+	void			*governor_data;
+	char			last_governor[CPUFREQ_NAME_LEN]; /* last governor used */
+	struct cpufreq_stats	*stats;
+	void			*driver_data;
+	.....
+};
+
+</code></pre></td></tr></tbody></table></div></div>
+
+<ul>
+  <li>cpu_info 记录了 CPU 的状态信息</li>
+  <li>min、max、cur 分别为策略配置的 CPU 最小、最大和当前频率</li>
+  <li>governor_data 使用的调频器</li>
+  <li>cpufreq_driver 使用的调频驱动</li>
+</ul>
+
+<p>在了解 cpufreq 的结构后，我们来看看如何调整 CPU 频率。</p>
+
+<ul>
+  <li>使用 cpufreq_policy 来调整 CPU 频率</li>
+</ul>
+
+<p>在内核初始化时，cpufreq 会创建 sysfs 目录来展示 cpufreq_policy 调频策略中的部分信息，</p>
+
+<p><code class="language-plaintext highlighter-rouge">ls /sys/devices/system/cpu/cpufreq/policy{X}</code></p>
+
+<p>其中，{X} 对应 CPU 核心的编号，每一个 CPU 核心都是独立的调频策略。
+（对应核心的 policy 也链接到了/sys/devices/system/cpu/cpu{X}/cpufreq）</p>
+
+<p>调整策略也包含一些通用的属性，cpuinfo_* 记录的是CPU硬件支持的频率信息，scaling_* 表示通过 cpufreq 进行扩展调节的所支持频率、配置等信息。
+（数据定义对应 cqufreq.h 中的 cpufreq_policy ）</p>
+
+<p><em>cpuinfo_min_freq、cpuinfo_max_freq</em>
+CPU支持的最小、最大频率
+<em>cpuinfo_cur_freq</em>
+从硬件读取到的CPU当前实际频率。如果这个值不确定的话，可能不会展示。（我测试的时候是没有的）
+<em>cpuinfo_transition_latency</em>
+采用 policy 进行效能状态转换所花费的时间（ns）
+<em>affected_cpus</em>
+属于当前 policy 的 online cpu
+<em>related_cpus</em>
+属于当前 policy 的 所有 cpu，包含 online 和 offline
+<em>scaling_available_governors</em>
+当前内核提供的可用调频器或驱动提供调频算法
+<em>scaling_cur_freq</em>
+最后一次通过调频驱动获得的 CPU 频率，而非当前时刻的频率。
+<em>scaling_driver</em>
+当前使用的调频驱动
+<em>scaling_governor</em>
+当前 policy 使用的调频器或调频算法，该值可修改
+<em>scaling_min_freq、scaling_max_freq</em>
+当前 policy 允许的最小、最大频率，该值可修改（kHz）
+<em>scaling_setspeed</em>
+当使用 userspace 调频器时可用，可配置 cpu 频率（kHz）</p>
+
+<p>通过 scaling_setspeed，我们可以对CPU频率进行设置，但是其受限于调频器，只有 userspace 才可以进行 CPU 频率自定义。</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_0_status.jpg" alt="" height="500" width="500" /></p>
+
+<p>这是在我本地查看0号核心的输出结果，当前核心频率944 MHz，在频率范围上与i7 - 8700 的官方定义一致，调频器使用的 powersave，调频驱动使用的是intel_psate，在使用 powersave 调频器的情况下，scaling_setspeed 处于 unsupported 状态，而支持的调速器也不包含 userspace。这种情况下，需要通过其他方式来进行频率调整。</p>
+
+<ul>
+  <li>使用 cpufreq_driver 来调整 CPU 频率</li>
+</ul>
+
+<p>在 Linux 内核源码中，intel_pstate.c 记录了其内部实现。既然是调频驱动，则必须实现 cpufreq 定义的接口，intel_pstate 定义的接口实现如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14</pre></td><td class="code"><pre class="highlight"><code>static struct cpufreq_driver intel_pstate = {
+	.flags		= CPUFREQ_CONST_LOOPS,
+	.verify		= intel_pstate_verify_policy,
+	.setpolicy	= intel_pstate_set_policy,
+	.suspend	= intel_pstate_suspend,
+	.resume		= intel_pstate_resume,
+	.init		= intel_pstate_cpu_init,
+	.exit		= intel_pstate_cpu_exit,
+	.stop_cpu	= intel_pstate_stop_cpu,
+	.offline	= intel_pstate_cpu_offline,
+	.online		= intel_pstate_cpu_online,
+	.update_limits	= intel_pstate_update_limits,
+	.name		= "intel_pstate",
+};
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>在 intel_pstate_set_policy 中，会设置生效调频策略，并通过 intel_pstate_update_perf_limits 更新 CPU 能耗配置</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>int max_freq = intel_pstate_get_max_freq(cpu);
+
+static int intel_pstate_get_max_freq(struct cpudata *cpu)
 {
-    final Class&lt;?&gt; result;
-    try {
-        result = AccessController.doPrivileged(
-            new PrivilegedExceptionAction&lt;Class&lt;?&gt;&gt;() {
-                public Class&lt;?&gt; run() throws ClassNotFoundException {
-                    String path = name.replace('.', '/').concat(".class");
-                    Resource res = ucp.getResource(path, false);
-                    if (res != null) {
-                        try {
-                            return defineClass(name, res);
-                        } catch (IOException e) {
-                            throw new ClassNotFoundException(name, e);
-                        }
-                    } else {
-                        return null;
-                    }
-                }
-            }, acc);
-    } catch (java.security.PrivilegedActionException pae) {
-        throw (ClassNotFoundException) pae.getException();
-    }
-    if (result == null) {
-        throw new ClassNotFoundException(name);
-    }
-    return result;
+	return global.turbo_disabled || global.no_turbo ?
+			cpu-&gt;pstate.max_freq : cpu-&gt;pstate.turbo_freq;
 }
 </code></pre></td></tr></tbody></table></div></div>
 
-<p>其中，<code class="language-plaintext highlighter-rouge">ucp.getResource(path, false)</code>尝试对指定类的ClassPath进行加载，遍历当前ClassLoader所包含的所有JAR包资源，利用ZipFile的getEntry方法，从jar包中搜索对应的Class信息，相关代码如下：</p>
+<p>其中，max_freq 取决于是否开启睿频，未开启则取默认的最大频率，即基础频率；已开启则使用睿频频率。通过睿频可以提升 CPU 频率上限，也符合我们之前实验的结果。可是由此看来，好像没有其他方式来修改 CPU 的频率。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ZipFile.java
+<p>细看代码，通过 intel_pstate_update_perf_limits 的实现，可以发现CPU 的实际性能表现并不仅仅是通过 max_freq 决定的，还涉及一个参数 max_policy_perf，用于设定 CPU 的最大性能比例。</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3</pre></td><td class="code"><pre class="highlight"><code>global_max = DIV_ROUND_UP(turbo_max * global.max_perf_pct, 100);
+cpu-&gt;max_perf_ratio = min(max_policy_perf, global_max);
+cpu-&gt;max_perf_ratio = max(min_policy_perf, cpu-&gt;max_perf_ratio);
+</code></pre></td></tr></tbody></table></div></div>
 
-/**
- * Returns the zip file entry for the specified name, or null
- * if not found.
- *
- * @param name the name of the entry
- * @return the zip file entry, or null if not found
- * @throws IllegalStateException if the zip file has been closed
- */
-public ZipEntry getEntry(String name) {
-    if (name == null) {
-        throw new NullPointerException("name");
-    }
-    long jzentry = 0;
-    synchronized (this) {
-        ensureOpen();
-        jzentry = getEntry(jzfile, zc.getBytes(name), true);
-        if (jzentry != 0) {
-            ZipEntry ze = getZipEntry(name, jzentry);
-            freeEntry(jzfile, jzentry);
-            return ze;
-        }
-    }
-    return null;
+<p>通过 intel_pstate 提供的配置入口可以进行修改</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2</pre></td><td class="code"><pre class="highlight"><code>/sys/devices/system/cpu/intel_pstate/max_perf_pct
+（值范围[0, 100]）
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>该值实际是设置最大的性能百分比，max_perf_pct = 50 可以限制其主频最多跑到 max_freq 的 50%。</p>
+
+<h3 id="cpu-频率对我们的程序有什么影响">CPU 频率对我们的程序有什么影响</h3>
+
+<p>来做个简单的测试，代码如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>func main() {
+	loop := uint64(150000000000)
+	sum := uint64(0)
+	startTime := time.Now().UnixNano()
+	for index := uint64(0); index &lt; loop; index++ {
+		sum += index
+	}
+	endTime := time.Now().UnixNano()
+	fmt.Println("Time cost in mills : ", (endTime - startTime) / 1000000)
 }
 </code></pre></td></tr></tbody></table></div></div>
 
-<p>正常情况下在JAVA Agent的JAR包中搜索，能找到对应的Class信息，即getEntry方法返回非0；而出现异常时，getEntry方法返回0。</p>
+<p>代码逻辑很简单，做循环加法，纯 CPU 运算，最后计算耗时（nano）。在不 桶的CPU 频率配置下，我们来看看结果：</p>
 
-<p> 3.  使用strace查看getEntry时对应的系统调用，结果如下：</p>
+<table>
+  <thead>
+    <tr>
+      <th>核心频率</th>
+      <th>核心使用率</th>
+      <th>计算耗时(ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>4.57 GHz</td>
+      <td>100%</td>
+      <td>33581</td>
+    </tr>
+    <tr>
+      <td>3.2 GHz</td>
+      <td>100%</td>
+      <td>47130</td>
+    </tr>
+    <tr>
+      <td>2.0 GHz</td>
+      <td>100%</td>
+      <td>71848</td>
+    </tr>
+  </tbody>
+</table>
 
-<p><strong>（1）Class加载成功时，可以从对应的JAR包中读取到Class信息</strong>
-<img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_1.png?raw=true" alt="Strace_normal" /></p>
+<p>随着主频下降，计算耗时逐渐上升，且主频下降的比例与计算耗时的增长比例相近。主频决定了 CPU 的运算速度，因此当主频降低时，计算耗时也相应增加。</p>
 
-<p><strong>（2）Class加载异常时，无法读取到Class信息</strong>
-<img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_jvm_crash_2.png?raw=true" alt="Strace_error" /></p>
+<h3 id="cpu-频率和使用率之间的关系">CPU 频率和使用率之间的关系</h3>
 
-<p>可以看到在对JAR包中Class进行加载时，找不到对应的Class。但是，实际上使用解压或者使用JD-GUI查看其内容时，是能够找到编译后的Class文件，所以该类是存在的。那么问题来了，为什么明明有却会说找不到？</p>
+<p>这一点上往往容易产生误区，会觉得主频越高，使用率一定高，或者使用率越高，主频也一定高。实际上，两者的关系有点像水管和水流的关系，CPU频率类似水管大小，使用率是水流，水管可以很大，水流可以很小。</p>
 
-<h2 id="问题原因">问题原因</h2>
+<p>还是上面的例子，只是在每次循环加之后，增加一个sleep：</p>
 
-<p>最终，根据错误的异常信息，在Java官网找到了相似的异常，其实这是JAVA本身就存在的一个问题：</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26<br/>27</pre></td><td class="code"><pre class="highlight"><code>ID 1296729.1
-
-Java Virtual Machine (JVM) crashes in java.util.zip.ZipFile.getEntry() during Class Loading (文档 ID 1296729.1） -  Random crashes during classloading while a jar/zip file is being accessed.  Here is a typical stack trace. Please notice that a custom classloader calls java.util.zip.ZipFile.getEntry() and the crash happens somewhere in libzip or libc or a native windows dll：
-
-tack: [0xfffffffe4e900000,0xfffffffe4e940000], sp=0xfffffffe4e93b1a0, free space=236k
-Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
-C [libc_psr.so.1+0xbf4]
-C [libzip.so+0xe280]
-C [libzip.so+0x28e8]
-C [libzip.so+0x2d9c]
-J java.util.zip.ZipFile.getEntry(JLjava/lang/String;Z)J
-J java.util.zip.ZipFile.getEntry(Ljava/lang/String;)Ljava/util/zip/ZipEntry;
-J weblogic.utils.classloaders.JarClassFinder.getSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.AbstractClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-j weblogic.application.utils.CompositeWebAppFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-J weblogic.utils.classloaders.MultiClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-j weblogic.utils.classloaders.CodeGenClassFinder.getClassSource(Ljava/lang/String;)Lweblogic/utils/classloaders/Source;
-j weblogic.utils.classloaders.GenericClassLoader.findLocalClass(Ljava/lang/String;)Ljava/lang/Class;
-j weblogic.utils.classloaders.GenericClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
-j weblogic.utils.classloaders.ChangeAwareClassLoader.findClass(Ljava/lang/String;)Ljava/lang/Class;
-J java.lang.ClassLoader.loadClass(Ljava/lang/String;Z)Ljava/lang/Class;
-J weblogic.utils.classloaders.ChangeAwareClassLoader.loadClass(Ljava/lang/String;)Ljava/lang/Class;
-j java.lang.ClassLoader.loadClassInternal(Ljava/lang/String;)Ljava/lang/Class;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11</pre></td><td class="code"><pre class="highlight"><code>func main() {
+	loop := uint64(150000000000)
+	sum := uint64(0)
+	startTime := time.Now().UnixNano()
+	for index := uint64(0); index &lt; loop; index++ {
+		sum += index
+		time.Sleep(100)
+	}
+	endTime := time.Now().UnixNano()
+	fmt.Println("Time cost in mills : ", (endTime - startTime) / 1000000)
+}
 </code></pre></td></tr></tbody></table></div></div>
 
-<p>其中，三种情况可能导致该问题发生：</p>
+<p>因为每次循环计算都会sleep，所以 CPU 实际跑不满的：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>There are three possible scenarios here:
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_usage_freq_0.jpg" alt="" height="500" width="500" /></p>
 
-1. While a class is in use it is dynamically reloaded from a jar file.
-2. While a jar file is being accessed by the class loader, the jar file is being modified.
-3. A Jarfile which was bigger than 4GB was accessed (applies to Java 6 and earlier only)
+<p>本地测试CPU使用率在60%左右，而主频已经达到了4.3 GHz左右的睿频频率，此时相当于水管很大，但是水流只占水管大小的60%左右。</p>
 
+<p>如果我们对 CPU 进行降频，把频率将至3.2GHz左右，相同搞定代码下，结果则会不一样：</p>
 
-Please note that a crash may happen even a long time after a jarfile was modified as classloaders keep references to jarfiles.
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/cpu_usage_freq_1.jpg" alt="" height="500" width="500" /></p>
 
-Another possible sceanrio is when Java or the application itself is being patched while the application is running.
-</code></pre></td></tr></tbody></table></div></div>
-
-<p>而这次问题的发生是由于第二点引起的，我们在对JAVA Agent版本进行更新时，是使用覆盖源文件的方式进行，随着Tomcat或者JVM重启去重新加载新的Agent JAR包。</p>
-
-<p>在更新JAR包，由于JVM还是保持着原JAR包的引用，所以再尝试从JAR包中进行Class加载时抛出异常，导致JVM崩溃。</p>
-
-<p>其中有一点比较关键的是，即使在JAR包变更后很长一段时间，也会出现这个问题，原因是因为在正常情况下，业务主要流程已经都跑过一次，依赖的类已经加载过，所以很少触发新的类加载，而当应用走到某个很少触发的业务逻辑或者抛出某个未加载过的异常，需要从该变更过的JAR包中进行Class加载时，就会产生这个现象。</p>
-
-<h2 id="解决方案">解决方案</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>1. StackOverFlow中有大佬表示可通过升级使用JAVA 9来解决，JDK9 early access builds已经解决该问题。
-（https://stackoverflow.com/questions/38326183/jvm-crashed-in-java-util-zip-zipfile-getentry）
-2. 启动时关闭MemoryMapping。JAVA Bug Fixs - 6929479
-（http://www.oracle.com/us/technologies/java/overview-156328.html）
-</code></pre></td></tr></tbody></table></div></div>
+<p>此时同样的运算在降频后，CPU 使用率达到了100%，相当于使用了更小的水管后，水流跑满了整个水管。</p>
 
 
       
@@ -648,7 +833,7 @@ Another possible sceanrio is when Java or the application itself is being patche
         <div class="post-tags">
           
             
-            <a href="/tag/#/JVM" rel="tag"># JVM</a>
+            <a href="/tag/#/CPU" rel="tag"># CPU</a>
           
         </div>
       
@@ -664,18 +849,14 @@ Another possible sceanrio is when Java or the application itself is being patche
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/elasticsearch/2018/05/25/elasticsearch-group-write/" rel="next" title="ElasticSearch分组相关性写入">
-                <i class="fa fa-chevron-left"></i> ElasticSearch分组相关性写入
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/common/2016/12/10/mysql-communications-link-failure/" rel="prev" title="MySQL Communications link failure问题">
-                MySQL Communications link failure问题 <i class="fa fa-chevron-right"></i>
+              <a href="/cpu/2020/11/10/cpu-0-name-meaning/" rel="prev" title="CPU - 命名">
+                CPU - 命名 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -833,7 +1014,7 @@ Another possible sceanrio is when Java or the application itself is being patche
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常一线程进行类加载时抛出"> <span class="nav-number">1</span> <span class="nav-text">异常（一）：线程进行类加载时抛出</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常二tomcat类加载时抛出"> <span class="nav-number">2</span> <span class="nav-text">异常（二）：Tomcat类加载时抛出</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#异常分析"> <span class="nav-number">3</span> <span class="nav-text">异常分析</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#问题原因"> <span class="nav-number">4</span> <span class="nav-text">问题原因</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#解决方案"> <span class="nav-number">5</span> <span class="nav-text">解决方案</span> </a> </li>
+      <li class="nav-item nav-level-3"> <a class="nav-link" href="#如何理解主频"> <span class="nav-number">1</span> <span class="nav-text">如何理解主频</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#cpu是以主频稳定运行的吗"> <span class="nav-number">2</span> <span class="nav-text">CPU是以主频稳定运行的吗</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#为什么cpu实际频率会超过基础频率"> <span class="nav-number">3</span> <span class="nav-text">为什么CPU实际频率会超过基础频率</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#除了cpu的频率可以调整吗"> <span class="nav-number">4</span> <span class="nav-text">除了CPU的频率可以调整吗</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#cpu-频率对我们的程序有什么影响"> <span class="nav-number">5</span> <span class="nav-text">CPU 频率对我们的程序有什么影响</span> </a> </li> <li class="nav-item nav-level-3"> <a class="nav-link" href="#cpu-频率和使用率之间的关系"> <span class="nav-number">6</span> <span class="nav-text">CPU 频率和使用率之间的关系</span> </a> </li>
     </ol>
   </div>
             
@@ -989,9 +1170,9 @@ Another possible sceanrio is when Java or the application itself is being patche
       
       <script type="text/javascript">
           var disqus_config = function () {
-              this.page.url = 'http://localhost:4000/jvm/2018/04/02/jvm-crash-when-jar-modify/';
-              this.page.identifier = '/jvm/2018/04/02/jvm-crash-when-jar-modify/';
-              this.page.title = 'Java Jar包变更导致JVM崩溃问题';
+              this.page.url = 'http://localhost:4000/cpu/2020/11/12/cpu-1-freq/';
+              this.page.identifier = '/cpu/2020/11/12/cpu-1-freq/';
+              this.page.title = 'CPU - 主频';
           };
           var d = document, s = d.createElement('script');
           s.src = 'https://Star.disqus.com/embed.js';

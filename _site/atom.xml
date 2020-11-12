@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-12T19:57:35+08:00</updated><id>http://localhost:4000/atom.xml</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Taaang</name></author><entry><title type="html">CPU - 主频</title><link href="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/" rel="alternate" type="text/html" title="CPU - 主频" /><published>2020-11-12T00:00:00+08:00</published><updated>2020-11-12T00:00:00+08:00</updated><id>http://localhost:4000/cpu/2020/11/12/cpu-1-freq</id><content type="html" xml:base="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/">&lt;p&gt;以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="http://localhost:4000/atom.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-12T20:10:26+08:00</updated><id>http://localhost:4000/atom.xml</id><title type="html">To the Moon</title><subtitle>If you're with me, then everything's alright.</subtitle><author><name>Taaang</name></author><entry><title type="html">CPU - 主频</title><link href="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/" rel="alternate" type="text/html" title="CPU - 主频" /><published>2020-11-12T00:00:00+08:00</published><updated>2020-11-12T00:00:00+08:00</updated><id>http://localhost:4000/cpu/2020/11/12/cpu-1-freq</id><content type="html" xml:base="http://localhost:4000/cpu/2020/11/12/cpu-1-freq/">&lt;p&gt;以 Intel 的 i7 - 8700 为例，我们来看看 CPU 的主频。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/1/i7-8700.jpg&quot; alt=&quot;&quot; height=&quot;500&quot; width=&quot;500&quot; /&gt;&lt;/p&gt;
 
@@ -23,7 +23,8 @@
 
 &lt;p&gt;要解释这个问题，先来看看CPU频率是怎么定义的。&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;处理器基本频率表示处理器晶体管打开和关闭的速率。处理器基本频率是 TDP 定义的操作点。频率以千兆赫兹 (GHz) 或每秒十亿次循环计。
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;处理器基本频率
+表示处理器晶体管打开和关闭的速率。处理器基本频率是 TDP 定义的操作点。频率以千兆赫兹 (GHz) 或每秒十亿次循环计。
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;以 Intel 的 CPU 为例，官方给出的CPU频率为基础频率，是 TDP 定义的操作点。说简单点，即CPU在TDP功耗下，能长时间稳定运行的最大频率（注意，并不是指CPU最多只能跑到这个最大频率，后面我们会讲到）。&lt;/p&gt;

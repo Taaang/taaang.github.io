@@ -11,7 +11,7 @@ tags:
 
 ## 苹果A系列处理器
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/apple_a.png){:height="300" width="300"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/apple_a.png){:height="500" width="500"}
 
 Apple - Brand 品牌、商标  
 A - 产品型号  
@@ -21,7 +21,7 @@ Bionic - 后缀。从A10开始，CPU名字后面会加入一个单词。A10 Fusi
 
 ## Intel Core i 系列处理器  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_core.png){:height="300" width="300"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/intel_core.png){:height="500" width="500"}
 
 Intel Core - Brand，品牌、商标  
 i7 - Brand Modifier，产品型号  
@@ -40,7 +40,7 @@ HK - Product Line Suffix，又称 SKU Suffix，SKU 后缀，描述处理器能�
 
 ## AMD Ryzen 系列处理器
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/amd_ryzen.jpg){:height="300" width="300"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/0/amd_ryzen.jpg){:height="500" width="500"}
 
 Ryzen  - Brand，品牌、商标  
 7 - Segment，段号，段号越大性能越好  

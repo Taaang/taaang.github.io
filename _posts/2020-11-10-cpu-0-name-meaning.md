@@ -1,5 +1,5 @@
 ---
-title: CPU - 命名
+title: CPU | 命名
 date: 2020-11-10
 categories:
 - CPU

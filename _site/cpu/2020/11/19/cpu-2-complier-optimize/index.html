@@ -83,7 +83,7 @@
 <link href="/assets/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="MySQL,Character Coding," />
+  <meta name="keywords" content="CPU," />
 
 
 
@@ -109,20 +109,22 @@
 
 
 
-<meta name="description" content=" ">
-<meta name="keywords" content="MySQL, Character Coding">
+<meta name="description" content="一段代码想要最终被计算机执行，首先需要被翻译成机器可识别和执行的指令。在这个过程中，有两个重要的角色，编译器 和 指令集。">
+<meta name="keywords" content="CPU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="字符编码">
-<meta property="og:url" content="http://localhost:4000/common/mysql/2018/07/06/character-coding/">
+<meta property="og:title" content="CPU | 指令 - 编译器优化">
+<meta property="og:url" content="http://localhost:4000/cpu/2020/11/19/cpu-2-complier-optimize/">
 <meta property="og:site_name" content="To the Moon">
-<meta property="og:description" content=" ">
+<meta property="og:description" content="一段代码想要最终被计算机执行，首先需要被翻译成机器可识别和执行的指令。在这个过程中，有两个重要的角色，编译器 和 指令集。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_coding.png?raw=true">
-<meta property="og:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_collate.png?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_2.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_4.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="字符编码">
-<meta name="twitter:description" content=" ">
-<meta name="twitter:image" content="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_coding.png?raw=true">
+<meta name="twitter:title" content="CPU | 指令 - 编译器优化">
+<meta name="twitter:description" content="一段代码想要最终被计算机执行，首先需要被翻译成机器可识别和执行的指令。在这个过程中，有两个重要的角色，编译器 和 指令集。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_1.jpg">
 
 
 <script type="text/javascript" id="hexo.configurations">
@@ -155,7 +157,7 @@
 
 
 
-  <title>字符编码 | To the Moon</title>
+  <title>CPU | 指令 - 编译器优化 | To the Moon</title>
   
 
 
@@ -315,7 +317,7 @@
   
 
   <article class="post post-type- " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://localhost:4000/common/mysql/2018/07/06/character-coding/">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/cpu/2020/11/19/cpu-2-complier-optimize/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Taaang">
@@ -335,7 +337,7 @@
           <h1 class="post-title" itemprop="name headline">
           
           
-            字符编码
+            CPU | 指令 - 编译器优化
           
         </h1>
         
@@ -349,8 +351,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-06T02:16:30+08:00">
-                2018-07-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-19T00:00:00+08:00">
+                2020-11-19
               </time>
             
 
@@ -373,20 +375,8 @@
               
                 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/Common" itemprop="url" rel="index">
-                    <span itemprop="name">Common</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/category/#/MySQL" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
+                  <a href="/category/#/CPU" itemprop="url" rel="index">
+                    <span itemprop="name">CPU</span>
                   </a>
                 </span>
 
@@ -403,9 +393,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/common/mysql/2018/07/06/character-coding/#comments" itemprop="discussionUrl">
+                <a href="/cpu/2020/11/19/cpu-2-complier-optimize/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/common/mysql/2018/07/06/character-coding/" itemprop="commentCount"></span>
+                        data-disqus-identifier="/cpu/2020/11/19/cpu-2-complier-optimize/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -451,169 +441,388 @@
 
 
 
-  <p> </p>
+  <p>一段代码想要最终被计算机执行，首先需要被翻译成机器可识别和执行的指令。在这个过程中，有两个重要的角色，编译器 和 指令集。</p>
 
-<h2 id="字符字符集和字符编码">字符、字符集和字符编码</h2>
+<p>代码编译的过程往往包含几个步骤：</p>
 
-<blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>字符</td>
-        <td>基本信息单元，字母、数字和标点等</td>
-      </tr>
-      <tr>
-        <td>字符集</td>
-        <td>字符集合，例如ASCII、GBK</td>
-      </tr>
-      <tr>
-        <td>字符编码</td>
-        <td>字符集的二进制编码方式</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
-
-<p>那么问题来了，我们常说的ASCII、GBK等都是指字符编码，为什么被列入字符集里了？</p>
-
-<p>实际上对于大部分的字符集来说，一个字符集智慧有一套编码，所以字符集即唯一确定了其编码。</p>
-
-<p>但是凡事总有例外，UNICODE字符集就是一个特例，UNICODE存在多种编码方式，包括UTF-8、UTF-16等。</p>
-
-<h2 id="常见字符编码">常见字符编码</h2>
-
-<p><strong>ASCII</strong></p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>单字节编码字符集，最高位不使用，常设为0.
-
-0~31及127为控制码，共33个
-
-32~126是字符，共95个
-
-空间占用：1字节
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>代码 -&gt; 词法语法分析 -&gt; 语义分析 -&gt; 中间代码生成 -&gt; 目标代码生成
 </code></pre></td></tr></tbody></table></div></div>
 
-<p><strong>不够用了怎么办 -&gt; LATIN-1（ISO-8859-1）</strong></p>
+<p>在这个过程中，
+（1）、（2）依赖于上层的编程语言设计
+（3）会将分析结果编译成中间代码。在这个阶段，编译器会尝试对中间代码进行优化，通过减少无效或冗余的代码、计算强度优化等手段，以助于减少最终生成的指令数，或使用更高效的指令
+（4）基于中间代码生成机器可执行的目标代码，这个过程和操作系统、指令集、内存等相关。其中，不同的指令集也会带来不同的效率。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code>ASCII扩展字符集，启用最高位。
+<h2 id="编译器优化">编译器优化</h2>
 
-0~127位与ASCII相同，新开启的128~255收录新字符。
+<p>以 gcc 为例，我们来简单了解一下编译器优化。</p>
 
-空间占用：1字节
+<p>gcc 编译器会在编译速度、生成代码大小和生成代码执行速度三个方面尝试进行优化。在默认情况下，gcc 编译器不开启编译优化，因为编译器的目标是减少编译时间、保证编译结果能够按照期望进行测试。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3</pre></td><td class="code"><pre class="highlight"><code>Without any optimization option, the compiler's goal is to reduce the cost of compilation and to make debugging produce the expected results.  
+
+Statements are independent: if you stop the program with a breakpoint between statements, you can then assign a new value to any variable or change the program counter to any other statement in the function and get exactly the results you expect from the source code.
 </code></pre></td></tr></tbody></table></div></div>
 
-<p><strong>有中文了怎么办 -&gt; GB2312</strong></p>
+<h4 id="编译优化">编译优化</h4>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9</pre></td><td class="code"><pre class="highlight"><code>有中文了怎么办？常用中文字符有6000多个~
+<p>我们以一个简单的例子，来简单了解一下编译优化，看看编译器可能会做哪些事情。</p>
 
-GB2312解决了中文问题，包含常用中文字符
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9</pre></td><td class="code"><pre class="highlight"><code>#include &lt;stdlib.h&gt;
 
-0~127位与ASCII相同，高位其他字符取消，采用新规则：
+void main() {
+        int loop = 1000000000;
+        long sum = 0;
+        int index = 1;
 
-当两个大于127的字符连在一起时，就表示一个汉字，前一个为高字节（0xA1到0xF7），后一个为低字节（0xA1到0xFE），可以组合出7000+的汉字。其中，高字节等于字符区号+0xA0，低字节等于字符所在区中的位置+0xA0。
-
-同时，GB2312也对一些特殊字符、数字和标点等进行了重新编码，重新编码的这一批字符，就是我们常说的“全角”字符，而127位以下的这些字符就被称为“半角”字符。
+        printf("%d", index + 6);
+}
 </code></pre></td></tr></tbody></table></div></div>
 
-<p><strong>哎呀，中文那么多不够用啊 -&gt; GBK</strong></p>
+<p>这是一段 C 语言代码，代码做了变量声明和打印，先来看看不开启编译优化的情况下，编译出来的汇编语言结果：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17</pre></td><td class="code"><pre class="highlight"><code>基于GB2312进行扩展，不再要求低字节一定是127之后的编码，只要第一个字节是大于127的，那么代表这是一个汉字的开始。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16</pre></td><td class="code"><pre class="highlight"><code>.LC0:
+        .string "%d"
+main:
+        pushq   %rbp    #
+        movq    %rsp, %rbp      #,
+        subq    $16, %rsp       #,
+        movl    $1000000000, -16(%rbp)  #, loop
+        movq    $0, -8(%rbp)    #, sum
+        movl    $1, -12(%rbp)   #, index
+        movl    -12(%rbp), %eax # index, tmp60
+        addl    $6, %eax        #, D.2418
+        movl    %eax, %esi      # D.2418,
+        movl    $.LC0, %edi     #,
+        movl    $0, %eax        #,
+        call    printf  #
+        ret
+</code></pre></td></tr></tbody></table></div></div>
 
-GBK包含了GB2312的所有内容，同时又增加了近20000个新的汉字。
+<p>通过 gcc -S -fverbose-asm，我们可以获得添加了变量备注的汇编结果。从中可以粗略看到各个变量的创建，通过 <code class="language-plaintext highlighter-rouge">addl</code> 进行了 <code class="language-plaintext highlighter-rouge">index + 6</code> 的操作，并最终通过 <code class="language-plaintext highlighter-rouge">call</code>调用 <code class="language-plaintext highlighter-rouge">printf</code> 方法。</p>
 
+<p>如果我们开启编译优化，则得到的结果会有很大不同：</p>
 
-看一个例子：
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7</pre></td><td class="code"><pre class="highlight"><code>.LC0:
+        .string "%d"
+main:
+        movl    $7, %esi        #,
+        movl    $.LC0, %edi     #,
+        xorl    %eax, %eax      #
+        jmp     printf  #
+</code></pre></td></tr></tbody></table></div></div>
 
-a机智
+<p>最直观的感受是指令少了更多，更加精简了，细看之下，会发现有一些改变：</p>
 
-采用GBK编码后，以十六进制方式查看，结果为：
+<p>（1）<em>消除了冗余的声明</em><br />
+里面一些声明了，但是没有使用到的变量，最终被移除了。
+比如<code class="language-plaintext highlighter-rouge">sum</code>、<code class="language-plaintext highlighter-rouge">loop</code>、<code class="language-plaintext highlighter-rouge">index</code></p>
 
-61bb fad6 c7
+<p>（2）<em>编译期间能够进行的计算提前做</em><br />
+在代码中，<code class="language-plaintext highlighter-rouge">index</code>变量是参与运算，但是在最终的指令中也被移除了，而这个过程被提前进行了计算，<code class="language-plaintext highlighter-rouge">index = 6</code>，那么 <code class="language-plaintext highlighter-rouge">index + 1</code>可以提前预知判断为<code class="language-plaintext highlighter-rouge">7</code>，则在编译阶段直接进行了替换。在指令上，实际是将：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code> movl    $1, -12(%rbp)   #, index
+ movl    -12(%rbp), %eax # index, tmp60
+ addl    $6, %eax        #, D.2418
+ movl    %eax, %esi      # D.2418,
+</code></pre></td></tr></tbody></table></div></div>
+<p>变为了：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code> movl    $7, %esi
+</code></pre></td></tr></tbody></table></div></div>
+<p>精简了编译出的指令结果。</p>
 
-第一个字节小于127，和ASCII编码保持一致，可以直接查表得到61对应a；
+<p>（3）<em>指令优化</em><br />
+在编译优化前的指令里，函数执行的最后可以看到这样一段指令：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code> movl    $0, %eax        
+</code></pre></td></tr></tbody></table></div></div>
+<p>它的目的只将累加器归0，而在开启编译后话后，变成了这样：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code> xorl    %eax, %eax      
+</code></pre></td></tr></tbody></table></div></div>
 
-之后一共4个字节，分别对应“机智”，查询后匹配bbfa对应”机“，d6c7对应”智”
+<p>为什么会有这样的变化呢？我们可以简单对比一下这两个命令。
+我们使用GNU 汇编器<code class="language-plaintext highlighter-rouge">as</code>，分别对这两段指令进行编译，并通过 <code class="language-plaintext highlighter-rouge">objdump -D</code> 来看看两个命令编译后的结果：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3</pre></td><td class="code"><pre class="highlight"><code> 0:	b8 00 00 00 00       	mov    $0x0,%eax
+
+ 0:	31 c0                	xor    %eax,%eax
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>可以发现，<code class="language-plaintext highlighter-rouge">mov</code> 指令占用大小是 <code class="language-plaintext highlighter-rouge">xor</code>的 2.5 倍，从大小上来看，<code class="language-plaintext highlighter-rouge">xor</code>更胜一筹。可以看出，编译优化会对指令进行优化，选择成本代价更低的指令，生成代码的大小也是编译优化中考虑的一部分。</p>
+
+<h4 id="编译优化项">编译优化项</h4>
+
+<p>从上面的例子可以看到，编译器会从不同的角度进行指令优化，在 gcc 的编译优化选项中，我们选取其中的一部分来看看：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17</pre></td><td class="code"><pre class="highlight"><code>-fmove-loop-invariants      
+Move loop invariant computations out of loops
+
+-funroll-loops              
+Perform loop unrolling when iteration count is known
+
+-finline-functions          
+Integrate functions not declared "inline" into their callers when profitable
+
+-fshort-double              
+Use the same size for double as for float
+
+-fjump-tables               
+Use jump tables for sufficiently large switch statements
+
+-fno-threadsafe-statics     
+Do not generate thread-safe code for initializing local statics
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>以<code class="language-plaintext highlighter-rouge">-finline-functions</code>为例，该优化项会尝试将非<code class="language-plaintext highlighter-rouge">inline</code>函数进行内联，对下面的代码进行优化：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10</pre></td><td class="code"><pre class="highlight"><code>#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+int add(int a, int b) {
+        return a + b;
+}
+
+void main(int argc, char* argv[]) {
+        printf("%d \n", add(atoi(argv[1]), atoi(argv[2])));
+}
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>代码读取main函数参数的两个参数，转化为整数猴进行想加，来看看它优化前的中间代码：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20</pre></td><td class="code"><pre class="highlight"><code>add:
+        pushq   %rbp    #
+        movq    %rsp, %rbp      #
+        movl    %edi, -4(%rbp)  # a, a
+        movl    %esi, -8(%rbp)  # b, b
+        movl    -8(%rbp), %eax  # b, tmp61
+        movl    -4(%rbp), %edx  # a, tmp62
+        addl    %edx, %eax      # tmp62, D.2430
+        popq    %rbp    #
+        ret
+main:
+		  ......
+        movl    %ebx, %esi      # b -&gt; esi
+        movl    %eax, %edi      # a -&gt; edi
+        call    add     #
+        movl    %eax, %esi      # D.2433,
+        movl    $.LC0, %edi     #,
+        movl    $0, %eax        #,
+        call    printf  #
+        ......
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>从<code class="language-plaintext highlighter-rouge">main</code>函数中可以看到，先调用了<code class="language-plaintext highlighter-rouge">call add</code>进行加法，再调用<code class="language-plaintext highlighter-rouge">call printf</code>输出。</p>
+
+<p>当我们开启编译优化，并开启函数内联优化，再来看看编译结果：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9</pre></td><td class="code"><pre class="highlight"><code>add:
+        leal    (%rdi,%rsi), %eax        
+        ret
+main:
+		  ......
+        leal    0(%rbp,%rax), %esi     # a,b值已放入rbp、rax
+        movl    $.LC0, %edi     
+        call    printf  #
+        ......
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>通过<code class="language-plaintext highlighter-rouge">gcc -O -finline-functions</code>开启函数内联优化进行编译，结果发生了变化：
+（1）<code class="language-plaintext highlighter-rouge">add</code>函数的指令得到精简和优化，原因是参数<code class="language-plaintext highlighter-rouge">-O</code>实际上是开启了<code class="language-plaintext highlighter-rouge">-O1</code>级优化，该级别优化不包含<code class="language-plaintext highlighter-rouge">-finline-functions</code>，所以手动开启了函数内联优化
+（2）<code class="language-plaintext highlighter-rouge">main</code>函数中已经没有了<code class="language-plaintext highlighter-rouge">call add</code>，而是将<code class="language-plaintext highlighter-rouge">add</code>函数进行内联处理，将<code class="language-plaintext highlighter-rouge">leal</code>指令放在了<code class="language-plaintext highlighter-rouge">main</code>函数中</p>
+
+<h4 id="编译优化等级">编译优化等级</h4>
+
+<p>在上面的优化中，我们有说到一个概念，编译优化等级。gcc 将编译优化项进行了分类，划分了出多个优化等级用于不同的场景。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>优化等级</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-O0</td>
+      <td>默认优化等级，即不开启编译优化，只尝试减少编译时间</td>
+    </tr>
+    <tr>
+      <td>-O/-O1</td>
+      <td>尝试减少代码大小，缩短代码执行时间，不会执行需要消耗大量编译时间的优化。对于大函数的编译优化会占用更多的时间和内存。</td>
+    </tr>
+    <tr>
+      <td>-O2</td>
+      <td>与-O1类似，会提升编译时间和代码性能，几乎开启除了时空权衡优化外的所有优化项</td>
+    </tr>
+    <tr>
+      <td>-O3</td>
+      <td>在-O2级别的基础上，开启了更多的优化项，最高优化等级，以编译时间、代码大小、内存为代价获取更高的性能。在部分情况下可能会降低性能。</td>
+    </tr>
+    <tr>
+      <td>-Os</td>
+      <td>优化代码大小，会开启-O2中不会增加代码大小的优化项</td>
+    </tr>
+    <tr>
+      <td>-Ofast</td>
+      <td>开启-O3所有优化项，该优化等级不会严格遵循语言标准</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="对代码性能的影响">对代码性能的影响</h4>
+
+<p>编译优化对最终的代码性能有什么影响呢，来看一个例子：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16</pre></td><td class="code"><pre class="highlight"><code>#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+
+void main() {
+        int loop = 1000000000;
+        long sum = 0;
+        int start_time = clock();
+
+        int index = 0;
+        for (index = 0; index &lt; loop; index ++) {
+                sum += index;
+        }
+        int end_time = clock();
+
+        printf("Sum : %ld, Time Cost : %lf \n", sum, (end_time - start_time) * 1.0 / CLOCKS_PER_SEC);
+}
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>依旧是一个循环加的例子，并记录加法运算时间。在不开启编译优化的情况下，执行时间如下：</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_1.jpg" alt="" height="500" width="500" /><br />
+开启<code class="language-plaintext highlighter-rouge">-O3</code>级优化后，执行时间如下：</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_2.jpg" alt="" height="500" width="500" /></p>
+
+<p>优化后，执行时间只有原来的10%左右，效果明显。
+（但是这个例子算是一个特殊的例子，计算过程可以用上向量化计算指令，实现并行计算，才能达到这么明显的效果，其他场景下不一定）</p>
+
+<h4 id="优化有风险">优化有风险</h4>
+
+<p>编译器优化这么厉害，当然也有“副作用”，来看看下面的例子：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16</pre></td><td class="code"><pre class="highlight"><code>#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+
+int f() {
+        int i;
+        int j = 0;
+        for ( i = 1; i &gt; 0; i += i) {
+                ++j;
+        }
+        return j;
+}
+
+void main() {
+        int ret = f();
+        printf("%d\n", ret);
+}
+</code></pre></td></tr></tbody></table></div></div>
+
+<p>函数中的<code class="language-plaintext highlighter-rouge">for</code>里，依赖于<code class="language-plaintext highlighter-rouge">i</code>来判断是否结束。正常判断下，<code class="language-plaintext highlighter-rouge">i</code>循环加溢出后变成负数，就会终止循环，结果如下：</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_3.jpg" alt="" height="500" width="500" /></p>
+
+<p>但是当我们开启<code class="language-plaintext highlighter-rouge">-O2</code>优化后，会进入死循环：</p>
+
+<p><img src="https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/cpu/2/test_4.jpg" alt="" height="500" width="500" /></p>
+
+<p>我们来看看优化前后的汇编指令：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20</pre></td><td class="code"><pre class="highlight"><code>优化前 main：
+		  ......
+        movl    $1, -8(%rbp)    #, i
+        jmp     .L2     #
+.L3:
+        addl    $1, -4(%rbp)    #, j
+        movl    -8(%rbp), %eax  # i, tmp64
+        addl    %eax, %eax      # tmp64, tmp63
+        movl    %eax, -8(%rbp)  # tmp63, i
+.L2:
+        cmpl    $0, -8(%rbp)    #, i
+        jg      .L3     #,
+		  ......
+
+优化后 main：
+     	  ......
+.L2:
+        jmp     .L2     
+		  ......
 
 </code></pre></td></tr></tbody></table></div></div>
 
-<p><strong>繁体字  -&gt; BIG5</strong></p>
+<p>在编译优化后，变成了死循环。这是一个特殊的现象，在这个过程中，有符号证书越界（Signed Integer Overflow）在 C99 标准中是一个未定义行为，该行为对应的实现可能是隐式转换或者异常等。在 gcc 中，编译器会 overflow 不会发生，将这段代码编译为死循环。</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>虽然GBK支持少量繁体中文，但是数量有限，于是就出现了BIG5啦。
+<p>（可能还会有类似的情况，具体可以参考<a href="https://my.eng.utah.edu/~cs5785/slides-f10/Dangerous+Optimizations.pdf">CERT - Dangerous Optimizations and the Loss of Causality</a>）</p>
+
+<h4 id="选择性编译优化">选择性编译优化</h4>
+
+<p>既然危险系数这么高，就放弃不用吗，当然不行，我们可以选择对部分代码进行编译优化：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1</pre></td><td class="code"><pre class="highlight"><code>#pragma GCC optimize ("O3")
 </code></pre></td></tr></tbody></table></div></div>
 
-<p><strong>ISO表示我坐不住了 -&gt; UNICODE</strong></p>
+<p>该语句会对其之后的代码开启对应级别的编译变化，语句之前的代码不影响，举个栗子：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5</pre></td><td class="code"><pre class="highlight"><code>不同的国家，不同的语言，编码太多，就会出现兼容、转换等问题。这时候，ISO坐不住了。
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24</pre></td><td class="code"><pre class="highlight"><code>#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
 
-ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Universal Multiple-Octet Coded Character Set），为了能够同时包含大量的字符，UNICODE使用2个字节来统一表示，对于ASCII中低于127位的字符保持不变，其他全部重新编码。
+int f();
 
-前面有提到，UNICODE是字符集，并不能代表字符编码，UNICODE拥有多种编码方式，包括为UTF-8、UTF-16。（UCS Transfer Format，UCS是UNICDOE的简称）
+void main() {
+        int loop = 1000000000;
+        long sum = 0;
+        int index = 1;
+        int ret = f();
+
+        printf("%d \n", index + 6);
+        printf("%d \n", ret);
+}
+
+# pragma GCC optimize("O3")
+int f() {
+        int i;
+        int j = 0;
+        for ( i = 1; i &gt; 0; i += i) {
+                ++j;
+        }
+        return j;
+}
 </code></pre></td></tr></tbody></table></div></div>
 
-<h2 id="字符与字节">字符与字节</h2>
+<p>在<code class="language-plaintext highlighter-rouge">gcc</code>编译时不开启编译优化，得到编译后的汇编指令：</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4</pre></td><td class="code"><pre class="highlight"><code>不同的编码的字符串，其长度和大小怎么计算？
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20<br/>21<br/>22<br/>23<br/>24<br/>25<br/>26</pre></td><td class="code"><pre class="highlight"><code>main:
+        ......
+        movl    $1000000000, -20(%rbp)  #, loop
+        movq    $0, -8(%rbp)    #, sum
+        movl    $1, -16(%rbp)   #, index
+        movl    $0, %eax        #,
+        call    f       #
+        movl    %eax, -12(%rbp) # tmp60, ret
+        movl    -16(%rbp), %eax # index, tmp61
+        addl    $6, %eax        #, D.2431
+        movl    %eax, %esi      # D.2431,
+        movl    $.LC0, %edi     #,
+        movl    $0, %eax        #,
+        call    printf  #
+        movl    -12(%rbp), %eax # ret, tmp62
+        movl    %eax, %esi      # tmp62,
+        movl    $.LC0, %edi     #,
+        movl    $0, %eax        #,
+        call    printf  #
+        ret
 
-字符串长度：字符串的实际长度，计算字符长度，strlen结果；
-字符串大小：字符串的空间占用大小，需要结合字符编码进行大小计算。
+f:
+        pushq   %rbp    #
+        movq    %rsp, %rbp      #
+.L3:
+        jmp     .L3     #
 </code></pre></td></tr></tbody></table></div></div>
 
-<h2 id="mysql下的字符编码">MySQL下的字符编码</h2>
-
-<p>show variables like ‘%character%’;</p>
-
-<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_coding.png?raw=true" alt="mysql_coding" /></p>
-
-<blockquote>
-  <table>
-    <tbody>
-      <tr>
-        <td>character_set_client</td>
-        <td>客户端字符编码</td>
-      </tr>
-      <tr>
-        <td>character_set_connection</td>
-        <td>网络传输数据的字符编码</td>
-      </tr>
-      <tr>
-        <td>character_set_database</td>
-        <td>服务端数据字符编码</td>
-      </tr>
-      <tr>
-        <td>character_set_filesystem</td>
-        <td>服务端文件名字符编码</td>
-      </tr>
-      <tr>
-        <td>character_set_results</td>
-        <td>服务端返回结果集的字符编码</td>
-      </tr>
-      <tr>
-        <td>character_set_server</td>
-        <td>服务端全局字符编码</td>
-      </tr>
-    </tbody>
-  </table>
-</blockquote>
-
-<h2 id="mysql字符集校对规则">MySQL字符集校对规则</h2>
-
-<p>相同字符集内，字符比较和排序的规则。</p>
-
-<p>如果查看MySQL中，information_schema的CHARACTER_SETS，可以看到MySQL支持的字符集及其校对规则，例如：</p>
-
-<p><img src="https://github.com/Taaang/blog/blob/master/assets/images/post_imgs/img_mysql_collate.png?raw=true" alt="mysql_collate" /></p>
-
-<p>图中显示了MySQL支持的字符集，以及对应字符集的校对规则、字符集中字符的长度。其中，不同的校对规则，会以_ci、_cs、_bin结尾，分别代表了不同的比对模式，_ci为大小写不敏感，_cs为大小写敏感，_bin为二进制比对。</p>
-
-<h2 id="mysql表字符集修改">MySQL表字符集修改</h2>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><table style="margin: 0px"><tbody><tr><td class="gutter"><pre>1<br/>2<br/>3<br/>4<br/>5<br/>6</pre></td><td class="code"><pre class="highlight"><code>修改表字符集（新数据生效）
-	ALTER TABLE  … CHARACTER SET …
-修改表字符集（新旧数据生效）
-	ALTER TABLE  … CONVERT TO CHARACTER SET …
-修改当前会话字符集
-	SET NAMES …（client、result、connection）
-</code></pre></td></tr></tbody></table></div></div>
+<p>此时在<code class="language-plaintext highlighter-rouge">main</code>函数阶段是正常编译的，在<code class="language-plaintext highlighter-rouge">#pragma GCC optimize</code>之后的<code class="language-plaintext highlighter-rouge">f</code>函数将会开启编译优化，编译成死循环</p>
 
 
       
@@ -645,10 +854,7 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
         <div class="post-tags">
           
             
-            <a href="/tag/#/MySQL" rel="tag"># MySQL</a>
-          
-            
-            <a href="/tag/#/Character%20Coding" rel="tag"># Character Coding</a>
+            <a href="/tag/#/CPU" rel="tag"># CPU</a>
           
         </div>
       
@@ -664,8 +870,8 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
         <div class="post-nav" id="post-nav-id">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/jvm/2018/07/14/jvm-classload-priority/" rel="next" title="Tomcat类加载NoSuchMethodError异常问题">
-                <i class="fa fa-chevron-left"></i> Tomcat类加载NoSuchMethodError异常问题
+              <a href="/cpu/2020/11/26/cpu-3-instruction/" rel="next" title="CPU | 指令 - 指令集">
+                <i class="fa fa-chevron-left"></i> CPU | 指令 - 指令集
               </a>
             
           </div>
@@ -674,8 +880,8 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/elasticsearch/2018/05/25/elasticsearch-group-write/" rel="prev" title="ElasticSearch分组相关性写入">
-                ElasticSearch分组相关性写入 <i class="fa fa-chevron-right"></i>
+              <a href="/cpu/2020/11/12/cpu-1-freq/" rel="prev" title="CPU | 主频">
+                CPU | 主频 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -833,7 +1039,7 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
             
               <div class="post-toc-content">
     <ol class=nav>
-      <li class="nav-item nav-level-2"> <a class="nav-link" href="#字符字符集和字符编码"> <span class="nav-number">1</span> <span class="nav-text">字符、字符集和字符编码</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#常见字符编码"> <span class="nav-number">2</span> <span class="nav-text">常见字符编码</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#字符与字节"> <span class="nav-number">3</span> <span class="nav-text">字符与字节</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#mysql下的字符编码"> <span class="nav-number">4</span> <span class="nav-text">MySQL下的字符编码</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#mysql字符集校对规则"> <span class="nav-number">5</span> <span class="nav-text">MySQL字符集校对规则</span> </a> </li> <li class="nav-item nav-level-2"> <a class="nav-link" href="#mysql表字符集修改"> <span class="nav-number">6</span> <span class="nav-text">MySQL表字符集修改</span> </a> </li>
+      <li class="nav-item nav-level-2"> <a class="nav-link" href="#编译器优化"> <span class="nav-number">1</span> <span class="nav-text">编译器优化</span> </a> <ol class="nav-child"> <li class="nav-item nav-level-4"> <a class="nav-link" href="#编译优化"> <span class="nav-number">1.1</span> <span class="nav-text">编译优化</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#编译优化项"> <span class="nav-number">1.2</span> <span class="nav-text">编译优化项</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#编译优化等级"> <span class="nav-number">1.3</span> <span class="nav-text">编译优化等级</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#对代码性能的影响"> <span class="nav-number">1.4</span> <span class="nav-text">对代码性能的影响</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#优化有风险"> <span class="nav-number">1.5</span> <span class="nav-text">优化有风险</span> </a> </li> <li class="nav-item nav-level-4"> <a class="nav-link" href="#选择性编译优化"> <span class="nav-number">1.6</span> <span class="nav-text">选择性编译优化</span> </a> </li> </ol> </li>
     </ol>
   </div>
             
@@ -989,9 +1195,9 @@ ISO统一了所有语言、字符和数字等编码，创建了UNICODE（Univers
       
       <script type="text/javascript">
           var disqus_config = function () {
-              this.page.url = 'http://localhost:4000/common/mysql/2018/07/06/character-coding/';
-              this.page.identifier = '/common/mysql/2018/07/06/character-coding/';
-              this.page.title = '字符编码';
+              this.page.url = 'http://localhost:4000/cpu/2020/11/19/cpu-2-complier-optimize/';
+              this.page.identifier = '/cpu/2020/11/19/cpu-2-complier-optimize/';
+              this.page.title = 'CPU | 指令 - 编译器优化';
           };
           var d = document, s = d.createElement('script');
           s.src = 'https://Star.disqus.com/embed.js';

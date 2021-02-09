@@ -10,19 +10,19 @@ tags:
 ## 简介
 `packetdrill`是 Google 开源的一个 测试脚本工具，可以用于测试TCP、UDP、IP网络协议栈，其是由基于时间序的脚本行组成，按时间顺序逐条执行。
 
-它的语言设计十分接近于`tcpdump`和`strace`，包含四种类型的语句：  
+它的语言设计十分接近于 tcpdump 和 strace ，包含四种类型的语句：  
 
-* 数据包。使用类似于`tcpdump`的语法，支持TCP、UDP、ICMP数据包，同时也提供了常见TCP选项的配置，包括 SACK、MSS、window scale等。  
+* 数据包。使用类似于 tcpdump 的语法，支持TCP、UDP、ICMP数据包，同时也提供了常见TCP选项的配置，包括 SACK、MSS、window scale等。  
 
-* 系统调用。使用类似于`strace`的语法。  
+* 系统调用。使用类似于 strace 的语法。  
 
-* Shell 命令。通过`&#x60; command &#x60;`进行调用，可以进行系统参数配置或断言验证网络协议栈状态。  
+* Shell 命令。通过&#x60;&#x60;进行调用，可以进行系统参数配置或断言验证网络协议栈状态。  
 
 * Python 脚本。通过`%{ command }%`进行调用，可以输出或者断言验证 TCP 状态。  
 
 ## 编译、安装
 
-参考官方GitHub [packetdrill](https://github.com/google/packetdrill)  
+参考官方GitHub - [packetdrill](https://github.com/google/packetdrill)  
 
 ## 基础使用
 
@@ -46,9 +46,13 @@ tags:
 
 脚本一共做了两件事情：  
 
-* 通过系统调用创建并配置 Socket ，绑定端口开始监听。  
+  
+* *通过系统调用创建并配置 Socket ，绑定端口开始监听*  
 
-`0       socket(..., SOCK_STREAM, IPPROTO_TCP) = 3`  
+
+```
+0       socket(..., SOCK_STREAM, IPPROTO_TCP) = 3
+```  
 
 我们创建了一个 Stream 类型的 Socket，并指定协议为 TCP。   
 
@@ -58,10 +62,13 @@ tags:
 
 剩下的代码就是配置并监听。
 
-> 这里可能会有一个疑问，为什么新建 Socket 对应的 FD 是 3 ？
+> 这里可能会有一个疑问，为什么新建 Socket 对应的 FD 是 3 ？  
+>   
 > 对于一个进程而言，默认会打开 stdin（0） 、 stdout（1） 、stderr（2），那么正常情况下，第一个新打开的 FD 正好是 3。
 
-* 三次握手  
+
+* *三次握手*
+
 
 通过三行脚本来发起和校验三次握手的过程。  
 
@@ -161,7 +168,9 @@ struct _tcp_info {
 
 当我们需要在连接的各个阶段查看状态变化时，可以通过 python 脚本进行打印：  
 
-`+0      %{ print("RTO @1: ", tcpi_rto) }% `
+```
++0      %{ print("RTO @1: ", tcpi_rto) }%
+```
 
 脚本尝试在上一条命令执行结束后，立刻开始执行一段 python 脚本，打印 TCP 的超时重传时间。  
 

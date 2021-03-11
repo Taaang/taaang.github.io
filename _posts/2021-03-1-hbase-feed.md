@@ -1,5 +1,5 @@
 ---
-title: HBase 浅析及场景应用（二）
+title: HBase 浅析及场景应用
 date: 2021-03-11
 categories:
 - HBase
@@ -27,7 +27,7 @@ HBase以数据表的形式存储数据，行键 RowKey 唯一标识一行数据�
 
 这里可以通过一个对比可以来看看数据存储形式。  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_0.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_0.jpg){:height="500" width="500"}
 
 MySQL 和 HBase 中数据的大致对应关系如下：  
 （仅用于参考和理解，实际还是有很大区别的）  
@@ -48,7 +48,7 @@ Row       		<----->   		数据行
 
 同样看一个例子。  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_1.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_1.jpg){:height="500" width="500"}
 
 其中记录一行数据，  
 `行键 RowKey` = 1  
@@ -57,12 +57,12 @@ Row       		<----->   		数据行
 
 而多个数据行组成`Region`，它是 HBase 存储和负载均衡的最小单元进行按 ASCII 顺序存储，整体结构如下：  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_2.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_2.jpg){:height="500" width="500"}
 
 随着时间推移，数据行越来越多，`Region`大小超过`hbase.hregion.max.filesize`时就会进行分裂：  
 （源码中，默认配置文件`hbase-default.xml`中记录的`hbase.hregion.max.filesize`默认大小是10GB，还是挺大的）  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_3.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_3.jpg){:height="500" width="500"}
 
 
 ### 物理视图  
@@ -78,14 +78,14 @@ Row       		<----->   		数据行
 当有数据更新时，快速写入处于内存中的`MemStore`,大小超过阈值时进行落盘，保存为`StoreFile`（以 HFile 格式进行保存，Hadoop 的二进制格式文件）。内存写入和顺序IO落盘，使其具有非常棒的写入性能，在读取最近更新数据的性能上表现也不错。  
 （具体可以分析`LSM Tree`，不细说）  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_4.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_4.jpg){:height="500" width="500"}
 
 
 * *RegionServer*  
 
 一张表由多个`Region`组成，`Region`分布在不同的`RegionServer`上，整体结构如下：  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_5.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_5.jpg){:height="500" width="500"}
 
 > Region 不做备份吗？
 >  
@@ -105,7 +105,7 @@ HBase 在数据写入时，首先会写入`MemStore`，这就引入了一个问�
 
 单个`RegionServer`只有一个`HLog`，管理所有`Region`的变更。  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_6.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_6.jpg){:height="500" width="500"}
 
 * *Master*  
 
@@ -113,7 +113,7 @@ HBase 在数据写入时，首先会写入`MemStore`，这就引入了一个问�
 
 `Master`则充当了这一角色，主要负责`Region`分配、`RegionServer`负载均衡以及元数据等的管理，并通常以多`Master`集群模式进行部署，以实现高可用。  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_7.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_7.jpg){:height="500" width="500"}
 
 * *ZooKeeper*  
 
@@ -121,7 +121,7 @@ HBase 在数据写入时，首先会写入`MemStore`，这就引入了一个问�
 
 ## 整体架构  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_8.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_8.jpg){:height="500" width="500"}
 
 ## 业务场景  
 
@@ -164,7 +164,7 @@ HBase 在数据写入时，首先会写入`MemStore`，这就引入了一个问�
 
 * *测试情况*  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_9.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_9.jpg){:height="500" width="500"}
 
 这是当时测试的情况，16 个分区数据量和读写量相对平均。
 
@@ -172,6 +172,6 @@ HBase 在数据写入时，首先会写入`MemStore`，这就引入了一个问�
 
 在将功能上线后，花了一些时间做线上数据迁移，并做了流量开关，最终的性能变化可以参考下图：  
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_10.png){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/hbase_feed/img_10.jpg){:height="500" width="500"}
 
 在打开流量开关切入 HBase 后， 99 线大概在 95ms 左右，而之前 99 线在极端场景下已经达到 4.5s ，整体效果还是很明显的。  

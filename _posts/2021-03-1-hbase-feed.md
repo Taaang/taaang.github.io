@@ -35,11 +35,11 @@ MySQL 和 HBase 中数据的大致对应关系如下：
 ```
 HBase   			<----->   		MySQL
 Table	  			<----->   		Table
-Row       		<----->   		数据行
+Row       		  <----->   		数据行
 列族Family			<----->			×××××
-列限定符Qualifer	<----->			表字段
+列限定符Qualifer	   <----->			表字段
 单元格Cell			<----->			数据行的某个字段
-时间戳TS			<----->			数据create/update时间
+时间戳TS			  <----->			数据create/update时间
 ```
 
 ### 逻辑视图  

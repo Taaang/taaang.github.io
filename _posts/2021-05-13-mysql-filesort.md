@@ -45,7 +45,7 @@ tags:
 
 通过一张图看看整个`filesort`过程，随时我们再逐步拆解每个步骤。
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/mysql_filesort/1.jpg){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/mysql_filesort/1.png){:height="500" width="500"}
 
 动手之前先准备 - 排序数据准备
 在取出数据之前，MySQL 先为数据排序所需要的内容进行了准备，存储在`Sort_param`上，主要包括排序字段长度、去重、稳定排序等。
@@ -83,7 +83,7 @@ MySQL 在获取数据的时候，除了获取 sort key 字段外，还会获取`
 
 但是，怎么决定使用哪一个呢，选择其中一者也决定着后续的查询字段的获取方法，选用`ref`意味着需要通过主键或rowid进行回表，以获取查询字段数据，选用`addon`则在一开始就需要把查询字段数据一起取出，减少了一次回表。
 
-源码里，在 ` decide_addon_fields(...) `中做出了解答：
+源码里，在`decide_addon_fields(...)`中做出了解答：
 
 ```
 // Generally, prefer using addon fields (ie., sorting rows instead of just row IDs) if we can .
@@ -129,7 +129,7 @@ PQ（Priority Queue） 优先级队列，不同于普通队列，是按优先级
 
 从源码上看，判断的逻辑记录在了`check_if_pq_applicable(...)`，在下面几个场景里，不会使用：
 
-* **没有 `LIMIT` **
+* **没有 `LIMIT`**
 
 前面说到算法在有限集合下的排序筛选可能会取得更好的性能，如果 SQL 中没有使用`LIMIT`，那么就不会使用  。这也很好理解，如果队列大小等于集合大小，那么不如换用其他排序算法（例如快排 ）。
 
@@ -137,8 +137,8 @@ PQ（Priority Queue） 优先级队列，不同于普通队列，是按优先级
 
 和优先级队列的结构有关，其数据间不是严格的优先级大小关系，只能保证子节点优先级小于父节点。
 
-* ** LIMIT 过大或数据过长**
-* ** 排序数据可以全部放在缓存里时，快排速度快于优先级队列**
+* **LIMIT 过大或数据过长**
+* **排序数据可以全部放在缓存里时，快排速度快于优先级队列**
 
 当所有排序数据可以放在内存时，MySQL 是可以使用快排的，这时就需要对比两者的速度。MySQL 认为优先级队列比快排慢 3 倍，当`（排序数据行数 / 3）< LIMIT行数`时，选择快排，否则选优先级队列。
 

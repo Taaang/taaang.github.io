@@ -99,7 +99,7 @@ MySQL 在获取数据的时候，除了获取 sort key 字段外，还会获取`
 
 在排序信息中的参数很多，各种`length`也很难理解每个字段的含义，我们换个方式，通过不同场景下的数据格式，来看它们的意义。
 
-![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/mysql_filesort/2.jpg){:height="500" width="500"}
+![](https://raw.githubusercontent.com/Taaang/blog/master/assets/images/post_imgs/mysql_filesort/2.png){:height="500" width="500"}
 
 
 不难发现，在使用不同的记录格式时，记录长度会发生变化，所以需要单独计算各个段的长度。其中，`rowid format`对应前面的`ref`，`addon format`对应`addon`，而`packed addon format`是对`addon format`进行打包压缩的格式（例如对变长字符串打包，减少空间占用，同时针对blob、deciaml等也都有打包方法）。
